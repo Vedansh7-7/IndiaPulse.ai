@@ -31,3 +31,7 @@ out/
 PRODUCT.md
 DESIGN.md
 .impeccable/
+
+# live-run output (session artifact, not the published demo)
+out/inv_live.json
+docs/data/inv_live.json

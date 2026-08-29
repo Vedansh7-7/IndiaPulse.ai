@@ -22,6 +22,27 @@ python -m pytest tests/ -q  # 23 tests
 
 Then open `docs/index.html`. No server, no build step, no login.
 
+## Run it live
+
+The engine takes its parameters at call time, so an investigation can be run on
+a region, metric and window chosen on the spot.
+
+```bash
+python demo.py --warm                 # preload the data first
+python demo.py --list                 # what can be selected
+python demo.py --state RJ             # one region
+python demo.py --metric on_time       # a different KPI
+python demo.py --state SP RJ MG --from 2017-06-01 --to 2018-06-01
+```
+
+Each run prints the scopes as they fire, then writes the result into the
+dashboard as the first tab. Warm the data once and later runs finish in a few
+seconds.
+
+Scopes 0 and 1 are dataset-agnostic: they need a date column, a metric and a
+segment. The agents in scope 2 read domain columns, so a new domain means new
+agents against the same contract in `engine/agents/base.py`.
+
 ## Demo
 
 Four scenarios, one per decision state. Each is a real slice of the dataset.
