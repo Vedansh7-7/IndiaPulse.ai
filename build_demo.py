@@ -53,8 +53,8 @@ def main() -> None:
     (C.OUT / "index.json").write_text(
         json.dumps({"scenarios": index}, indent=2), encoding="utf-8")
 
-    # mirror into web/data so the static site is self-contained
-    web_data = C.ROOT / "web" / "data"
+    # mirror into docs/data so GitHub Pages can serve the site directly
+    web_data = C.ROOT / "docs" / "data"
     web_data.mkdir(parents=True, exist_ok=True)
     for f in list(C.OUT.glob("inv_*.json")) + [C.OUT / "index.json"]:
         shutil.copy(f, web_data / f.name)
@@ -66,7 +66,7 @@ def main() -> None:
     for sc in SCENARIOS:
         bundle["investigations"][sc["key"]] = json.loads(
             (C.OUT / f"inv_{sc['key']}.json").read_text(encoding="utf-8"))
-    (C.ROOT / "web" / "data.js").write_text(
+    (C.ROOT / "docs" / "data.js").write_text(
         "window.__INDIAPULSE__ = " + json.dumps(bundle) + ";",
         encoding="utf-8")
 

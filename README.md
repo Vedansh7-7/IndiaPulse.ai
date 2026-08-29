@@ -20,7 +20,7 @@ python build_demo.py        # runs all four investigations
 python -m pytest tests/ -q  # 23 tests
 ```
 
-Then open `web/index.html`. No server, no build step, no login.
+Then open `docs/index.html`. No server, no build step, no login.
 
 ## Demo
 
@@ -132,7 +132,7 @@ engine/
   adversary.py     Scope 3
   arbiter.py       Scope 4
   run.py           orchestrator
-web/index.html     dashboard
+docs/index.html    dashboard
 tests/             23 tests
 ```
 

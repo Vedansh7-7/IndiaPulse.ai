@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "santa-catarina",
-    "generated_at": "2026-08-29 23:17:13",
-    "runtime_seconds": 0.42,
+    "generated_at": "2026-08-29 23:19:19",
+    "runtime_seconds": 0.35,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {

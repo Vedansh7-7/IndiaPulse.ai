@@ -1,14 +1,9 @@
 """Tests for the statistical core and the decision logic.
 
-These target the properties that actually matter for trustworthiness:
-  - the statistics are correct against known closed-form answers
-  - FDR control genuinely suppresses false discoveries on pure noise
-  - the engine can return every decision state, including the ones that
-    admit it does not know
-
-That last point is the one worth testing hardest. A previous iteration of this
-project had an "Inconclusive" state that was structurally unreachable, so the
-system could only ever agree with itself.
+Three properties are covered:
+  - the statistics match known closed-form answers
+  - FDR control suppresses false discoveries on pure noise
+  - every decision state is reachable, including the ones that decline to answer
 """
 from __future__ import annotations
 
@@ -72,8 +67,8 @@ def test_benjamini_hochberg_is_stricter_than_naive_alpha():
 
 
 def test_fdr_suppresses_false_discoveries_on_pure_noise():
-    """The core claim: scanning many null segments produces false hits, and
-    FDR control removes most of them."""
+    """Scanning many null segments produces false hits. FDR control removes
+    most of them."""
     rng = np.random.default_rng(11)
     naive_hits, fdr_hits, trials = 0, 0, 200
     for _ in range(trials):
@@ -177,7 +172,7 @@ def test_composite_score_cannot_manufacture_evidence():
 def bundle():
     import json
     from engine import config as C
-    path = C.ROOT / "web" / "data.js"
+    path = C.ROOT / "docs" / "data.js"
     if not path.exists():
         pytest.skip("run `python build_demo.py` first")
     raw = path.read_text(encoding="utf-8")
@@ -185,7 +180,7 @@ def bundle():
 
 
 def test_all_four_decision_states_are_reachable(bundle):
-    """The regression guard for this project's original failure mode."""
+    """An engine that can only ever confirm is not an investigation."""
     states = {s["state"] for s in bundle["index"]}
     assert {"CONFIRMED", "INCONCLUSIVE", "NOISE", "ARTEFACT"} <= states, (
         f"not every decision state is reachable on real data: {states}")
@@ -206,7 +201,7 @@ def test_inconclusive_withholds_a_recommendation(bundle):
 
 
 def test_confirmed_case_rejects_the_demand_hypothesis(bundle):
-    """The engine must be able to reject a plausible hypothesis, not just rank."""
+    """The engine must be able to reject a hypothesis, not only rank."""
     inv = bundle["investigations"]["national"]
     ext = next(v for v in inv["scope2_verdicts"] if v["cause_family"] == "demand")
     assert ext["supported"] is False
@@ -231,7 +226,7 @@ def test_every_evidence_item_carries_a_source(bundle):
 
 
 def test_corroborating_agents_do_not_compete(bundle):
-    """Ops and VoC are two witnesses to one cause; they must share a family."""
+    """Ops and VoC are two witnesses to one cause, so they share a family."""
     inv = bundle["investigations"]["national"]
     fams = {v["agent"]: v["cause_family"] for v in inv["scope2_verdicts"]}
     assert fams["Ops & Fulfilment"] == fams["Voice of Customer"] == "fulfilment"
