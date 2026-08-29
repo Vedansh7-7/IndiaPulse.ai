@@ -6,9 +6,9 @@
     "dataset": "Olist Brazilian E-Commerce (public, ~99k orders, ~41k free-text reviews)",
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
-    "scenario": "santa-catarina",
-    "generated_at": "2026-08-30 01:36:53",
-    "runtime_seconds": 0.1,
+    "scenario": "parana",
+    "generated_at": "2026-08-30 01:47:35",
+    "runtime_seconds": 0.11,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -16,11 +16,11 @@
     "is_signal": true,
     "verdict": "SIGNAL",
     "event_weeks": [
-      "2017-01-30"
+      "2017-01-16",
+      "2017-01-23"
     ],
     "baseline_weeks": [
-      "2017-01-02",
-      "2017-01-09",
+      "2017-02-13",
       "2017-02-20",
       "2017-02-27",
       "2017-03-06",
@@ -101,542 +101,544 @@
       "2018-08-13",
       "2018-08-20"
     ],
-    "event_value": 3.3333333333333335,
-    "baseline_value": 4.1684017580393125,
-    "delta": -0.835068424705979,
-    "robust_z": -3.4210352088695664,
+    "event_value": 3.3083333333333336,
+    "baseline_value": 4.260616989148666,
+    "delta": -0.9522836558153323,
+    "robust_z": -6.168068808436771,
     "control_limits": [
-      3.44042051724138,
-      4.966476034482758
+      3.5348818322633777,
+      5.021368167736623
     ],
-    "changepoint_week": "2017-03-06",
-    "p_value": 0.04995338353455958,
-    "ci_low": -1.6051089073542468,
-    "ci_high": -0.0001873137726494667,
+    "changepoint_week": "2017-01-09",
+    "p_value": 0.1379056147013833,
+    "ci_low": -1.4314921107892493,
+    "ci_high": 0.2147341275029585,
     "series": [
       {
         "week": "2017-01-02",
-        "value": 5.0,
-        "orders": 1,
-        "in_event": false
-      },
-      {
-        "week": "2017-01-09",
-        "value": 4.0,
-        "orders": 5,
-        "in_event": false
-      },
-      {
-        "week": "2017-01-16",
-        "value": 4.5,
-        "orders": 6,
-        "in_event": false
-      },
-      {
-        "week": "2017-01-23",
-        "value": 4.5,
-        "orders": 8,
-        "in_event": false
-      },
-      {
-        "week": "2017-01-30",
-        "value": 3.3333333333333335,
-        "orders": 15,
-        "in_event": true
-      },
-      {
-        "week": "2017-02-06",
-        "value": 4.238095238095238,
-        "orders": 22,
-        "in_event": false
-      },
-      {
-        "week": "2017-02-13",
-        "value": 3.8,
-        "orders": 10,
-        "in_event": false
-      },
-      {
-        "week": "2017-02-20",
-        "value": 4.2,
-        "orders": 11,
-        "in_event": false
-      },
-      {
-        "week": "2017-02-27",
-        "value": 3.8,
-        "orders": 20,
-        "in_event": false
-      },
-      {
-        "week": "2017-03-06",
-        "value": 3.9285714285714284,
-        "orders": 14,
-        "in_event": false
-      },
-      {
-        "week": "2017-03-13",
-        "value": 4.275862068965517,
+        "value": 4.866666666666666,
         "orders": 30,
         "in_event": false
       },
       {
-        "week": "2017-03-20",
-        "value": 3.9444444444444446,
-        "orders": 18,
+        "week": "2017-01-09",
+        "value": 5.0,
+        "orders": 4,
         "in_event": false
       },
       {
-        "week": "2017-03-27",
-        "value": 4.172413793103448,
-        "orders": 29,
+        "week": "2017-01-16",
+        "value": 2.75,
+        "orders": 4,
+        "in_event": true
+      },
+      {
+        "week": "2017-01-23",
+        "value": 3.8666666666666667,
+        "orders": 15,
+        "in_event": true
+      },
+      {
+        "week": "2017-01-30",
+        "value": 4.142857142857143,
+        "orders": 36,
         "in_event": false
       },
       {
-        "week": "2017-04-03",
-        "value": 4.304347826086956,
-        "orders": 23,
+        "week": "2017-02-06",
+        "value": 4.090909090909091,
+        "orders": 33,
         "in_event": false
       },
       {
-        "week": "2017-04-10",
-        "value": 3.375,
-        "orders": 16,
+        "week": "2017-02-13",
+        "value": 3.8214285714285716,
+        "orders": 28,
         "in_event": false
       },
       {
-        "week": "2017-04-17",
-        "value": 4.148148148148148,
+        "week": "2017-02-20",
+        "value": 4.733333333333333,
+        "orders": 15,
+        "in_event": false
+      },
+      {
+        "week": "2017-02-27",
+        "value": 4.346153846153846,
+        "orders": 26,
+        "in_event": false
+      },
+      {
+        "week": "2017-03-06",
+        "value": 4.6,
+        "orders": 30,
+        "in_event": false
+      },
+      {
+        "week": "2017-03-13",
+        "value": 4.37037037037037,
         "orders": 27,
         "in_event": false
       },
       {
+        "week": "2017-03-20",
+        "value": 4.178571428571429,
+        "orders": 28,
+        "in_event": false
+      },
+      {
+        "week": "2017-03-27",
+        "value": 4.041666666666667,
+        "orders": 24,
+        "in_event": false
+      },
+      {
+        "week": "2017-04-03",
+        "value": 3.9047619047619047,
+        "orders": 21,
+        "in_event": false
+      },
+      {
+        "week": "2017-04-10",
+        "value": 4.4,
+        "orders": 15,
+        "in_event": false
+      },
+      {
+        "week": "2017-04-17",
+        "value": 3.9393939393939394,
+        "orders": 33,
+        "in_event": false
+      },
+      {
         "week": "2017-04-24",
-        "value": 4.34375,
-        "orders": 32,
+        "value": 4.472222222222222,
+        "orders": 36,
         "in_event": false
       },
       {
         "week": "2017-05-01",
-        "value": 4.0588235294117645,
+        "value": 4.514285714285714,
         "orders": 35,
         "in_event": false
       },
       {
         "week": "2017-05-08",
-        "value": 4.2,
-        "orders": 25,
+        "value": 4.326923076923077,
+        "orders": 52,
         "in_event": false
       },
       {
         "week": "2017-05-15",
-        "value": 4.2,
-        "orders": 43,
+        "value": 4.527272727272727,
+        "orders": 56,
         "in_event": false
       },
       {
         "week": "2017-05-22",
-        "value": 4.096774193548387,
-        "orders": 31,
+        "value": 4.255813953488372,
+        "orders": 43,
         "in_event": false
       },
       {
         "week": "2017-05-29",
-        "value": 3.9565217391304346,
-        "orders": 23,
+        "value": 4.2894736842105265,
+        "orders": 38,
         "in_event": false
       },
       {
         "week": "2017-06-05",
-        "value": 4.142857142857143,
-        "orders": 42,
+        "value": 4.361702127659575,
+        "orders": 47,
         "in_event": false
       },
       {
         "week": "2017-06-12",
-        "value": 4.04,
-        "orders": 25,
-        "in_event": false
-      },
-      {
-        "week": "2017-06-19",
-        "value": 4.2,
-        "orders": 15,
-        "in_event": false
-      },
-      {
-        "week": "2017-06-26",
-        "value": 4.523809523809524,
-        "orders": 22,
-        "in_event": false
-      },
-      {
-        "week": "2017-07-03",
-        "value": 4.405405405405405,
-        "orders": 37,
-        "in_event": false
-      },
-      {
-        "week": "2017-07-10",
-        "value": 4.216216216216216,
-        "orders": 37,
-        "in_event": false
-      },
-      {
-        "week": "2017-07-17",
-        "value": 4.464285714285714,
-        "orders": 28,
-        "in_event": false
-      },
-      {
-        "week": "2017-07-24",
-        "value": 4.461538461538462,
+        "value": 4.3076923076923075,
         "orders": 39,
         "in_event": false
       },
       {
-        "week": "2017-07-31",
-        "value": 3.9125,
-        "orders": 40,
-        "in_event": false
-      },
-      {
-        "week": "2017-08-07",
-        "value": 4.111111111111111,
-        "orders": 27,
-        "in_event": false
-      },
-      {
-        "week": "2017-08-14",
-        "value": 4.45945945945946,
-        "orders": 37,
-        "in_event": false
-      },
-      {
-        "week": "2017-08-21",
-        "value": 4.344827586206897,
-        "orders": 29,
-        "in_event": false
-      },
-      {
-        "week": "2017-08-28",
-        "value": 4.371428571428571,
+        "week": "2017-06-19",
+        "value": 4.457142857142857,
         "orders": 35,
         "in_event": false
       },
       {
+        "week": "2017-06-26",
+        "value": 4.416666666666667,
+        "orders": 36,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-03",
+        "value": 4.55,
+        "orders": 40,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-10",
+        "value": 4.533333333333333,
+        "orders": 46,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-17",
+        "value": 4.673913043478261,
+        "orders": 46,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-24",
+        "value": 4.354166666666667,
+        "orders": 48,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-31",
+        "value": 3.9910714285714284,
+        "orders": 56,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-07",
+        "value": 4.627118644067797,
+        "orders": 59,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-14",
+        "value": 4.405405405405405,
+        "orders": 38,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-21",
+        "value": 4.560975609756097,
+        "orders": 41,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-28",
+        "value": 4.387755102040816,
+        "orders": 49,
+        "in_event": false
+      },
+      {
         "week": "2017-09-04",
-        "value": 3.9705882352941178,
-        "orders": 34,
+        "value": 4.323529411764706,
+        "orders": 35,
         "in_event": false
       },
       {
         "week": "2017-09-11",
-        "value": 4.214285714285714,
+        "value": 4.024390243902439,
         "orders": 42,
         "in_event": false
       },
       {
         "week": "2017-09-18",
-        "value": 4.25,
-        "orders": 36,
+        "value": 4.428571428571429,
+        "orders": 49,
         "in_event": false
       },
       {
         "week": "2017-09-25",
-        "value": 4.485714285714286,
-        "orders": 35,
+        "value": 4.2272727272727275,
+        "orders": 44,
         "in_event": false
       },
       {
         "week": "2017-10-02",
-        "value": 4.424242424242424,
-        "orders": 33,
+        "value": 4.285714285714286,
+        "orders": 35,
         "in_event": false
       },
       {
         "week": "2017-10-09",
-        "value": 4.232558139534884,
+        "value": 3.9767441860465116,
         "orders": 43,
         "in_event": false
       },
       {
         "week": "2017-10-16",
-        "value": 4.0606060606060606,
-        "orders": 33,
-        "in_event": false
-      },
-      {
-        "week": "2017-10-23",
-        "value": 4.133333333333334,
-        "orders": 46,
-        "in_event": false
-      },
-      {
-        "week": "2017-10-30",
-        "value": 4.3428571428571425,
-        "orders": 35,
-        "in_event": false
-      },
-      {
-        "week": "2017-11-06",
-        "value": 4.42,
-        "orders": 52,
-        "in_event": false
-      },
-      {
-        "week": "2017-11-13",
-        "value": 4.375,
-        "orders": 48,
-        "in_event": false
-      },
-      {
-        "week": "2017-11-20",
-        "value": 3.652892561983471,
-        "orders": 121,
-        "in_event": false
-      },
-      {
-        "week": "2017-11-27",
-        "value": 3.6417910447761193,
-        "orders": 67,
-        "in_event": false
-      },
-      {
-        "week": "2017-12-04",
-        "value": 4.181818181818182,
-        "orders": 55,
-        "in_event": false
-      },
-      {
-        "week": "2017-12-11",
-        "value": 4.115384615384615,
-        "orders": 53,
-        "in_event": false
-      },
-      {
-        "week": "2017-12-18",
-        "value": 3.8,
-        "orders": 25,
-        "in_event": false
-      },
-      {
-        "week": "2017-12-25",
-        "value": 4.394736842105263,
-        "orders": 38,
-        "in_event": false
-      },
-      {
-        "week": "2018-01-01",
-        "value": 3.9272727272727272,
-        "orders": 58,
-        "in_event": false
-      },
-      {
-        "week": "2018-01-08",
-        "value": 4.125,
-        "orders": 77,
-        "in_event": false
-      },
-      {
-        "week": "2018-01-15",
-        "value": 4.0,
-        "orders": 77,
-        "in_event": false
-      },
-      {
-        "week": "2018-01-22",
-        "value": 3.6666666666666665,
-        "orders": 63,
-        "in_event": false
-      },
-      {
-        "week": "2018-01-29",
-        "value": 4.112676056338028,
-        "orders": 71,
-        "in_event": false
-      },
-      {
-        "week": "2018-02-05",
-        "value": 3.7962962962962963,
-        "orders": 54,
-        "in_event": false
-      },
-      {
-        "week": "2018-02-12",
-        "value": 3.6911764705882355,
-        "orders": 68,
-        "in_event": false
-      },
-      {
-        "week": "2018-02-19",
-        "value": 3.3333333333333335,
-        "orders": 67,
-        "in_event": false
-      },
-      {
-        "week": "2018-02-26",
-        "value": 3.420289855072464,
-        "orders": 71,
-        "in_event": false
-      },
-      {
-        "week": "2018-03-05",
-        "value": 3.7818181818181817,
-        "orders": 56,
-        "in_event": false
-      },
-      {
-        "week": "2018-03-12",
-        "value": 4.0,
-        "orders": 48,
-        "in_event": false
-      },
-      {
-        "week": "2018-03-19",
-        "value": 3.9692307692307693,
-        "orders": 65,
-        "in_event": false
-      },
-      {
-        "week": "2018-03-26",
-        "value": 4.068181818181818,
-        "orders": 45,
-        "in_event": false
-      },
-      {
-        "week": "2018-04-02",
-        "value": 4.4,
-        "orders": 45,
-        "in_event": false
-      },
-      {
-        "week": "2018-04-09",
-        "value": 4.339622641509434,
-        "orders": 53,
-        "in_event": false
-      },
-      {
-        "week": "2018-04-16",
-        "value": 4.354838709677419,
-        "orders": 62,
-        "in_event": false
-      },
-      {
-        "week": "2018-04-23",
-        "value": 4.447761194029851,
-        "orders": 68,
-        "in_event": false
-      },
-      {
-        "week": "2018-04-30",
-        "value": 4.357142857142857,
+        "value": 4.0701754385964914,
         "orders": 57,
         "in_event": false
       },
       {
-        "week": "2018-05-07",
-        "value": 4.430555555555555,
-        "orders": 72,
-        "in_event": false
-      },
-      {
-        "week": "2018-05-14",
-        "value": 4.206896551724138,
-        "orders": 58,
-        "in_event": false
-      },
-      {
-        "week": "2018-05-21",
-        "value": 4.147058823529412,
-        "orders": 35,
-        "in_event": false
-      },
-      {
-        "week": "2018-05-28",
-        "value": 4.291666666666667,
-        "orders": 24,
-        "in_event": false
-      },
-      {
-        "week": "2018-06-04",
-        "value": 4.132075471698113,
-        "orders": 53,
-        "in_event": false
-      },
-      {
-        "week": "2018-06-11",
-        "value": 4.48936170212766,
-        "orders": 47,
-        "in_event": false
-      },
-      {
-        "week": "2018-06-18",
-        "value": 4.236363636363636,
-        "orders": 55,
-        "in_event": false
-      },
-      {
-        "week": "2018-06-25",
-        "value": 4.375,
-        "orders": 48,
-        "in_event": false
-      },
-      {
-        "week": "2018-07-02",
-        "value": 4.2631578947368425,
+        "week": "2017-10-23",
+        "value": 4.184210526315789,
         "orders": 38,
         "in_event": false
       },
       {
-        "week": "2018-07-09",
-        "value": 4.297297297297297,
-        "orders": 37,
-        "in_event": false
-      },
-      {
-        "week": "2018-07-16",
-        "value": 4.634615384615385,
-        "orders": 52,
-        "in_event": false
-      },
-      {
-        "week": "2018-07-23",
-        "value": 4.333333333333333,
-        "orders": 48,
-        "in_event": false
-      },
-      {
-        "week": "2018-07-30",
-        "value": 4.48936170212766,
+        "week": "2017-10-30",
+        "value": 4.065217391304348,
         "orders": 47,
         "in_event": false
       },
       {
-        "week": "2018-08-06",
-        "value": 4.305555555555555,
-        "orders": 72,
+        "week": "2017-11-06",
+        "value": 4.18,
+        "orders": 50,
         "in_event": false
       },
       {
-        "week": "2018-08-13",
-        "value": 4.303030303030303,
+        "week": "2017-11-13",
+        "value": 4.222222222222222,
+        "orders": 63,
+        "in_event": false
+      },
+      {
+        "week": "2017-11-20",
+        "value": 4.04074074074074,
+        "orders": 136,
+        "in_event": false
+      },
+      {
+        "week": "2017-11-27",
+        "value": 4.1454545454545455,
+        "orders": 111,
+        "in_event": false
+      },
+      {
+        "week": "2017-12-04",
+        "value": 4.223880597014926,
         "orders": 67,
         "in_event": false
       },
       {
+        "week": "2017-12-11",
+        "value": 3.891891891891892,
+        "orders": 75,
+        "in_event": false
+      },
+      {
+        "week": "2017-12-18",
+        "value": 4.2592592592592595,
+        "orders": 54,
+        "in_event": false
+      },
+      {
+        "week": "2017-12-25",
+        "value": 4.0,
+        "orders": 37,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-01",
+        "value": 3.870967741935484,
+        "orders": 63,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-08",
+        "value": 4.362745098039215,
+        "orders": 103,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-15",
+        "value": 4.333333333333333,
+        "orders": 81,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-22",
+        "value": 4.235955056179775,
+        "orders": 90,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-29",
+        "value": 4.130434782608695,
+        "orders": 69,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-05",
+        "value": 4.209876543209877,
+        "orders": 81,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-12",
+        "value": 4.025316455696203,
+        "orders": 79,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-19",
+        "value": 4.068965517241379,
+        "orders": 89,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-26",
+        "value": 3.7547169811320753,
+        "orders": 106,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-05",
+        "value": 3.857142857142857,
+        "orders": 84,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-12",
+        "value": 3.7411764705882353,
+        "orders": 85,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-19",
+        "value": 4.050632911392405,
+        "orders": 79,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-26",
+        "value": 4.30379746835443,
+        "orders": 80,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-02",
+        "value": 4.228915662650603,
+        "orders": 83,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-09",
+        "value": 4.3375,
+        "orders": 80,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-16",
+        "value": 4.385416666666667,
+        "orders": 97,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-23",
+        "value": 4.28125,
+        "orders": 96,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-30",
+        "value": 4.135802469135802,
+        "orders": 82,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-07",
+        "value": 4.195876288659794,
+        "orders": 97,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-14",
+        "value": 4.219178082191781,
+        "orders": 73,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-21",
+        "value": 4.275,
+        "orders": 40,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-28",
+        "value": 4.444444444444445,
+        "orders": 45,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-04",
+        "value": 4.013333333333334,
+        "orders": 75,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-11",
+        "value": 4.253521126760563,
+        "orders": 71,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-18",
+        "value": 4.410958904109589,
+        "orders": 73,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-25",
+        "value": 4.44,
+        "orders": 77,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-02",
+        "value": 4.326923076923077,
+        "orders": 52,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-09",
+        "value": 4.172413793103448,
+        "orders": 59,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-16",
+        "value": 4.478260869565218,
+        "orders": 93,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-23",
+        "value": 4.590361445783133,
+        "orders": 83,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-30",
+        "value": 4.284090909090909,
+        "orders": 88,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-06",
+        "value": 4.293577981651376,
+        "orders": 109,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-13",
+        "value": 4.489583333333333,
+        "orders": 97,
+        "in_event": false
+      },
+      {
         "week": "2018-08-20",
-        "value": 4.56,
-        "orders": 25,
+        "value": 4.75,
+        "orders": 48,
         "in_event": false
       }
     ],
-    "reasoning": "Weekly review_score fell to 3.333 against a robust baseline of 4.168 (delta -0.835). The worst week sits -3.42 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=5.00e-02 with a 95% CI of [-1.605, -0.000]. This is a real movement, not normal variation."
+    "reasoning": "Weekly review score fell to 3.308 against a robust baseline of 4.261 (change -0.952). Detected by a isolated excursion of -6.17 sigma in a single week, with the worst week at -6.17 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=1.38e-01 with a 95% CI of [-1.431, +0.215].",
+    "direction": "down",
+    "rule": "isolated excursion of -6.17 sigma in a single week"
   },
   "scope1_decomposition": {
-    "total_delta": -0.8026481105634482,
+    "total_delta": -0.6083789916431455,
     "mix_effect": 0.0,
-    "rate_effect": -0.8026481105634482,
+    "rate_effect": -0.6083789916431455,
     "interaction": 0.0,
     "mix_share": 0.0,
     "rate_share": 1.0,
@@ -656,12 +658,12 @@
       "scope": "Scope 2 - Investigate",
       "hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
       "supported": false,
-      "evidence_score": 0.5265444498388329,
+      "evidence_score": 0.25239080982769974,
       "components": {
-        "statistical": 1.0,
+        "statistical": 0.19369607023672214,
         "temporal": 0.65,
         "specificity": 0.0,
-        "discrimination": 0.2327222491941644,
+        "discrimination": 0.27298592622423484,
         "weights": {
           "statistical": 0.35,
           "temporal": 0.2,
@@ -671,92 +673,92 @@
       },
       "cause_family": "fulfilment",
       "effect": {
-        "estimate": 0.09899280575539571,
-        "ci_low": 0.08906309420662867,
-        "ci_high": 0.10892251730416275,
-        "p_value": 0.19933255561471275,
+        "estimate": -0.05460374822339498,
+        "ci_low": -0.19273683784552503,
+        "ci_high": 0.08352934139873508,
+        "p_value": 0.27970294867687806,
         "method": "two_proportion_z",
-        "n_treat": 15,
-        "n_control": 3475,
-        "significant": true
+        "n_treat": 19,
+        "n_control": 4777,
+        "significant": false
       },
       "temporal": {
         "best_lag": 0,
-        "best_corr": 0.6159003507985992,
+        "best_corr": 0.6189778007764797,
         "precedes": false,
         "by_lag": [
           {
             "lag": -4,
-            "corr": 0.3448694505483787,
+            "corr": 0.11726544441092389,
             "n": 82
           },
           {
             "lag": -3,
-            "corr": 0.25560925576989507,
+            "corr": 0.10597296299530003,
             "n": 83
           },
           {
             "lag": -2,
-            "corr": 0.36942092412876965,
+            "corr": 0.05820203838142402,
             "n": 84
           },
           {
             "lag": -1,
-            "corr": 0.4632830522754653,
+            "corr": 0.18785644984189573,
             "n": 85
           },
           {
             "lag": 0,
-            "corr": 0.6159003507985992,
+            "corr": 0.6189778007764797,
             "n": 86
           },
           {
             "lag": 1,
-            "corr": 0.5139408086674893,
+            "corr": 0.2800324818602293,
             "n": 85
           },
           {
             "lag": 2,
-            "corr": 0.24128033730642784,
+            "corr": 0.15794416473129042,
             "n": 84
           },
           {
             "lag": 3,
-            "corr": 0.28844970755683585,
+            "corr": 0.29305604192485163,
             "n": 83
           },
           {
             "lag": 4,
-            "corr": 0.15325057740833625,
+            "corr": 0.23237639561534984,
             "n": 82
           }
         ],
-        "note": "contemporaneous at lag 0 (r=0.616); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it.",
+        "note": "contemporaneous at lag 0 (r=0.619); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it.",
         "score": 0.65
       },
       "evidence": [
         {
           "kind": "metric",
           "claim": "On-time delivery rate fell",
-          "value": 0.09899280575539571,
+          "value": -0.05460374822339498,
           "units": "pp",
-          "detail": "90.1% -> 100.0% (95% CI [+0.089, +0.109], p=1.99e-01)",
-          "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=15, n_base=3475"
+          "detail": "94.9% -> 89.5% (95% CI [-0.193, +0.084], p=2.80e-01)",
+          "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=19, n_base=4777"
         },
         {
           "kind": "metric",
           "claim": "Average delivery time rose",
-          "value": -1.280748639976908,
+          "value": 2.319817104814291,
           "units": "days",
-          "detail": "14.93 -> 13.65 days (95% CI [-4.17, +1.61])",
-          "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=15"
+          "detail": "11.96 -> 14.28 days (95% CI [-4.60, +9.24])",
+          "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=19"
         },
         {
           "kind": "metric",
           "claim": "Degradation is in the CARRIER leg, not the seller leg",
-          "value": 0.2327222491941644,
+          "value": -0.27298592622423484,
           "units": "share",
-          "detail": "seller->carrier handoff moved only -0.98 days while total moved -1.28; the carrier leg accounts for -0.30 days (23% of the increase)",
+          "detail": "seller->carrier handoff moved only +2.95 days while total moved +2.32; the carrier leg accounts for -0.63 days (-27% of the increase)",
           "source": "olist_orders: delivered_carrier_date vs purchase & delivered_customer_date"
         },
         {
@@ -769,9 +771,9 @@
         }
       ],
       "falsifiable_by": "Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
-      "reasoning": "On-time delivery fell 9.9% (90.1% -> 100.0%, p=1.99e-01) and average delivery time rose -1.3 days. Decomposing the journey, the seller-to-carrier handoff barely moved (-0.98d) while the carrier leg absorbed 23% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
+      "reasoning": "On-time delivery fell 5.5% (94.9% -> 89.5%, p=2.80e-01) and average delivery time rose +2.3 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+2.95d) while the carrier leg absorbed -27% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
       "caveats": [
-        "contemporaneous at lag 0 (r=0.616); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
+        "contemporaneous at lag 0 (r=0.619); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
       ]
     },
     {
@@ -779,12 +781,12 @@
       "scope": "Scope 2 - Investigate",
       "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
       "supported": false,
-      "evidence_score": 0.455501458355155,
+      "evidence_score": 0.48,
       "components": {
-        "statistical": 0.3585755953004428,
+        "statistical": 1.0,
         "temporal": 0.65,
         "specificity": 0.0,
-        "discrimination": 1.0,
+        "discrimination": 0.0,
         "weights": {
           "statistical": 0.35,
           "temporal": 0.2,
@@ -794,14 +796,14 @@
       },
       "cause_family": "fulfilment",
       "effect": {
-        "estimate": 0.24586614173228347,
-        "ci_low": -0.09011436287477423,
-        "ci_high": 0.5818466463393411,
-        "p_value": 0.03970379175168515,
+        "estimate": -0.07723577235772358,
+        "ci_low": -0.08984493188815006,
+        "ci_high": -0.0646266128272971,
+        "p_value": 0.36037095468752867,
         "method": "two_proportion_z",
-        "n_treat": 8,
-        "n_control": 1270,
-        "significant": false
+        "n_treat": 10,
+        "n_control": 1722,
+        "significant": true
       },
       "temporal": {
         "note": "review text is written after delivery; ordering is structural",
@@ -811,48 +813,48 @@
         {
           "kind": "text",
           "claim": "Delivery-delay complaints rose sharply",
-          "value": 2.903963414634146,
+          "value": 0.0,
           "units": "x baseline",
-          "detail": "12.9% -> 37.5% of reviews (2.90x, 95% CI [-0.090, +0.582], p=3.97e-02)",
-          "source": "olist_order_reviews.review_comment_message, 8 event / 1270 baseline reviews with text"
+          "detail": "7.7% -> 0.0% of reviews (0.00x, 95% CI [-0.090, -0.065], p=3.60e-01)",
+          "source": "olist_order_reviews.review_comment_message, 10 event / 1722 baseline reviews with text"
         },
         {
           "kind": "text",
           "claim": "Product quality complaints did NOT rise",
           "value": 0.0,
           "units": "x baseline",
-          "detail": "2.5% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
-          "source": "olist_order_reviews.review_comment_message, n=8"
+          "detail": "2.6% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+          "source": "olist_order_reviews.review_comment_message, n=10"
         },
         {
           "kind": "text",
           "claim": "Wrong item received did NOT rise",
           "value": 0.0,
           "units": "x baseline",
-          "detail": "2.8% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
-          "source": "olist_order_reviews.review_comment_message, n=8"
+          "detail": "2.0% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+          "source": "olist_order_reviews.review_comment_message, n=10"
         },
         {
           "kind": "text",
           "claim": "Missing / incomplete order did NOT rise",
           "value": 0.0,
           "units": "x baseline",
-          "detail": "2.0% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
-          "source": "olist_order_reviews.review_comment_message, n=8"
+          "detail": "1.7% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+          "source": "olist_order_reviews.review_comment_message, n=10"
         },
         {
           "kind": "text",
           "claim": "Positive sentiment fell",
-          "value": 0.7232346241457859,
+          "value": 0.813543307086614,
           "units": "x baseline",
-          "detail": "34.6% -> 25.0% (0.72x)",
-          "source": "olist_order_reviews.review_comment_message, n=8"
+          "detail": "36.9% -> 30.0% (0.81x)",
+          "source": "olist_order_reviews.review_comment_message, n=10"
         }
       ],
       "falsifiable_by": "If product-quality or wrong-item complaints had risen by a similar multiple, the text would not discriminate between causes and this verdict would collapse to 'customers were unhappy', which is not a root cause.",
-      "reasoning": "Delivery-delay complaints rose from 12.9% to 37.5% of reviews carrying text, a 2.90x lift (p=4.0e-02). Competing themes did not follow: Product quality complaints 0.00x, Wrong item received 0.00x, Missing / incomplete order 0.00x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Wrong item received, Missing / incomplete order.",
+      "reasoning": "Delivery-delay complaints rose from 7.7% to 0.0% of reviews carrying text, a 0.00x lift (p=3.6e-01). Competing themes did not follow: Product quality complaints 0.00x, Wrong item received 0.00x, Missing / incomplete order 0.00x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Wrong item received, Missing / incomplete order.",
       "caveats": [
-        "Topic detection is lexicon-based over Portuguese review text; only 8/15 event-window orders carry free text, so text rates describe reviewers, not all customers."
+        "Topic detection is lexicon-based over Portuguese review text; only 10/20 event-window orders carry free text, so text rates describe reviewers, not all customers."
       ]
     },
     {
@@ -875,13 +877,13 @@
       },
       "cause_family": "measurement",
       "effect": {
-        "estimate": 0.16786570743405277,
+        "estimate": 0.16583850247347487,
         "ci_low": 0.0,
         "ci_high": 0.0,
         "p_value": 1.0,
         "method": "integrity_checks",
-        "n_treat": 15,
-        "n_control": 3475
+        "n_treat": 19,
+        "n_control": 4777
       },
       "temporal": {
         "note": "not applicable to artefact detection",
@@ -891,17 +893,17 @@
         {
           "kind": "integrity",
           "claim": "Review coverage is stable",
-          "value": 0.0074820143884891666,
+          "value": 0.004605400879212906,
           "units": "pp",
-          "detail": "99.3% -> 100.0% of delivered orders carry a review (SHIFTED). A collapse in coverage would make the score a selection artefact.",
-          "source": "olist_order_reviews joined to olist_orders; n_event=15"
+          "detail": "99.5% -> 100.0% of delivered orders carry a review (SHIFTED). A collapse in coverage would make the score a selection artefact.",
+          "source": "olist_order_reviews joined to olist_orders; n_event=19"
         },
         {
           "kind": "integrity",
           "claim": "Free-text rate is stable",
-          "value": 0.16786570743405277,
+          "value": 0.16583850247347487,
           "units": "pp",
-          "detail": "36.5% -> 53.3% of orders carry review text (no significant shift)",
+          "detail": "36.0% -> 52.6% of orders carry review text (no significant shift)",
           "source": "olist_order_reviews.review_comment_message non-null rate"
         },
         {
@@ -915,14 +917,14 @@
         {
           "kind": "integrity",
           "claim": "Order-status mix is stable",
-          "value": 0.023327712197864003,
+          "value": -0.02649223221586272,
           "units": "pp",
-          "detail": "delivered share 97.7% -> 100.0% (p=0.549)",
+          "detail": "delivered share 97.6% -> 95.0% (p=0.436)",
           "source": "olist_orders.order_status distribution"
         }
       ],
       "falsifiable_by": "A step change in review coverage, free-text rate, null rates, or order-status mix coinciding with the event window would support the artefact hypothesis and invalidate the substantive findings.",
-      "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 16.79%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
+      "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 16.58%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
       "caveats": []
     },
     {
@@ -945,13 +947,13 @@
       },
       "cause_family": "demand",
       "effect": {
-        "estimate": 0.0,
-        "ci_low": 0.0,
-        "ci_high": 0.0,
-        "p_value": 1.0,
+        "estimate": -7.5,
+        "ci_low": -107.36184893899059,
+        "ci_high": 92.36184893899059,
+        "p_value": 0.6694750087502301,
         "method": "welch_t",
-        "n_treat": 1,
-        "n_control": 4,
+        "n_treat": 2,
+        "n_control": 2,
         "significant": false
       },
       "temporal": {
@@ -962,18 +964,18 @@
         {
           "kind": "external",
           "claim": "Volume vs GLOBAL baseline looks like a spike",
-          "value": 0.3621130360692985,
+          "value": 0.16352459016393442,
           "units": "x",
-          "detail": "event weeks averaged 15 orders vs 41 across all other weeks (0.36x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
+          "detail": "event weeks averaged 10 orders vs 58 across all other weeks (0.16x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
           "source": "olist_orders weekly volume, all non-event weeks"
         },
         {
           "kind": "external",
           "claim": "Volume vs LOCAL trend shows no spike",
-          "value": 3.0,
+          "value": 0.5588235294117647,
           "units": "x",
-          "detail": "against the 8 weeks immediately preceding the event (5 orders/wk), event volume was 15 (3.00x, p=1.000). Demand was already at this level before satisfaction fell and did not rise further.",
-          "source": "olist_orders weekly volume, 8 weeks preceding 2017-01-30"
+          "detail": "against the 8 weeks immediately preceding the event (17 orders/wk), event volume was 10 (0.56x, p=0.669). Demand was already at this level before satisfaction fell and did not rise further.",
+          "source": "olist_orders weekly volume, 8 weeks preceding 2017-01-16"
         },
         {
           "kind": "external",
@@ -993,7 +995,7 @@
         }
       ],
       "falsifiable_by": "Event-window volume significantly exceeding the 8-week pre-event trend would support the overload hypothesis. It does not.",
-      "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 0.36x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 3.00x (p=1.000): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. ",
+      "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 0.16x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 0.56x (p=0.669): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. ",
       "caveats": [
         "Retrieved web context is not verifiable against this dataset and is excluded from the evidence score by design."
       ]
@@ -1002,8 +1004,8 @@
   "scope3_adversary": null,
   "scope4_decision": {
     "state": "INCONCLUSIVE",
-    "headline": "Review Score moved significantly (-0.835), but the evidence cannot identify a single cause.",
-    "narrative": "**What changed.** Weekly review_score fell to 3.333 against a robust baseline of 4.168 (delta -0.835). The worst week sits -3.42 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=5.00e-02 with a 95% CI of [-1.605, -0.000]. This is a real movement, not normal variation.\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
+    "headline": "Review Score moved significantly (-0.952), but the evidence cannot identify a single cause.",
+    "narrative": "**What changed.** Weekly review score fell to 3.308 against a robust baseline of 4.261 (change -0.952). Detected by a isolated excursion of -6.17 sigma in a single week, with the worst week at -6.17 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=1.38e-01 with a 95% CI of [-1.431, +0.215].\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
     "ranked": [
       {
         "agent": "Data Integrity",
@@ -1025,13 +1027,13 @@
         },
         "cause_family": "measurement",
         "effect": {
-          "estimate": 0.16786570743405277,
+          "estimate": 0.16583850247347487,
           "ci_low": 0.0,
           "ci_high": 0.0,
           "p_value": 1.0,
           "method": "integrity_checks",
-          "n_treat": 15,
-          "n_control": 3475
+          "n_treat": 19,
+          "n_control": 4777
         },
         "temporal": {
           "note": "not applicable to artefact detection",
@@ -1041,17 +1043,17 @@
           {
             "kind": "integrity",
             "claim": "Review coverage is stable",
-            "value": 0.0074820143884891666,
+            "value": 0.004605400879212906,
             "units": "pp",
-            "detail": "99.3% -> 100.0% of delivered orders carry a review (SHIFTED). A collapse in coverage would make the score a selection artefact.",
-            "source": "olist_order_reviews joined to olist_orders; n_event=15"
+            "detail": "99.5% -> 100.0% of delivered orders carry a review (SHIFTED). A collapse in coverage would make the score a selection artefact.",
+            "source": "olist_order_reviews joined to olist_orders; n_event=19"
           },
           {
             "kind": "integrity",
             "claim": "Free-text rate is stable",
-            "value": 0.16786570743405277,
+            "value": 0.16583850247347487,
             "units": "pp",
-            "detail": "36.5% -> 53.3% of orders carry review text (no significant shift)",
+            "detail": "36.0% -> 52.6% of orders carry review text (no significant shift)",
             "source": "olist_order_reviews.review_comment_message non-null rate"
           },
           {
@@ -1065,27 +1067,27 @@
           {
             "kind": "integrity",
             "claim": "Order-status mix is stable",
-            "value": 0.023327712197864003,
+            "value": -0.02649223221586272,
             "units": "pp",
-            "detail": "delivered share 97.7% -> 100.0% (p=0.549)",
+            "detail": "delivered share 97.6% -> 95.0% (p=0.436)",
             "source": "olist_orders.order_status distribution"
           }
         ],
         "falsifiable_by": "A step change in review coverage, free-text rate, null rates, or order-status mix coinciding with the event window would support the artefact hypothesis and invalidate the substantive findings.",
-        "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 16.79%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
+        "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 16.58%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
         "caveats": []
       },
       {
-        "agent": "Ops & Fulfilment",
+        "agent": "Voice of Customer",
         "scope": "Scope 2 - Investigate",
-        "hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
+        "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
         "supported": false,
-        "evidence_score": 0.5265444498388329,
+        "evidence_score": 0.48,
         "components": {
           "statistical": 1.0,
           "temporal": 0.65,
           "specificity": 0.0,
-          "discrimination": 0.2327222491941644,
+          "discrimination": 0.0,
           "weights": {
             "statistical": 0.35,
             "temporal": 0.2,
@@ -1095,92 +1097,173 @@
         },
         "cause_family": "fulfilment",
         "effect": {
-          "estimate": 0.09899280575539571,
-          "ci_low": 0.08906309420662867,
-          "ci_high": 0.10892251730416275,
-          "p_value": 0.19933255561471275,
+          "estimate": -0.07723577235772358,
+          "ci_low": -0.08984493188815006,
+          "ci_high": -0.0646266128272971,
+          "p_value": 0.36037095468752867,
           "method": "two_proportion_z",
-          "n_treat": 15,
-          "n_control": 3475,
+          "n_treat": 10,
+          "n_control": 1722,
           "significant": true
         },
         "temporal": {
+          "note": "review text is written after delivery; ordering is structural",
+          "score": 0.65
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "claim": "Delivery-delay complaints rose sharply",
+            "value": 0.0,
+            "units": "x baseline",
+            "detail": "7.7% -> 0.0% of reviews (0.00x, 95% CI [-0.090, -0.065], p=3.60e-01)",
+            "source": "olist_order_reviews.review_comment_message, 10 event / 1722 baseline reviews with text"
+          },
+          {
+            "kind": "text",
+            "claim": "Product quality complaints did NOT rise",
+            "value": 0.0,
+            "units": "x baseline",
+            "detail": "2.6% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+            "source": "olist_order_reviews.review_comment_message, n=10"
+          },
+          {
+            "kind": "text",
+            "claim": "Wrong item received did NOT rise",
+            "value": 0.0,
+            "units": "x baseline",
+            "detail": "2.0% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+            "source": "olist_order_reviews.review_comment_message, n=10"
+          },
+          {
+            "kind": "text",
+            "claim": "Missing / incomplete order did NOT rise",
+            "value": 0.0,
+            "units": "x baseline",
+            "detail": "1.7% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+            "source": "olist_order_reviews.review_comment_message, n=10"
+          },
+          {
+            "kind": "text",
+            "claim": "Positive sentiment fell",
+            "value": 0.813543307086614,
+            "units": "x baseline",
+            "detail": "36.9% -> 30.0% (0.81x)",
+            "source": "olist_order_reviews.review_comment_message, n=10"
+          }
+        ],
+        "falsifiable_by": "If product-quality or wrong-item complaints had risen by a similar multiple, the text would not discriminate between causes and this verdict would collapse to 'customers were unhappy', which is not a root cause.",
+        "reasoning": "Delivery-delay complaints rose from 7.7% to 0.0% of reviews carrying text, a 0.00x lift (p=3.6e-01). Competing themes did not follow: Product quality complaints 0.00x, Wrong item received 0.00x, Missing / incomplete order 0.00x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Wrong item received, Missing / incomplete order.",
+        "caveats": [
+          "Topic detection is lexicon-based over Portuguese review text; only 10/20 event-window orders carry free text, so text rates describe reviewers, not all customers."
+        ]
+      },
+      {
+        "agent": "Ops & Fulfilment",
+        "scope": "Scope 2 - Investigate",
+        "hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
+        "supported": false,
+        "evidence_score": 0.25239080982769974,
+        "components": {
+          "statistical": 0.19369607023672214,
+          "temporal": 0.65,
+          "specificity": 0.0,
+          "discrimination": 0.27298592622423484,
+          "weights": {
+            "statistical": 0.35,
+            "temporal": 0.2,
+            "specificity": 0.25,
+            "discrimination": 0.2
+          }
+        },
+        "cause_family": "fulfilment",
+        "effect": {
+          "estimate": -0.05460374822339498,
+          "ci_low": -0.19273683784552503,
+          "ci_high": 0.08352934139873508,
+          "p_value": 0.27970294867687806,
+          "method": "two_proportion_z",
+          "n_treat": 19,
+          "n_control": 4777,
+          "significant": false
+        },
+        "temporal": {
           "best_lag": 0,
-          "best_corr": 0.6159003507985992,
+          "best_corr": 0.6189778007764797,
           "precedes": false,
           "by_lag": [
             {
               "lag": -4,
-              "corr": 0.3448694505483787,
+              "corr": 0.11726544441092389,
               "n": 82
             },
             {
               "lag": -3,
-              "corr": 0.25560925576989507,
+              "corr": 0.10597296299530003,
               "n": 83
             },
             {
               "lag": -2,
-              "corr": 0.36942092412876965,
+              "corr": 0.05820203838142402,
               "n": 84
             },
             {
               "lag": -1,
-              "corr": 0.4632830522754653,
+              "corr": 0.18785644984189573,
               "n": 85
             },
             {
               "lag": 0,
-              "corr": 0.6159003507985992,
+              "corr": 0.6189778007764797,
               "n": 86
             },
             {
               "lag": 1,
-              "corr": 0.5139408086674893,
+              "corr": 0.2800324818602293,
               "n": 85
             },
             {
               "lag": 2,
-              "corr": 0.24128033730642784,
+              "corr": 0.15794416473129042,
               "n": 84
             },
             {
               "lag": 3,
-              "corr": 0.28844970755683585,
+              "corr": 0.29305604192485163,
               "n": 83
             },
             {
               "lag": 4,
-              "corr": 0.15325057740833625,
+              "corr": 0.23237639561534984,
               "n": 82
             }
           ],
-          "note": "contemporaneous at lag 0 (r=0.616); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it.",
+          "note": "contemporaneous at lag 0 (r=0.619); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it.",
           "score": 0.65
         },
         "evidence": [
           {
             "kind": "metric",
             "claim": "On-time delivery rate fell",
-            "value": 0.09899280575539571,
+            "value": -0.05460374822339498,
             "units": "pp",
-            "detail": "90.1% -> 100.0% (95% CI [+0.089, +0.109], p=1.99e-01)",
-            "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=15, n_base=3475"
+            "detail": "94.9% -> 89.5% (95% CI [-0.193, +0.084], p=2.80e-01)",
+            "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=19, n_base=4777"
           },
           {
             "kind": "metric",
             "claim": "Average delivery time rose",
-            "value": -1.280748639976908,
+            "value": 2.319817104814291,
             "units": "days",
-            "detail": "14.93 -> 13.65 days (95% CI [-4.17, +1.61])",
-            "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=15"
+            "detail": "11.96 -> 14.28 days (95% CI [-4.60, +9.24])",
+            "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=19"
           },
           {
             "kind": "metric",
             "claim": "Degradation is in the CARRIER leg, not the seller leg",
-            "value": 0.2327222491941644,
+            "value": -0.27298592622423484,
             "units": "share",
-            "detail": "seller->carrier handoff moved only -0.98 days while total moved -1.28; the carrier leg accounts for -0.30 days (23% of the increase)",
+            "detail": "seller->carrier handoff moved only +2.95 days while total moved +2.32; the carrier leg accounts for -0.63 days (-27% of the increase)",
             "source": "olist_orders: delivered_carrier_date vs purchase & delivered_customer_date"
           },
           {
@@ -1193,90 +1276,9 @@
           }
         ],
         "falsifiable_by": "Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
-        "reasoning": "On-time delivery fell 9.9% (90.1% -> 100.0%, p=1.99e-01) and average delivery time rose -1.3 days. Decomposing the journey, the seller-to-carrier handoff barely moved (-0.98d) while the carrier leg absorbed 23% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
+        "reasoning": "On-time delivery fell 5.5% (94.9% -> 89.5%, p=2.80e-01) and average delivery time rose +2.3 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+2.95d) while the carrier leg absorbed -27% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
         "caveats": [
-          "contemporaneous at lag 0 (r=0.616); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
-        ]
-      },
-      {
-        "agent": "Voice of Customer",
-        "scope": "Scope 2 - Investigate",
-        "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
-        "supported": false,
-        "evidence_score": 0.455501458355155,
-        "components": {
-          "statistical": 0.3585755953004428,
-          "temporal": 0.65,
-          "specificity": 0.0,
-          "discrimination": 1.0,
-          "weights": {
-            "statistical": 0.35,
-            "temporal": 0.2,
-            "specificity": 0.25,
-            "discrimination": 0.2
-          }
-        },
-        "cause_family": "fulfilment",
-        "effect": {
-          "estimate": 0.24586614173228347,
-          "ci_low": -0.09011436287477423,
-          "ci_high": 0.5818466463393411,
-          "p_value": 0.03970379175168515,
-          "method": "two_proportion_z",
-          "n_treat": 8,
-          "n_control": 1270,
-          "significant": false
-        },
-        "temporal": {
-          "note": "review text is written after delivery; ordering is structural",
-          "score": 0.65
-        },
-        "evidence": [
-          {
-            "kind": "text",
-            "claim": "Delivery-delay complaints rose sharply",
-            "value": 2.903963414634146,
-            "units": "x baseline",
-            "detail": "12.9% -> 37.5% of reviews (2.90x, 95% CI [-0.090, +0.582], p=3.97e-02)",
-            "source": "olist_order_reviews.review_comment_message, 8 event / 1270 baseline reviews with text"
-          },
-          {
-            "kind": "text",
-            "claim": "Product quality complaints did NOT rise",
-            "value": 0.0,
-            "units": "x baseline",
-            "detail": "2.5% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
-            "source": "olist_order_reviews.review_comment_message, n=8"
-          },
-          {
-            "kind": "text",
-            "claim": "Wrong item received did NOT rise",
-            "value": 0.0,
-            "units": "x baseline",
-            "detail": "2.8% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
-            "source": "olist_order_reviews.review_comment_message, n=8"
-          },
-          {
-            "kind": "text",
-            "claim": "Missing / incomplete order did NOT rise",
-            "value": 0.0,
-            "units": "x baseline",
-            "detail": "2.0% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
-            "source": "olist_order_reviews.review_comment_message, n=8"
-          },
-          {
-            "kind": "text",
-            "claim": "Positive sentiment fell",
-            "value": 0.7232346241457859,
-            "units": "x baseline",
-            "detail": "34.6% -> 25.0% (0.72x)",
-            "source": "olist_order_reviews.review_comment_message, n=8"
-          }
-        ],
-        "falsifiable_by": "If product-quality or wrong-item complaints had risen by a similar multiple, the text would not discriminate between causes and this verdict would collapse to 'customers were unhappy', which is not a root cause.",
-        "reasoning": "Delivery-delay complaints rose from 12.9% to 37.5% of reviews carrying text, a 2.90x lift (p=4.0e-02). Competing themes did not follow: Product quality complaints 0.00x, Wrong item received 0.00x, Missing / incomplete order 0.00x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Wrong item received, Missing / incomplete order.",
-        "caveats": [
-          "Topic detection is lexicon-based over Portuguese review text; only 8/15 event-window orders carry free text, so text rates describe reviewers, not all customers."
+          "contemporaneous at lag 0 (r=0.619); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
         ]
       },
       {
@@ -1299,13 +1301,13 @@
         },
         "cause_family": "demand",
         "effect": {
-          "estimate": 0.0,
-          "ci_low": 0.0,
-          "ci_high": 0.0,
-          "p_value": 1.0,
+          "estimate": -7.5,
+          "ci_low": -107.36184893899059,
+          "ci_high": 92.36184893899059,
+          "p_value": 0.6694750087502301,
           "method": "welch_t",
-          "n_treat": 1,
-          "n_control": 4,
+          "n_treat": 2,
+          "n_control": 2,
           "significant": false
         },
         "temporal": {
@@ -1316,18 +1318,18 @@
           {
             "kind": "external",
             "claim": "Volume vs GLOBAL baseline looks like a spike",
-            "value": 0.3621130360692985,
+            "value": 0.16352459016393442,
             "units": "x",
-            "detail": "event weeks averaged 15 orders vs 41 across all other weeks (0.36x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
+            "detail": "event weeks averaged 10 orders vs 58 across all other weeks (0.16x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
             "source": "olist_orders weekly volume, all non-event weeks"
           },
           {
             "kind": "external",
             "claim": "Volume vs LOCAL trend shows no spike",
-            "value": 3.0,
+            "value": 0.5588235294117647,
             "units": "x",
-            "detail": "against the 8 weeks immediately preceding the event (5 orders/wk), event volume was 15 (3.00x, p=1.000). Demand was already at this level before satisfaction fell and did not rise further.",
-            "source": "olist_orders weekly volume, 8 weeks preceding 2017-01-30"
+            "detail": "against the 8 weeks immediately preceding the event (17 orders/wk), event volume was 10 (0.56x, p=0.669). Demand was already at this level before satisfaction fell and did not rise further.",
+            "source": "olist_orders weekly volume, 8 weeks preceding 2017-01-16"
           },
           {
             "kind": "external",
@@ -1347,7 +1349,7 @@
           }
         ],
         "falsifiable_by": "Event-window volume significantly exceeding the 8-week pre-event trend would support the overload hypothesis. It does not.",
-        "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 0.36x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 3.00x (p=1.000): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. ",
+        "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 0.16x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 0.56x (p=0.669): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. ",
         "caveats": [
           "Retrieved web context is not verifiable against this dataset and is excluded from the evidence score by design."
         ]
@@ -1375,14 +1377,14 @@
   },
   "orchestration_log": [
     "Scope 0  Triage      | loading panel...",
-    "Scope 0  Triage      | scenario='santa-catarina'  orders=3,624  states=['SC']",
-    "Scope 0  Triage      | SIGNAL  z=-3.42  delta=-0.835  weeks=1",
+    "Scope 0  Triage      | scenario='parana'  orders=5,021  states=['PR']",
+    "Scope 0  Triage      | SIGNAL  z=-6.17  delta=-0.952  weeks=2",
     "Scope 1  Localize    | mix-vs-rate decomposition...",
-    "Scope 1  Localize    | rate=-0.803 mix=+0.000 -> 100% rate-driven",
+    "Scope 1  Localize    | rate=-0.608 mix=+0.000 -> 100% rate-driven",
     "Scope 1  Localize    | 0 segments tested, 0 naive hits -> 0 survive FDR control",
     "Scope 2  Investigate | spawning agents...",
-    "Scope 2  Ops & Fulfilment  | supported=False score=0.527  [stat=1.00 temp=0.65 spec=0.00 disc=0.23]",
-    "Scope 2  Voice of Customer | supported=False score=0.456  [stat=0.36 temp=0.65 spec=0.00 disc=1.00]",
+    "Scope 2  Ops & Fulfilment  | supported=False score=0.252  [stat=0.19 temp=0.65 spec=0.00 disc=0.27]",
+    "Scope 2  Voice of Customer | supported=False score=0.480  [stat=1.00 temp=0.65 spec=0.00 disc=0.00]",
     "Scope 2  Data Integrity    | supported=False score=0.900  [stat=1.00 temp=0.50 spec=1.00 disc=1.00]",
     "Scope 2  Market & External | supported=False score=0.100  [stat=0.00 temp=0.50 spec=0.00 disc=0.00]",
     "Scope 4  Arbiter     | ranking and deciding...",
@@ -1433,7 +1435,7 @@
         ]
       },
       "withheld": false,
-      "narrative": "**Hold.** Customer satisfaction moved from 4.17 to 3.33, and that part is certain. What caused it is not. Do not change process on this yet; a change aimed at the wrong cause will not move the metric back.\n\nNo substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.",
+      "narrative": "**Hold.** Customer satisfaction moved from 4.26 to 3.31, and that part is certain. What caused it is not. Do not change process on this yet; a change aimed at the wrong cause will not move the metric back.\n\nNo substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.",
       "action": {
         "headline": "Do not act yet",
         "driver": "not established",
@@ -1460,7 +1462,7 @@
         ]
       },
       "withheld": false,
-      "narrative": "**What changed.** Weekly review_score fell to 3.333 against a robust baseline of 4.168 (delta -0.835). The worst week sits -3.42 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=5.00e-02 with a 95% CI of [-1.605, -0.000]. This is a real movement, not normal variation.\n\n**Why inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.\n\n**What changed.** Weekly review_score fell to 3.333 against a robust baseline of 4.168 (delta -0.835). The worst week sits -3.42 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=5.00e-02 with a 95% CI of [-1.605, -0.000]. This is a real movement, not normal variation.\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
+      "narrative": "**What changed.** Weekly review score fell to 3.308 against a robust baseline of 4.261 (change -0.952). Detected by a isolated excursion of -6.17 sigma in a single week, with the worst week at -6.17 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=1.38e-01 with a 95% CI of [-1.431, +0.215].\n\n**Why inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.\n\n**What changed.** Weekly review score fell to 3.308 against a robust baseline of 4.261 (change -0.952). Detected by a isolated excursion of -6.17 sigma in a single week, with the worst week at -6.17 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=1.38e-01 with a 95% CI of [-1.431, +0.215].\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
       "action": {
         "headline": "Do not act yet",
         "driver": "not established",
@@ -1476,26 +1478,26 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 95.8,
+      "total_ms": 109.6,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 42.2,
-          "detail": "3,624 rows"
+          "ms": 47.6,
+          "detail": "5,021 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 9.7,
-          "detail": "SIGNAL, z=-3.42"
+          "ms": 10.2,
+          "detail": "SIGNAL, z=-6.17"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 15.7,
+          "ms": 18.0,
           "detail": "0 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 27.6,
+          "ms": 33.1,
           "detail": "4 agents"
         },
         {
@@ -1717,1034 +1719,1034 @@
     {
       "week": "2017-01-02",
       "in_event": false,
-      "orders": 1,
-      "review_score": 5.0,
+      "orders": 30,
+      "review_score": 4.866666666666666,
       "on_time": 1.0,
-      "delivery_days": 8.602060185185184,
-      "days_to_carrier": 2.7483912037037035,
-      "topic_delivery_delay": null,
-      "topic_product_quality": null,
-      "topic_positive": null
+      "delivery_days": 11.436717206790123,
+      "days_to_carrier": 5.873954475308642,
+      "topic_delivery_delay": 0.043478260869565216,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.8260869565217391
     },
     {
       "week": "2017-01-09",
       "in_event": false,
-      "orders": 5,
-      "review_score": 4.0,
+      "orders": 4,
+      "review_score": 5.0,
       "on_time": 1.0,
-      "delivery_days": 13.101212962962965,
-      "days_to_carrier": 2.8665439814814815,
+      "delivery_days": 7.703888888888889,
+      "days_to_carrier": 1.256478587962963,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.3333333333333333
+    },
+    {
+      "week": "2017-01-16",
+      "in_event": true,
+      "orders": 4,
+      "review_score": 2.75,
+      "on_time": 0.75,
+      "delivery_days": 20.381979166666667,
+      "days_to_carrier": 14.75916087962963,
       "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
       "topic_positive": 0.0
     },
     {
-      "week": "2017-01-16",
+      "week": "2017-01-23",
+      "in_event": true,
+      "orders": 15,
+      "review_score": 3.8666666666666667,
+      "on_time": 0.9333333333333333,
+      "delivery_days": 12.658565586419753,
+      "days_to_carrier": 3.7707878086419755,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.42857142857142855
+    },
+    {
+      "week": "2017-01-30",
       "in_event": false,
-      "orders": 6,
-      "review_score": 4.5,
+      "orders": 36,
+      "review_score": 4.142857142857143,
+      "on_time": 0.9722222222222222,
+      "delivery_days": 12.723381558641975,
+      "days_to_carrier": 4.978255208333334,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.06666666666666667,
+      "topic_positive": 0.3333333333333333
+    },
+    {
+      "week": "2017-02-06",
+      "in_event": false,
+      "orders": 33,
+      "review_score": 4.090909090909091,
+      "on_time": 0.9696969696969697,
+      "delivery_days": 13.220763187429855,
+      "days_to_carrier": 4.412142957351291,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.3333333333333333
+    },
+    {
+      "week": "2017-02-13",
+      "in_event": false,
+      "orders": 28,
+      "review_score": 3.8214285714285716,
+      "on_time": 0.9285714285714286,
+      "delivery_days": 15.83429935515873,
+      "days_to_carrier": 4.640602678571429,
+      "topic_delivery_delay": 0.15384615384615385,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.38461538461538464
+    },
+    {
+      "week": "2017-02-20",
+      "in_event": false,
+      "orders": 15,
+      "review_score": 4.733333333333333,
       "on_time": 1.0,
-      "delivery_days": 12.845765817901233,
-      "days_to_carrier": 2.225775462962963,
+      "delivery_days": 12.929373456790124,
+      "days_to_carrier": 3.7073672839506173,
       "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
       "topic_positive": 0.4
     },
     {
-      "week": "2017-01-23",
-      "in_event": false,
-      "orders": 8,
-      "review_score": 4.5,
-      "on_time": 0.875,
-      "delivery_days": 24.22455295138889,
-      "days_to_carrier": 3.4165813078703704,
-      "topic_delivery_delay": 0.3333333333333333,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.0
-    },
-    {
-      "week": "2017-01-30",
-      "in_event": true,
-      "orders": 15,
-      "review_score": 3.3333333333333335,
-      "on_time": 1.0,
-      "delivery_days": 13.646124228395061,
-      "days_to_carrier": 2.3193456790123457,
-      "topic_delivery_delay": 0.375,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.25
-    },
-    {
-      "week": "2017-02-06",
-      "in_event": false,
-      "orders": 22,
-      "review_score": 4.238095238095238,
-      "on_time": 0.9545454545454546,
-      "delivery_days": 14.501683501683504,
-      "days_to_carrier": 4.163775778619528,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.2,
-      "topic_positive": 0.0
-    },
-    {
-      "week": "2017-02-13",
-      "in_event": false,
-      "orders": 10,
-      "review_score": 3.8,
-      "on_time": 1.0,
-      "delivery_days": 19.59678472222222,
-      "days_to_carrier": 2.8261990740740743,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.0
-    },
-    {
-      "week": "2017-02-20",
-      "in_event": false,
-      "orders": 11,
-      "review_score": 4.2,
-      "on_time": 0.9090909090909091,
-      "delivery_days": 15.410083122895623,
-      "days_to_carrier": 3.243481691919192,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 1.0
-    },
-    {
       "week": "2017-02-27",
       "in_event": false,
-      "orders": 20,
-      "review_score": 3.8,
-      "on_time": 0.75,
-      "delivery_days": 19.08683622685185,
-      "days_to_carrier": 3.1560873842592594,
-      "topic_delivery_delay": 0.16666666666666666,
-      "topic_product_quality": 0.08333333333333333,
-      "topic_positive": 0.3333333333333333
+      "orders": 26,
+      "review_score": 4.346153846153846,
+      "on_time": 0.9615384615384616,
+      "delivery_days": 13.91662971866097,
+      "days_to_carrier": 5.119330484330485,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.2222222222222222,
+      "topic_positive": 0.4444444444444444
     },
     {
       "week": "2017-03-06",
       "in_event": false,
-      "orders": 14,
-      "review_score": 3.9285714285714284,
-      "on_time": 0.9285714285714286,
-      "delivery_days": 15.707527281746033,
-      "days_to_carrier": 3.9161135912698413,
+      "orders": 30,
+      "review_score": 4.6,
+      "on_time": 1.0,
+      "delivery_days": 9.197284336419754,
+      "days_to_carrier": 1.895730324074074,
       "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.3333333333333333,
-      "topic_positive": 0.3333333333333333
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.25
     },
     {
       "week": "2017-03-13",
       "in_event": false,
-      "orders": 30,
-      "review_score": 4.275862068965517,
-      "on_time": 0.7666666666666667,
-      "delivery_days": 17.91315663580247,
-      "days_to_carrier": 2.821639274691358,
-      "topic_delivery_delay": 0.0,
+      "orders": 27,
+      "review_score": 4.37037037037037,
+      "on_time": 0.9259259259259259,
+      "delivery_days": 12.572227794924553,
+      "days_to_carrier": 2.580261488340192,
+      "topic_delivery_delay": 0.16666666666666666,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.2222222222222222
+      "topic_positive": 0.16666666666666666
     },
     {
       "week": "2017-03-20",
       "in_event": false,
-      "orders": 18,
-      "review_score": 3.9444444444444446,
-      "on_time": 0.6666666666666666,
-      "delivery_days": 17.870967721193416,
-      "days_to_carrier": 3.17211741255144,
-      "topic_delivery_delay": 0.16666666666666666,
-      "topic_product_quality": 0.16666666666666666,
-      "topic_positive": 0.3333333333333333
+      "orders": 28,
+      "review_score": 4.178571428571429,
+      "on_time": 0.9642857142857143,
+      "delivery_days": 11.627965443121694,
+      "days_to_carrier": 3.1713917824074076,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.125
     },
     {
       "week": "2017-03-27",
       "in_event": false,
-      "orders": 29,
-      "review_score": 4.172413793103448,
-      "on_time": 0.8620689655172413,
-      "delivery_days": 16.837989303959134,
-      "days_to_carrier": 2.3924560983397187,
-      "topic_delivery_delay": 0.1,
-      "topic_product_quality": 0.0,
+      "orders": 24,
+      "review_score": 4.041666666666667,
+      "on_time": 0.9583333333333334,
+      "delivery_days": 12.337835165895063,
+      "days_to_carrier": 3.583283661265432,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.14285714285714285,
       "topic_positive": 0.5
     },
     {
       "week": "2017-04-03",
       "in_event": false,
-      "orders": 23,
-      "review_score": 4.304347826086956,
-      "on_time": 0.8695652173913043,
-      "delivery_days": 16.493280998389697,
-      "days_to_carrier": 2.94003421900161,
-      "topic_delivery_delay": 0.2,
+      "orders": 21,
+      "review_score": 3.9047619047619047,
+      "on_time": 0.9523809523809523,
+      "delivery_days": 12.647527557319226,
+      "days_to_carrier": 3.806189925044092,
+      "topic_delivery_delay": 0.16666666666666666,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.1
+      "topic_positive": 0.3333333333333333
     },
     {
       "week": "2017-04-10",
       "in_event": false,
-      "orders": 16,
-      "review_score": 3.375,
-      "on_time": 0.75,
-      "delivery_days": 19.60210503472222,
-      "days_to_carrier": 3.638584346064815,
-      "topic_delivery_delay": 0.5,
+      "orders": 15,
+      "review_score": 4.4,
+      "on_time": 0.9333333333333333,
+      "delivery_days": 12.192657407407408,
+      "days_to_carrier": 3.840295524691358,
+      "topic_delivery_delay": 0.16666666666666666,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.125
+      "topic_positive": 0.6666666666666666
     },
     {
       "week": "2017-04-17",
       "in_event": false,
-      "orders": 27,
-      "review_score": 4.148148148148148,
-      "on_time": 0.8888888888888888,
-      "delivery_days": 15.676578360768175,
-      "days_to_carrier": 2.9254501028806583,
+      "orders": 33,
+      "review_score": 3.9393939393939394,
+      "on_time": 0.9696969696969697,
+      "delivery_days": 15.06705948372615,
+      "days_to_carrier": 3.2827890011223344,
+      "topic_delivery_delay": 0.15384615384615385,
+      "topic_product_quality": 0.07692307692307693,
+      "topic_positive": 0.46153846153846156
+    },
+    {
+      "week": "2017-04-24",
+      "in_event": false,
+      "orders": 36,
+      "review_score": 4.472222222222222,
+      "on_time": 0.9722222222222222,
+      "delivery_days": 12.88455536265432,
+      "days_to_carrier": 4.194277263374485,
       "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
       "topic_positive": 0.5
     },
     {
-      "week": "2017-04-24",
-      "in_event": false,
-      "orders": 32,
-      "review_score": 4.34375,
-      "on_time": 0.90625,
-      "delivery_days": 15.328765552662038,
-      "days_to_carrier": 3.7706452546296294,
-      "topic_delivery_delay": 0.07142857142857142,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.42857142857142855
-    },
-    {
       "week": "2017-05-01",
       "in_event": false,
       "orders": 35,
-      "review_score": 4.0588235294117645,
-      "on_time": 0.9428571428571428,
-      "delivery_days": 15.350138227513227,
-      "days_to_carrier": 4.041697751322751,
+      "review_score": 4.514285714285714,
+      "on_time": 1.0,
+      "delivery_days": 10.86433201058201,
+      "days_to_carrier": 3.5854308862433864,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.5
+    },
+    {
+      "week": "2017-05-08",
+      "in_event": false,
+      "orders": 52,
+      "review_score": 4.326923076923077,
+      "on_time": 0.9615384615384616,
+      "delivery_days": 9.862803151709402,
+      "days_to_carrier": 2.5782761306980055,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.05,
+      "topic_positive": 0.45
+    },
+    {
+      "week": "2017-05-15",
+      "in_event": false,
+      "orders": 56,
+      "review_score": 4.527272727272727,
+      "on_time": 0.9821428571428571,
+      "delivery_days": 10.491624710648148,
+      "days_to_carrier": 2.634299768518518,
+      "topic_delivery_delay": 0.14285714285714285,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.3333333333333333
+    },
+    {
+      "week": "2017-05-22",
+      "in_event": false,
+      "orders": 43,
+      "review_score": 4.255813953488372,
+      "on_time": 1.0,
+      "delivery_days": 9.834575258397933,
+      "days_to_carrier": 2.3630555555555555,
+      "topic_delivery_delay": 0.058823529411764705,
+      "topic_product_quality": 0.058823529411764705,
+      "topic_positive": 0.29411764705882354
+    },
+    {
+      "week": "2017-05-29",
+      "in_event": false,
+      "orders": 38,
+      "review_score": 4.2894736842105265,
+      "on_time": 1.0,
+      "delivery_days": 10.692284356725146,
+      "days_to_carrier": 2.828100024366472,
       "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
       "topic_positive": 0.3333333333333333
     },
     {
-      "week": "2017-05-08",
-      "in_event": false,
-      "orders": 25,
-      "review_score": 4.2,
-      "on_time": 0.88,
-      "delivery_days": 13.493742592592591,
-      "days_to_carrier": 3.299663425925926,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.5555555555555556
-    },
-    {
-      "week": "2017-05-15",
-      "in_event": false,
-      "orders": 43,
-      "review_score": 4.2,
-      "on_time": 0.9767441860465116,
-      "delivery_days": 13.848742463393625,
-      "days_to_carrier": 3.101435992678725,
-      "topic_delivery_delay": 0.13333333333333333,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.6
-    },
-    {
-      "week": "2017-05-22",
-      "in_event": false,
-      "orders": 31,
-      "review_score": 4.096774193548387,
-      "on_time": 0.9354838709677419,
-      "delivery_days": 14.997541442652329,
-      "days_to_carrier": 3.624068100358423,
-      "topic_delivery_delay": 0.15384615384615385,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.46153846153846156
-    },
-    {
-      "week": "2017-05-29",
-      "in_event": false,
-      "orders": 23,
-      "review_score": 3.9565217391304346,
-      "on_time": 1.0,
-      "delivery_days": 13.778737419484703,
-      "days_to_carrier": 2.3501167471819646,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.2222222222222222
-    },
-    {
       "week": "2017-06-05",
       "in_event": false,
-      "orders": 42,
-      "review_score": 4.142857142857143,
-      "on_time": 0.9761904761904762,
-      "delivery_days": 12.64229083994709,
-      "days_to_carrier": 2.9813720789241622,
-      "topic_delivery_delay": 0.05,
+      "orders": 47,
+      "review_score": 4.361702127659575,
+      "on_time": 1.0,
+      "delivery_days": 12.986339883766744,
+      "days_to_carrier": 3.163046690307328,
+      "topic_delivery_delay": 0.06666666666666667,
       "topic_product_quality": 0.0,
       "topic_positive": 0.4
     },
     {
       "week": "2017-06-12",
       "in_event": false,
-      "orders": 25,
-      "review_score": 4.04,
-      "on_time": 0.88,
-      "delivery_days": 18.377418055555555,
-      "days_to_carrier": 3.290325,
-      "topic_delivery_delay": 0.1,
-      "topic_product_quality": 0.1,
-      "topic_positive": 0.1
+      "orders": 39,
+      "review_score": 4.3076923076923075,
+      "on_time": 0.9743589743589743,
+      "delivery_days": 11.13886870845204,
+      "days_to_carrier": 2.8424816001899336,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.2857142857142857
     },
     {
       "week": "2017-06-19",
       "in_event": false,
-      "orders": 15,
-      "review_score": 4.2,
-      "on_time": 0.9333333333333333,
-      "delivery_days": 15.8047237654321,
-      "days_to_carrier": 3.184530864197531,
-      "topic_delivery_delay": 0.0,
+      "orders": 35,
+      "review_score": 4.457142857142857,
+      "on_time": 0.9714285714285714,
+      "delivery_days": 11.159584656084657,
+      "days_to_carrier": 2.9088680555555557,
+      "topic_delivery_delay": 0.06666666666666667,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.75
+      "topic_positive": 0.4
     },
     {
       "week": "2017-06-26",
       "in_event": false,
-      "orders": 22,
-      "review_score": 4.523809523809524,
+      "orders": 36,
+      "review_score": 4.416666666666667,
       "on_time": 1.0,
-      "delivery_days": 11.89961752946128,
-      "days_to_carrier": 1.835863320707071,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.2857142857142857
+      "delivery_days": 9.158009902263375,
+      "days_to_carrier": 2.8357883230452674,
+      "topic_delivery_delay": 0.05,
+      "topic_product_quality": 0.05,
+      "topic_positive": 0.6
     },
     {
       "week": "2017-07-03",
       "in_event": false,
-      "orders": 37,
-      "review_score": 4.405405405405405,
+      "orders": 40,
+      "review_score": 4.55,
       "on_time": 1.0,
-      "delivery_days": 11.81606544044044,
-      "days_to_carrier": 2.7593653028028027,
+      "delivery_days": 10.624453124999999,
+      "days_to_carrier": 3.0060133101851854,
       "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0625,
-      "topic_positive": 0.375
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.7
     },
     {
       "week": "2017-07-10",
       "in_event": false,
-      "orders": 37,
-      "review_score": 4.216216216216216,
-      "on_time": 0.9459459459459459,
-      "delivery_days": 13.997219406906908,
-      "days_to_carrier": 3.311363238238238,
+      "orders": 46,
+      "review_score": 4.533333333333333,
+      "on_time": 0.9782608695652174,
+      "delivery_days": 11.752004830917873,
+      "days_to_carrier": 3.8821857387278587,
       "topic_delivery_delay": 0.05555555555555555,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.2777777777777778
+      "topic_positive": 0.6111111111111112
     },
     {
       "week": "2017-07-17",
       "in_event": false,
-      "orders": 28,
-      "review_score": 4.464285714285714,
-      "on_time": 0.9285714285714286,
-      "delivery_days": 12.84991691468254,
-      "days_to_carrier": 2.748745453042328,
-      "topic_delivery_delay": 0.14285714285714285,
+      "orders": 46,
+      "review_score": 4.673913043478261,
+      "on_time": 1.0,
+      "delivery_days": 10.505047554347826,
+      "days_to_carrier": 3.2890041264090177,
+      "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.5714285714285714
+      "topic_positive": 0.42857142857142855
     },
     {
       "week": "2017-07-24",
       "in_event": false,
-      "orders": 39,
-      "review_score": 4.461538461538462,
-      "on_time": 0.9230769230769231,
-      "delivery_days": 13.31420435660019,
-      "days_to_carrier": 3.086710885565052,
-      "topic_delivery_delay": 0.2222222222222222,
+      "orders": 48,
+      "review_score": 4.354166666666667,
+      "on_time": 1.0,
+      "delivery_days": 10.560200376157407,
+      "days_to_carrier": 3.7428467399691363,
+      "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.3333333333333333
+      "topic_positive": 0.5555555555555556
     },
     {
       "week": "2017-07-31",
       "in_event": false,
-      "orders": 40,
-      "review_score": 3.9125,
-      "on_time": 0.95,
-      "delivery_days": 13.40004976851852,
-      "days_to_carrier": 3.6854557291666667,
-      "topic_delivery_delay": 0.058823529411764705,
-      "topic_product_quality": 0.11764705882352941,
-      "topic_positive": 0.35294117647058826
+      "orders": 56,
+      "review_score": 3.9910714285714284,
+      "on_time": 0.9821428571428571,
+      "delivery_days": 9.79880931712963,
+      "days_to_carrier": 2.8737175512566138,
+      "topic_delivery_delay": 0.07692307692307693,
+      "topic_product_quality": 0.07692307692307693,
+      "topic_positive": 0.11538461538461539
     },
     {
       "week": "2017-08-07",
       "in_event": false,
-      "orders": 27,
-      "review_score": 4.111111111111111,
-      "on_time": 0.9629629629629629,
-      "delivery_days": 11.860235339506174,
-      "days_to_carrier": 2.9943878600823046,
-      "topic_delivery_delay": 0.16666666666666666,
+      "orders": 59,
+      "review_score": 4.627118644067797,
+      "on_time": 1.0,
+      "delivery_days": 9.423459078782171,
+      "days_to_carrier": 2.6351781230382927,
+      "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.16666666666666666
+      "topic_positive": 0.42105263157894735
     },
     {
       "week": "2017-08-14",
       "in_event": false,
-      "orders": 37,
-      "review_score": 4.45945945945946,
-      "on_time": 0.972972972972973,
-      "delivery_days": 13.9093384009009,
-      "days_to_carrier": 3.0059600225225225,
-      "topic_delivery_delay": 0.15384615384615385,
+      "orders": 38,
+      "review_score": 4.405405405405405,
+      "on_time": 1.0,
+      "delivery_days": 10.113890716374268,
+      "days_to_carrier": 2.9843762183235865,
+      "topic_delivery_delay": 0.2,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.3076923076923077
+      "topic_positive": 0.3
     },
     {
       "week": "2017-08-21",
       "in_event": false,
-      "orders": 29,
-      "review_score": 4.344827586206897,
-      "on_time": 0.9655172413793104,
-      "delivery_days": 13.208411957215837,
-      "days_to_carrier": 3.6457551085568327,
-      "topic_delivery_delay": 0.16666666666666666,
+      "orders": 41,
+      "review_score": 4.560975609756097,
+      "on_time": 1.0,
+      "delivery_days": 9.499858570460704,
+      "days_to_carrier": 2.663329381210479,
+      "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.16666666666666666
+      "topic_positive": 0.5384615384615384
     },
     {
       "week": "2017-08-28",
       "in_event": false,
-      "orders": 35,
-      "review_score": 4.371428571428571,
-      "on_time": 0.9142857142857143,
-      "delivery_days": 14.076079365079364,
-      "days_to_carrier": 4.497551917989418,
-      "topic_delivery_delay": 0.14285714285714285,
-      "topic_product_quality": 0.07142857142857142,
-      "topic_positive": 0.2857142857142857
-    },
-    {
-      "week": "2017-09-04",
-      "in_event": false,
-      "orders": 34,
-      "review_score": 3.9705882352941178,
-      "on_time": 0.9411764705882353,
-      "delivery_days": 13.822375748910675,
-      "days_to_carrier": 4.191993464052287,
-      "topic_delivery_delay": 0.07692307692307693,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.23076923076923078
-    },
-    {
-      "week": "2017-09-11",
-      "in_event": false,
-      "orders": 42,
-      "review_score": 4.214285714285714,
-      "on_time": 0.8571428571428571,
-      "delivery_days": 14.955203648589066,
-      "days_to_carrier": 3.5802256944444446,
-      "topic_delivery_delay": 0.08333333333333333,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.25
-    },
-    {
-      "week": "2017-09-18",
-      "in_event": false,
-      "orders": 36,
-      "review_score": 4.25,
-      "on_time": 0.9166666666666666,
-      "delivery_days": 14.839164094650206,
-      "days_to_carrier": 3.7952372685185187,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.1111111111111111
-    },
-    {
-      "week": "2017-09-25",
-      "in_event": false,
-      "orders": 35,
-      "review_score": 4.485714285714286,
-      "on_time": 0.9714285714285714,
-      "delivery_days": 13.658551917989419,
-      "days_to_carrier": 3.6914606481481487,
-      "topic_delivery_delay": 0.13333333333333333,
-      "topic_product_quality": 0.06666666666666667,
-      "topic_positive": 0.3333333333333333
-    },
-    {
-      "week": "2017-10-02",
-      "in_event": false,
-      "orders": 33,
-      "review_score": 4.424242424242424,
-      "on_time": 0.9696969696969697,
-      "delivery_days": 12.123311588103254,
-      "days_to_carrier": 4.077018799102133,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.3333333333333333
-    },
-    {
-      "week": "2017-10-09",
-      "in_event": false,
-      "orders": 43,
-      "review_score": 4.232558139534884,
-      "on_time": 0.9534883720930233,
-      "delivery_days": 12.27310265934539,
-      "days_to_carrier": 3.4105700904392764,
-      "topic_delivery_delay": 0.07142857142857142,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.2857142857142857
-    },
-    {
-      "week": "2017-10-16",
-      "in_event": false,
-      "orders": 33,
-      "review_score": 4.0606060606060606,
-      "on_time": 0.9090909090909091,
-      "delivery_days": 12.572525953984288,
-      "days_to_carrier": 3.2512426346801346,
-      "topic_delivery_delay": 0.16666666666666666,
-      "topic_product_quality": 0.08333333333333333,
-      "topic_positive": 0.3333333333333333
-    },
-    {
-      "week": "2017-10-23",
-      "in_event": false,
-      "orders": 46,
-      "review_score": 4.133333333333334,
-      "on_time": 0.9347826086956522,
-      "delivery_days": 14.492117552334944,
-      "days_to_carrier": 4.3733720813204515,
+      "orders": 49,
+      "review_score": 4.387755102040816,
+      "on_time": 1.0,
+      "delivery_days": 11.817954931972789,
+      "days_to_carrier": 3.456371645880574,
       "topic_delivery_delay": 0.125,
       "topic_product_quality": 0.0,
       "topic_positive": 0.3125
     },
     {
-      "week": "2017-10-30",
+      "week": "2017-09-04",
       "in_event": false,
       "orders": 35,
-      "review_score": 4.3428571428571425,
+      "review_score": 4.323529411764706,
       "on_time": 1.0,
-      "delivery_days": 13.197818452380952,
-      "days_to_carrier": 3.496631613756614,
-      "topic_delivery_delay": 0.125,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.5625
-    },
-    {
-      "week": "2017-11-06",
-      "in_event": false,
-      "orders": 52,
-      "review_score": 4.42,
-      "on_time": 0.9615384615384616,
-      "delivery_days": 14.86465344551282,
-      "days_to_carrier": 3.287538506054131,
-      "topic_delivery_delay": 0.05555555555555555,
-      "topic_product_quality": 0.05555555555555555,
-      "topic_positive": 0.3888888888888889
-    },
-    {
-      "week": "2017-11-13",
-      "in_event": false,
-      "orders": 48,
-      "review_score": 4.375,
-      "on_time": 0.9791666666666666,
-      "delivery_days": 12.966594087577159,
-      "days_to_carrier": 3.724679060570988,
+      "delivery_days": 11.750748015873016,
+      "days_to_carrier": 3.9759054232804236,
       "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.2
+      "topic_positive": 0.25
     },
     {
-      "week": "2017-11-20",
+      "week": "2017-09-11",
       "in_event": false,
-      "orders": 121,
-      "review_score": 3.652892561983471,
-      "on_time": 0.768595041322314,
-      "delivery_days": 20.170528102999693,
-      "days_to_carrier": 5.14631533134374,
-      "topic_delivery_delay": 0.391304347826087,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.1956521739130435
-    },
-    {
-      "week": "2017-11-27",
-      "in_event": false,
-      "orders": 67,
-      "review_score": 3.6417910447761193,
-      "on_time": 0.746268656716418,
-      "delivery_days": 19.58860040077391,
-      "days_to_carrier": 3.780966176064124,
-      "topic_delivery_delay": 0.2222222222222222,
-      "topic_product_quality": 0.037037037037037035,
-      "topic_positive": 0.25925925925925924
-    },
-    {
-      "week": "2017-12-04",
-      "in_event": false,
-      "orders": 55,
-      "review_score": 4.181818181818182,
-      "on_time": 0.8727272727272727,
-      "delivery_days": 19.960083333333333,
-      "days_to_carrier": 3.143331228956229,
-      "topic_delivery_delay": 0.1875,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.4375
-    },
-    {
-      "week": "2017-12-11",
-      "in_event": false,
-      "orders": 53,
-      "review_score": 4.115384615384615,
-      "on_time": 0.9811320754716981,
-      "delivery_days": 16.029168195317958,
-      "days_to_carrier": 3.2619457547169812,
+      "orders": 42,
+      "review_score": 4.024390243902439,
+      "on_time": 0.9761904761904762,
+      "delivery_days": 12.13925567680776,
+      "days_to_carrier": 3.336977237654321,
       "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.06666666666666667,
-      "topic_positive": 0.2
+      "topic_product_quality": 0.05263157894736842,
+      "topic_positive": 0.3157894736842105
     },
     {
-      "week": "2017-12-18",
+      "week": "2017-09-18",
       "in_event": false,
-      "orders": 25,
-      "review_score": 3.8,
-      "on_time": 0.96,
-      "delivery_days": 17.680558796296296,
-      "days_to_carrier": 3.3813425925925924,
-      "topic_delivery_delay": 0.07142857142857142,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.5
+      "orders": 49,
+      "review_score": 4.428571428571429,
+      "on_time": 1.0,
+      "delivery_days": 11.179734741118668,
+      "days_to_carrier": 3.218568357898715,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.047619047619047616,
+      "topic_positive": 0.3333333333333333
     },
     {
-      "week": "2017-12-25",
+      "week": "2017-09-25",
       "in_event": false,
-      "orders": 38,
-      "review_score": 4.394736842105263,
-      "on_time": 0.9736842105263158,
-      "delivery_days": 17.446320358187137,
-      "days_to_carrier": 4.639101790935673,
-      "topic_delivery_delay": 0.058823529411764705,
-      "topic_product_quality": 0.17647058823529413,
-      "topic_positive": 0.29411764705882354
-    },
-    {
-      "week": "2018-01-01",
-      "in_event": false,
-      "orders": 58,
-      "review_score": 3.9272727272727272,
-      "on_time": 0.9310344827586207,
-      "delivery_days": 19.875185384738188,
-      "days_to_carrier": 5.930305316091954,
-      "topic_delivery_delay": 0.16,
-      "topic_product_quality": 0.04,
-      "topic_positive": 0.44
-    },
-    {
-      "week": "2018-01-08",
-      "in_event": false,
-      "orders": 77,
-      "review_score": 4.125,
-      "on_time": 0.9090909090909091,
-      "delivery_days": 19.259117514430017,
-      "days_to_carrier": 4.0543270502645505,
-      "topic_delivery_delay": 0.09375,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.375
-    },
-    {
-      "week": "2018-01-15",
-      "in_event": false,
-      "orders": 77,
-      "review_score": 4.0,
-      "on_time": 0.8701298701298701,
-      "delivery_days": 18.320257485569986,
-      "days_to_carrier": 3.1459613997113998,
-      "topic_delivery_delay": 0.2608695652173913,
-      "topic_product_quality": 0.043478260869565216,
-      "topic_positive": 0.34782608695652173
-    },
-    {
-      "week": "2018-01-22",
-      "in_event": false,
-      "orders": 63,
-      "review_score": 3.6666666666666665,
-      "on_time": 0.7936507936507936,
-      "delivery_days": 20.06245572457378,
-      "days_to_carrier": 3.3289050558495004,
-      "topic_delivery_delay": 0.3125,
-      "topic_product_quality": 0.03125,
-      "topic_positive": 0.375
-    },
-    {
-      "week": "2018-01-29",
-      "in_event": false,
-      "orders": 71,
-      "review_score": 4.112676056338028,
-      "on_time": 0.9295774647887324,
-      "delivery_days": 19.780340375586857,
-      "days_to_carrier": 2.943635889410537,
-      "topic_delivery_delay": 0.2,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.56
-    },
-    {
-      "week": "2018-02-05",
-      "in_event": false,
-      "orders": 54,
-      "review_score": 3.7962962962962963,
-      "on_time": 0.8703703703703703,
-      "delivery_days": 20.277422625171468,
-      "days_to_carrier": 4.758343835733882,
-      "topic_delivery_delay": 0.2608695652173913,
-      "topic_product_quality": 0.043478260869565216,
-      "topic_positive": 0.43478260869565216
-    },
-    {
-      "week": "2018-02-12",
-      "in_event": false,
-      "orders": 68,
-      "review_score": 3.6911764705882355,
-      "on_time": 0.6764705882352942,
-      "delivery_days": 22.46840992647059,
-      "days_to_carrier": 3.3210799632352943,
-      "topic_delivery_delay": 0.24324324324324326,
-      "topic_product_quality": 0.02702702702702703,
-      "topic_positive": 0.2972972972972973
-    },
-    {
-      "week": "2018-02-19",
-      "in_event": false,
-      "orders": 67,
-      "review_score": 3.3333333333333335,
-      "on_time": 0.5671641791044776,
-      "delivery_days": 24.14899236456606,
-      "days_to_carrier": 3.6545575939745714,
-      "topic_delivery_delay": 0.34615384615384615,
-      "topic_product_quality": 0.07692307692307693,
-      "topic_positive": 0.23076923076923078
-    },
-    {
-      "week": "2018-02-26",
-      "in_event": false,
-      "orders": 71,
-      "review_score": 3.420289855072464,
-      "on_time": 0.6901408450704225,
-      "delivery_days": 19.460357329160143,
-      "days_to_carrier": 3.452135824204486,
-      "topic_delivery_delay": 0.23333333333333334,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.2
-    },
-    {
-      "week": "2018-03-05",
-      "in_event": false,
-      "orders": 56,
-      "review_score": 3.7818181818181817,
-      "on_time": 0.7142857142857143,
-      "delivery_days": 18.427254877645503,
-      "days_to_carrier": 2.8869926008597884,
-      "topic_delivery_delay": 0.3,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.15
-    },
-    {
-      "week": "2018-03-12",
-      "in_event": false,
-      "orders": 48,
-      "review_score": 4.0,
-      "on_time": 0.7708333333333334,
-      "delivery_days": 17.631296537422838,
-      "days_to_carrier": 3.29449893904321,
-      "topic_delivery_delay": 0.21428571428571427,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.35714285714285715
-    },
-    {
-      "week": "2018-03-19",
-      "in_event": false,
-      "orders": 65,
-      "review_score": 3.9692307692307693,
-      "on_time": 0.8769230769230769,
-      "delivery_days": 15.30001282051282,
-      "days_to_carrier": 2.54074910968661,
-      "topic_delivery_delay": 0.18518518518518517,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.25925925925925924
-    },
-    {
-      "week": "2018-03-26",
-      "in_event": false,
-      "orders": 45,
-      "review_score": 4.068181818181818,
-      "on_time": 0.8666666666666667,
-      "delivery_days": 15.043704732510289,
-      "days_to_carrier": 4.201117026748971,
-      "topic_delivery_delay": 0.14285714285714285,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.35714285714285715
-    },
-    {
-      "week": "2018-04-02",
-      "in_event": false,
-      "orders": 45,
-      "review_score": 4.4,
-      "on_time": 0.9555555555555556,
-      "delivery_days": 12.247301183127572,
-      "days_to_carrier": 2.5945475823045268,
+      "orders": 44,
+      "review_score": 4.2272727272727275,
+      "on_time": 1.0,
+      "delivery_days": 11.542329019360269,
+      "days_to_carrier": 3.1003948337542084,
       "topic_delivery_delay": 0.1111111111111111,
       "topic_product_quality": 0.0,
       "topic_positive": 0.3888888888888889
     },
     {
-      "week": "2018-04-09",
+      "week": "2017-10-02",
       "in_event": false,
-      "orders": 53,
-      "review_score": 4.339622641509434,
-      "on_time": 1.0,
-      "delivery_days": 12.207261967155835,
-      "days_to_carrier": 3.2712203004891682,
-      "topic_delivery_delay": 0.05,
-      "topic_product_quality": 0.1,
-      "topic_positive": 0.3
+      "orders": 35,
+      "review_score": 4.285714285714286,
+      "on_time": 0.9714285714285714,
+      "delivery_days": 13.162677579365079,
+      "days_to_carrier": 3.8101097883597888,
+      "topic_delivery_delay": 0.08333333333333333,
+      "topic_product_quality": 0.08333333333333333,
+      "topic_positive": 0.25
     },
     {
-      "week": "2018-04-16",
+      "week": "2017-10-09",
       "in_event": false,
-      "orders": 62,
-      "review_score": 4.354838709677419,
-      "on_time": 0.967741935483871,
-      "delivery_days": 11.826115218040622,
-      "days_to_carrier": 2.9662208781362005,
+      "orders": 43,
+      "review_score": 3.9767441860465116,
+      "on_time": 0.9767441860465116,
+      "delivery_days": 11.631795596468562,
+      "days_to_carrier": 3.078781761412575,
       "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.47368421052631576
+      "topic_positive": 0.5
     },
     {
-      "week": "2018-04-23",
-      "in_event": false,
-      "orders": 68,
-      "review_score": 4.447761194029851,
-      "on_time": 0.9705882352941176,
-      "delivery_days": 11.806549734477123,
-      "days_to_carrier": 2.4611134940087145,
-      "topic_delivery_delay": 0.04,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.36
-    },
-    {
-      "week": "2018-04-30",
+      "week": "2017-10-16",
       "in_event": false,
       "orders": 57,
-      "review_score": 4.357142857142857,
-      "on_time": 0.9824561403508771,
-      "delivery_days": 10.548962191358024,
-      "days_to_carrier": 2.315711297920728,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.3181818181818182
+      "review_score": 4.0701754385964914,
+      "on_time": 0.9122807017543859,
+      "delivery_days": 13.678630401234567,
+      "days_to_carrier": 4.523092308317089,
+      "topic_delivery_delay": 0.125,
+      "topic_product_quality": 0.041666666666666664,
+      "topic_positive": 0.3333333333333333
     },
     {
-      "week": "2018-05-07",
+      "week": "2017-10-23",
       "in_event": false,
-      "orders": 72,
-      "review_score": 4.430555555555555,
-      "on_time": 0.9027777777777778,
-      "delivery_days": 12.505415702160494,
-      "days_to_carrier": 3.0292730838477366,
+      "orders": 38,
+      "review_score": 4.184210526315789,
+      "on_time": 0.9736842105263158,
+      "delivery_days": 11.983175865009747,
+      "days_to_carrier": 3.1540475755360626,
       "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.6
+    },
+    {
+      "week": "2017-10-30",
+      "in_event": false,
+      "orders": 47,
+      "review_score": 4.065217391304348,
+      "on_time": 0.9574468085106383,
+      "delivery_days": 11.712412332545313,
+      "days_to_carrier": 3.6376337174940896,
+      "topic_delivery_delay": 0.14285714285714285,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.47619047619047616
+    },
+    {
+      "week": "2017-11-06",
+      "in_event": false,
+      "orders": 50,
+      "review_score": 4.18,
+      "on_time": 0.98,
+      "delivery_days": 12.93827152777778,
+      "days_to_carrier": 4.1171092592592595,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.047619047619047616,
+      "topic_positive": 0.23809523809523808
+    },
+    {
+      "week": "2017-11-13",
+      "in_event": false,
+      "orders": 63,
+      "review_score": 4.222222222222222,
+      "on_time": 0.9365079365079365,
+      "delivery_days": 14.258092666078777,
+      "days_to_carrier": 3.3620245443856556,
+      "topic_delivery_delay": 0.10526315789473684,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.42105263157894735
+    },
+    {
+      "week": "2017-11-20",
+      "in_event": false,
+      "orders": 136,
+      "review_score": 4.04074074074074,
+      "on_time": 0.8602941176470589,
+      "delivery_days": 15.651557053376905,
+      "days_to_carrier": 3.8198691108387797,
+      "topic_delivery_delay": 0.25,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.375
+    },
+    {
+      "week": "2017-11-27",
+      "in_event": false,
+      "orders": 111,
+      "review_score": 4.1454545454545455,
+      "on_time": 0.8738738738738738,
+      "delivery_days": 15.722737529195863,
+      "days_to_carrier": 3.6549938480146817,
+      "topic_delivery_delay": 0.05263157894736842,
+      "topic_product_quality": 0.02631578947368421,
+      "topic_positive": 0.4473684210526316
+    },
+    {
+      "week": "2017-12-04",
+      "in_event": false,
+      "orders": 67,
+      "review_score": 4.223880597014926,
+      "on_time": 0.9402985074626866,
+      "delivery_days": 14.19487855859591,
+      "days_to_carrier": 4.0343746545052515,
+      "topic_delivery_delay": 0.034482758620689655,
+      "topic_product_quality": 0.034482758620689655,
+      "topic_positive": 0.4827586206896552
+    },
+    {
+      "week": "2017-12-11",
+      "in_event": false,
+      "orders": 75,
+      "review_score": 3.891891891891892,
+      "on_time": 0.9466666666666667,
+      "delivery_days": 15.941439197530862,
+      "days_to_carrier": 2.945308487654321,
+      "topic_delivery_delay": 0.15,
+      "topic_product_quality": 0.05,
+      "topic_positive": 0.15
+    },
+    {
+      "week": "2017-12-18",
+      "in_event": false,
+      "orders": 54,
+      "review_score": 4.2592592592592595,
+      "on_time": 0.9629629629629629,
+      "delivery_days": 13.705670224622772,
+      "days_to_carrier": 3.6369958847736625,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.3333333333333333
+    },
+    {
+      "week": "2017-12-25",
+      "in_event": false,
+      "orders": 37,
+      "review_score": 4.0,
+      "on_time": 0.9459459459459459,
+      "delivery_days": 15.392061123623623,
+      "days_to_carrier": 4.05493337087087,
+      "topic_delivery_delay": 0.1111111111111111,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.2777777777777778
+    },
+    {
+      "week": "2018-01-01",
+      "in_event": false,
+      "orders": 63,
+      "review_score": 3.870967741935484,
+      "on_time": 0.9523809523809523,
+      "delivery_days": 13.983588881540271,
+      "days_to_carrier": 3.9107491916519694,
+      "topic_delivery_delay": 0.1111111111111111,
+      "topic_product_quality": 0.1111111111111111,
+      "topic_positive": 0.2222222222222222
+    },
+    {
+      "week": "2018-01-08",
+      "in_event": false,
+      "orders": 103,
+      "review_score": 4.362745098039215,
+      "on_time": 0.9902912621359223,
+      "delivery_days": 12.560477009169363,
+      "days_to_carrier": 3.0703511551600147,
+      "topic_delivery_delay": 0.05,
+      "topic_product_quality": 0.025,
+      "topic_positive": 0.375
+    },
+    {
+      "week": "2018-01-15",
+      "in_event": false,
+      "orders": 81,
+      "review_score": 4.333333333333333,
+      "on_time": 0.9876543209876543,
+      "delivery_days": 13.166506058527665,
+      "days_to_carrier": 3.9141768118427067,
+      "topic_delivery_delay": 0.10810810810810811,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.4864864864864865
+    },
+    {
+      "week": "2018-01-22",
+      "in_event": false,
+      "orders": 90,
+      "review_score": 4.235955056179775,
+      "on_time": 0.9777777777777777,
+      "delivery_days": 13.885255272633746,
+      "days_to_carrier": 3.723440072016461,
+      "topic_delivery_delay": 0.15625,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.375
+    },
+    {
+      "week": "2018-01-29",
+      "in_event": false,
+      "orders": 69,
+      "review_score": 4.130434782608695,
+      "on_time": 0.9420289855072463,
+      "delivery_days": 15.889347322866346,
+      "days_to_carrier": 3.410907977724101,
+      "topic_delivery_delay": 0.1,
       "topic_product_quality": 0.0,
       "topic_positive": 0.36666666666666664
     },
     {
+      "week": "2018-02-05",
+      "in_event": false,
+      "orders": 81,
+      "review_score": 4.209876543209877,
+      "on_time": 0.8888888888888888,
+      "delivery_days": 15.552729195244627,
+      "days_to_carrier": 4.244652206218564,
+      "topic_delivery_delay": 0.10714285714285714,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.25
+    },
+    {
+      "week": "2018-02-12",
+      "in_event": false,
+      "orders": 79,
+      "review_score": 4.025316455696203,
+      "on_time": 0.8734177215189873,
+      "delivery_days": 16.080584124472573,
+      "days_to_carrier": 4.143606422878575,
+      "topic_delivery_delay": 0.2857142857142857,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.19047619047619047
+    },
+    {
+      "week": "2018-02-19",
+      "in_event": false,
+      "orders": 89,
+      "review_score": 4.068965517241379,
+      "on_time": 0.898876404494382,
+      "delivery_days": 13.8539106065335,
+      "days_to_carrier": 2.6227913025384937,
+      "topic_delivery_delay": 0.10714285714285714,
+      "topic_product_quality": 0.03571428571428571,
+      "topic_positive": 0.25
+    },
+    {
+      "week": "2018-02-26",
+      "in_event": false,
+      "orders": 106,
+      "review_score": 3.7547169811320753,
+      "on_time": 0.7924528301886793,
+      "delivery_days": 16.28387480345912,
+      "days_to_carrier": 3.6645915225366874,
+      "topic_delivery_delay": 0.2222222222222222,
+      "topic_product_quality": 0.022222222222222223,
+      "topic_positive": 0.26666666666666666
+    },
+    {
+      "week": "2018-03-05",
+      "in_event": false,
+      "orders": 84,
+      "review_score": 3.857142857142857,
+      "on_time": 0.7976190476190477,
+      "delivery_days": 16.16583912037037,
+      "days_to_carrier": 2.701630153218695,
+      "topic_delivery_delay": 0.16,
+      "topic_product_quality": 0.04,
+      "topic_positive": 0.2
+    },
+    {
+      "week": "2018-03-12",
+      "in_event": false,
+      "orders": 85,
+      "review_score": 3.7411764705882353,
+      "on_time": 0.8235294117647058,
+      "delivery_days": 15.762005855119824,
+      "days_to_carrier": 3.3197912581699343,
+      "topic_delivery_delay": 0.11363636363636363,
+      "topic_product_quality": 0.022727272727272728,
+      "topic_positive": 0.3181818181818182
+    },
+    {
+      "week": "2018-03-19",
+      "in_event": false,
+      "orders": 79,
+      "review_score": 4.050632911392405,
+      "on_time": 0.9240506329113924,
+      "delivery_days": 13.981781528363808,
+      "days_to_carrier": 3.0516317979371776,
+      "topic_delivery_delay": 0.03571428571428571,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.35714285714285715
+    },
+    {
+      "week": "2018-03-26",
+      "in_event": false,
+      "orders": 80,
+      "review_score": 4.30379746835443,
+      "on_time": 0.9875,
+      "delivery_days": 12.231198206018519,
+      "days_to_carrier": 3.236702835648148,
+      "topic_delivery_delay": 0.12121212121212122,
+      "topic_product_quality": 0.06060606060606061,
+      "topic_positive": 0.2727272727272727
+    },
+    {
+      "week": "2018-04-02",
+      "in_event": false,
+      "orders": 83,
+      "review_score": 4.228915662650603,
+      "on_time": 1.0,
+      "delivery_days": 10.690314173360107,
+      "days_to_carrier": 2.988258729361892,
+      "topic_delivery_delay": 0.10714285714285714,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.39285714285714285
+    },
+    {
+      "week": "2018-04-09",
+      "in_event": false,
+      "orders": 80,
+      "review_score": 4.3375,
+      "on_time": 0.9375,
+      "delivery_days": 11.168054542824073,
+      "days_to_carrier": 3.0907397280092592,
+      "topic_delivery_delay": 0.13333333333333333,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.4
+    },
+    {
+      "week": "2018-04-16",
+      "in_event": false,
+      "orders": 97,
+      "review_score": 4.385416666666667,
+      "on_time": 1.0,
+      "delivery_days": 9.23585075410462,
+      "days_to_carrier": 2.3183264127529593,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.029411764705882353,
+      "topic_positive": 0.5
+    },
+    {
+      "week": "2018-04-23",
+      "in_event": false,
+      "orders": 96,
+      "review_score": 4.28125,
+      "on_time": 0.9895833333333334,
+      "delivery_days": 9.971654610339506,
+      "days_to_carrier": 2.862484447337963,
+      "topic_delivery_delay": 0.03125,
+      "topic_product_quality": 0.09375,
+      "topic_positive": 0.34375
+    },
+    {
+      "week": "2018-04-30",
+      "in_event": false,
+      "orders": 82,
+      "review_score": 4.135802469135802,
+      "on_time": 1.0,
+      "delivery_days": 9.437599367660344,
+      "days_to_carrier": 2.952430273261066,
+      "topic_delivery_delay": 0.0625,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.25
+    },
+    {
+      "week": "2018-05-07",
+      "in_event": false,
+      "orders": 97,
+      "review_score": 4.195876288659794,
+      "on_time": 0.8969072164948454,
+      "delivery_days": 10.639326555937382,
+      "days_to_carrier": 2.4095441962581137,
+      "topic_delivery_delay": 0.02702702702702703,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.4594594594594595
+    },
+    {
       "week": "2018-05-14",
       "in_event": false,
-      "orders": 58,
-      "review_score": 4.206896551724138,
-      "on_time": 0.8620689655172413,
-      "delivery_days": 14.992860392720306,
-      "days_to_carrier": 2.2464347860791825,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.1,
-      "topic_positive": 0.4
+      "orders": 73,
+      "review_score": 4.219178082191781,
+      "on_time": 0.7123287671232876,
+      "delivery_days": 14.776509227549468,
+      "days_to_carrier": 2.407663781075596,
+      "topic_delivery_delay": 0.09090909090909091,
+      "topic_product_quality": 0.045454545454545456,
+      "topic_positive": 0.3181818181818182
     },
     {
       "week": "2018-05-21",
       "in_event": false,
-      "orders": 35,
-      "review_score": 4.147058823529412,
-      "on_time": 0.9428571428571428,
-      "delivery_days": 15.766258597883597,
-      "days_to_carrier": 2.388605158730159,
-      "topic_delivery_delay": 0.2727272727272727,
-      "topic_product_quality": 0.0,
+      "orders": 40,
+      "review_score": 4.275,
+      "on_time": 0.95,
+      "delivery_days": 15.587298032407407,
+      "days_to_carrier": 3.130025173611111,
+      "topic_delivery_delay": 0.09090909090909091,
+      "topic_product_quality": 0.09090909090909091,
       "topic_positive": 0.18181818181818182
     },
     {
       "week": "2018-05-28",
       "in_event": false,
-      "orders": 24,
-      "review_score": 4.291666666666667,
+      "orders": 45,
+      "review_score": 4.444444444444445,
       "on_time": 1.0,
-      "delivery_days": 14.532998649691358,
-      "days_to_carrier": 3.4618957368827163,
-      "topic_delivery_delay": 0.14285714285714285,
-      "topic_product_quality": 0.14285714285714285,
-      "topic_positive": 0.2857142857142857
+      "delivery_days": 13.587204732510289,
+      "days_to_carrier": 3.4714650205761313,
+      "topic_delivery_delay": 0.0,
+      "topic_product_quality": 0.05,
+      "topic_positive": 0.3
     },
     {
       "week": "2018-06-04",
       "in_event": false,
-      "orders": 53,
-      "review_score": 4.132075471698113,
+      "orders": 75,
+      "review_score": 4.013333333333334,
       "on_time": 1.0,
-      "delivery_days": 11.233461958420685,
-      "days_to_carrier": 3.4494081935709295,
-      "topic_delivery_delay": 0.08695652173913043,
-      "topic_product_quality": 0.08695652173913043,
-      "topic_positive": 0.34782608695652173
+      "delivery_days": 9.744993981481482,
+      "days_to_carrier": 2.0572091049382717,
+      "topic_delivery_delay": 0.17391304347826086,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.391304347826087
     },
     {
       "week": "2018-06-11",
       "in_event": false,
-      "orders": 47,
-      "review_score": 4.48936170212766,
+      "orders": 71,
+      "review_score": 4.253521126760563,
       "on_time": 1.0,
-      "delivery_days": 9.828792848699765,
-      "days_to_carrier": 2.597105742710796,
-      "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.1,
-      "topic_positive": 0.2
+      "delivery_days": 8.641641236306729,
+      "days_to_carrier": 2.261099374021909,
+      "topic_delivery_delay": 0.08,
+      "topic_product_quality": 0.16,
+      "topic_positive": 0.4
     },
     {
       "week": "2018-06-18",
       "in_event": false,
-      "orders": 55,
-      "review_score": 4.236363636363636,
+      "orders": 73,
+      "review_score": 4.410958904109589,
       "on_time": 1.0,
-      "delivery_days": 9.473064814814814,
-      "days_to_carrier": 2.5710271464646466,
+      "delivery_days": 8.290517028158295,
+      "days_to_carrier": 2.1657301179604262,
       "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.5882352941176471
+      "topic_product_quality": 0.03125,
+      "topic_positive": 0.3125
     },
     {
       "week": "2018-06-25",
       "in_event": false,
-      "orders": 48,
-      "review_score": 4.375,
+      "orders": 77,
+      "review_score": 4.44,
       "on_time": 1.0,
-      "delivery_days": 8.64331886574074,
-      "days_to_carrier": 2.2717898823302467,
-      "topic_delivery_delay": 0.06666666666666667,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.5333333333333333
+      "delivery_days": 7.513060215247715,
+      "days_to_carrier": 2.3254539442039444,
+      "topic_delivery_delay": 0.041666666666666664,
+      "topic_product_quality": 0.041666666666666664,
+      "topic_positive": 0.375
     },
     {
       "week": "2018-07-02",
       "in_event": false,
-      "orders": 38,
-      "review_score": 4.2631578947368425,
-      "on_time": 1.0,
-      "delivery_days": 7.966269493177387,
-      "days_to_carrier": 2.0388428971734895,
-      "topic_delivery_delay": 0.07142857142857142,
+      "orders": 52,
+      "review_score": 4.326923076923077,
+      "on_time": 0.9807692307692307,
+      "delivery_days": 7.726668447293448,
+      "days_to_carrier": 2.1025287126068375,
+      "topic_delivery_delay": 0.13333333333333333,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.35714285714285715
+      "topic_positive": 0.4
     },
     {
       "week": "2018-07-09",
       "in_event": false,
-      "orders": 37,
-      "review_score": 4.297297297297297,
-      "on_time": 0.9459459459459459,
-      "delivery_days": 11.416531218718719,
-      "days_to_carrier": 3.5232332332332335,
-      "topic_delivery_delay": 0.3333333333333333,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.3333333333333333
+      "orders": 59,
+      "review_score": 4.172413793103448,
+      "on_time": 0.9830508474576272,
+      "delivery_days": 10.724708294099186,
+      "days_to_carrier": 3.831485797237916,
+      "topic_delivery_delay": 0.0625,
+      "topic_product_quality": 0.0625,
+      "topic_positive": 0.5
     },
     {
       "week": "2018-07-16",
       "in_event": false,
-      "orders": 52,
-      "review_score": 4.634615384615385,
-      "on_time": 0.9615384615384616,
-      "delivery_days": 10.639752270299144,
-      "days_to_carrier": 3.357895299145299,
-      "topic_delivery_delay": 0.0,
+      "orders": 93,
+      "review_score": 4.478260869565218,
+      "on_time": 0.978494623655914,
+      "delivery_days": 8.868531834926324,
+      "days_to_carrier": 2.3187502489048186,
+      "topic_delivery_delay": 0.06451612903225806,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.47368421052631576
+      "topic_positive": 0.4838709677419355
     },
     {
       "week": "2018-07-23",
       "in_event": false,
-      "orders": 48,
-      "review_score": 4.333333333333333,
-      "on_time": 1.0,
-      "delivery_days": 8.262244888117284,
-      "days_to_carrier": 2.6633538290895062,
+      "orders": 83,
+      "review_score": 4.590361445783133,
+      "on_time": 0.9759036144578314,
+      "delivery_days": 7.793329568273092,
+      "days_to_carrier": 2.428964887327086,
       "topic_delivery_delay": 0.0,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.35294117647058826
+      "topic_product_quality": 0.07142857142857142,
+      "topic_positive": 0.35714285714285715
     },
     {
       "week": "2018-07-30",
       "in_event": false,
-      "orders": 47,
-      "review_score": 4.48936170212766,
-      "on_time": 0.9361702127659575,
-      "delivery_days": 9.115296000788023,
-      "days_to_carrier": 2.7964073581560283,
-      "topic_delivery_delay": 0.08333333333333333,
-      "topic_product_quality": 0.0,
-      "topic_positive": 0.5833333333333334
+      "orders": 88,
+      "review_score": 4.284090909090909,
+      "on_time": 0.9204545454545454,
+      "delivery_days": 8.306208833122897,
+      "days_to_carrier": 2.508594670664983,
+      "topic_delivery_delay": 0.02702702702702703,
+      "topic_product_quality": 0.02702702702702703,
+      "topic_positive": 0.24324324324324326
     },
     {
       "week": "2018-08-06",
       "in_event": false,
-      "orders": 72,
-      "review_score": 4.305555555555555,
-      "on_time": 0.9027777777777778,
-      "delivery_days": 10.348811567644033,
-      "days_to_carrier": 2.921140207047325,
-      "topic_delivery_delay": 0.09523809523809523,
+      "orders": 109,
+      "review_score": 4.293577981651376,
+      "on_time": 0.908256880733945,
+      "delivery_days": 9.167529306829765,
+      "days_to_carrier": 3.168046105164798,
+      "topic_delivery_delay": 0.02564102564102564,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.23809523809523808
+      "topic_positive": 0.38461538461538464
     },
     {
       "week": "2018-08-13",
       "in_event": false,
-      "orders": 67,
-      "review_score": 4.303030303030303,
-      "on_time": 0.9701492537313433,
-      "delivery_days": 8.610589759535655,
-      "days_to_carrier": 2.007672229132117,
-      "topic_delivery_delay": 0.03571428571428571,
-      "topic_product_quality": 0.03571428571428571,
-      "topic_positive": 0.39285714285714285
+      "orders": 97,
+      "review_score": 4.489583333333333,
+      "on_time": 0.9896907216494846,
+      "delivery_days": 7.731660342688048,
+      "days_to_carrier": 2.355691700076365,
+      "topic_delivery_delay": 0.07692307692307693,
+      "topic_product_quality": 0.0,
+      "topic_positive": 0.34615384615384615
     },
     {
       "week": "2018-08-20",
       "in_event": false,
-      "orders": 25,
-      "review_score": 4.56,
+      "orders": 48,
+      "review_score": 4.75,
       "on_time": 1.0,
-      "delivery_days": 6.223164351851852,
-      "days_to_carrier": 1.0393541666666666,
+      "delivery_days": 6.208820167824075,
+      "days_to_carrier": 1.5542074170524691,
       "topic_delivery_delay": 0.0,
       "topic_product_quality": 0.0,
-      "topic_positive": 0.6666666666666666
+      "topic_positive": 0.8125
     }
   ],
   "dose_response": {
@@ -2752,12 +2754,12 @@
     "scope": "Scope 2 - Investigate",
     "hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
     "supported": false,
-    "evidence_score": 0.5265444498388329,
+    "evidence_score": 0.25239080982769974,
     "components": {
-      "statistical": 1.0,
+      "statistical": 0.19369607023672214,
       "temporal": 0.65,
       "specificity": 0.0,
-      "discrimination": 0.2327222491941644,
+      "discrimination": 0.27298592622423484,
       "weights": {
         "statistical": 0.35,
         "temporal": 0.2,
@@ -2767,92 +2769,92 @@
     },
     "cause_family": "fulfilment",
     "effect": {
-      "estimate": 0.09899280575539571,
-      "ci_low": 0.08906309420662867,
-      "ci_high": 0.10892251730416275,
-      "p_value": 0.19933255561471275,
+      "estimate": -0.05460374822339498,
+      "ci_low": -0.19273683784552503,
+      "ci_high": 0.08352934139873508,
+      "p_value": 0.27970294867687806,
       "method": "two_proportion_z",
-      "n_treat": 15,
-      "n_control": 3475,
-      "significant": true
+      "n_treat": 19,
+      "n_control": 4777,
+      "significant": false
     },
     "temporal": {
       "best_lag": 0,
-      "best_corr": 0.6159003507985992,
+      "best_corr": 0.6189778007764797,
       "precedes": false,
       "by_lag": [
         {
           "lag": -4,
-          "corr": 0.3448694505483787,
+          "corr": 0.11726544441092389,
           "n": 82
         },
         {
           "lag": -3,
-          "corr": 0.25560925576989507,
+          "corr": 0.10597296299530003,
           "n": 83
         },
         {
           "lag": -2,
-          "corr": 0.36942092412876965,
+          "corr": 0.05820203838142402,
           "n": 84
         },
         {
           "lag": -1,
-          "corr": 0.4632830522754653,
+          "corr": 0.18785644984189573,
           "n": 85
         },
         {
           "lag": 0,
-          "corr": 0.6159003507985992,
+          "corr": 0.6189778007764797,
           "n": 86
         },
         {
           "lag": 1,
-          "corr": 0.5139408086674893,
+          "corr": 0.2800324818602293,
           "n": 85
         },
         {
           "lag": 2,
-          "corr": 0.24128033730642784,
+          "corr": 0.15794416473129042,
           "n": 84
         },
         {
           "lag": 3,
-          "corr": 0.28844970755683585,
+          "corr": 0.29305604192485163,
           "n": 83
         },
         {
           "lag": 4,
-          "corr": 0.15325057740833625,
+          "corr": 0.23237639561534984,
           "n": 82
         }
       ],
-      "note": "contemporaneous at lag 0 (r=0.616); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it.",
+      "note": "contemporaneous at lag 0 (r=0.619); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it.",
       "score": 0.65
     },
     "evidence": [
       {
         "kind": "metric",
         "claim": "On-time delivery rate fell",
-        "value": 0.09899280575539571,
+        "value": -0.05460374822339498,
         "units": "pp",
-        "detail": "90.1% -> 100.0% (95% CI [+0.089, +0.109], p=1.99e-01)",
-        "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=15, n_base=3475"
+        "detail": "94.9% -> 89.5% (95% CI [-0.193, +0.084], p=2.80e-01)",
+        "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=19, n_base=4777"
       },
       {
         "kind": "metric",
         "claim": "Average delivery time rose",
-        "value": -1.280748639976908,
+        "value": 2.319817104814291,
         "units": "days",
-        "detail": "14.93 -> 13.65 days (95% CI [-4.17, +1.61])",
-        "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=15"
+        "detail": "11.96 -> 14.28 days (95% CI [-4.60, +9.24])",
+        "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=19"
       },
       {
         "kind": "metric",
         "claim": "Degradation is in the CARRIER leg, not the seller leg",
-        "value": 0.2327222491941644,
+        "value": -0.27298592622423484,
         "units": "share",
-        "detail": "seller->carrier handoff moved only -0.98 days while total moved -1.28; the carrier leg accounts for -0.30 days (23% of the increase)",
+        "detail": "seller->carrier handoff moved only +2.95 days while total moved +2.32; the carrier leg accounts for -0.63 days (-27% of the increase)",
         "source": "olist_orders: delivered_carrier_date vs purchase & delivered_customer_date"
       },
       {
@@ -2865,9 +2867,9 @@
       }
     ],
     "falsifiable_by": "Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
-    "reasoning": "On-time delivery fell 9.9% (90.1% -> 100.0%, p=1.99e-01) and average delivery time rose -1.3 days. Decomposing the journey, the seller-to-carrier handoff barely moved (-0.98d) while the carrier leg absorbed 23% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
+    "reasoning": "On-time delivery fell 5.5% (94.9% -> 89.5%, p=2.80e-01) and average delivery time rose +2.3 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+2.95d) while the carrier leg absorbed -27% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
     "caveats": [
-      "contemporaneous at lag 0 (r=0.616); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
+      "contemporaneous at lag 0 (r=0.619); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
     ]
   }
 }

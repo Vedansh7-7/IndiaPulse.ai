@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "aov",
     "scenario": "entitlement",
-    "generated_at": "2026-08-30 01:36:54",
-    "runtime_seconds": 0.98,
+    "generated_at": "2026-08-30 01:47:36",
+    "runtime_seconds": 0.99,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -106,10 +106,10 @@
     "event_value": 70.79454545454546,
     "baseline_value": 138.0271156018835,
     "delta": -67.23257014733805,
-    "robust_z": -6.698486864650995,
+    "robust_z": -6.203297624701218,
     "control_limits": [
-      106.87759003072908,
-      165.41457431106434
+      104.5411807119736,
+      167.7509836298198
     ],
     "changepoint_week": "2017-01-02",
     "p_value": 0.008889799432841627,
@@ -633,7 +633,9 @@
         "in_event": false
       }
     ],
-    "reasoning": "Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation."
+    "reasoning": "Weekly aov fell to 70.795 against a robust baseline of 138.027 (change -67.233). Detected by a isolated excursion of -6.20 sigma in a single week, with the worst week at -6.20 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=8.89e-03 with a 95% CI of [-115.100, -17.519].",
+    "direction": "down",
+    "rule": "isolated excursion of -6.20 sigma in a single week"
   },
   "scope1_decomposition": {
     "total_delta": -66.30950459295478,
@@ -1005,7 +1007,7 @@
   "scope4_decision": {
     "state": "INCONCLUSIVE",
     "headline": "Aov moved significantly (-67.233), but the evidence cannot identify a single cause.",
-    "narrative": "**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation.\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
+    "narrative": "**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (change -67.233). Detected by a isolated excursion of -6.20 sigma in a single week, with the worst week at -6.20 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=8.89e-03 with a 95% CI of [-115.100, -17.519].\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
     "ranked": [
       {
         "agent": "Data Integrity",
@@ -1378,7 +1380,7 @@
   "orchestration_log": [
     "Scope 0  Triage      | loading panel...",
     "Scope 0  Triage      | scenario='entitlement'  orders=98,962",
-    "Scope 0  Triage      | SIGNAL  z=-6.70  delta=-67.233  weeks=1",
+    "Scope 0  Triage      | SIGNAL  z=-6.20  delta=-67.233  weeks=1",
     "Scope 1  Localize    | mix-vs-rate decomposition...",
     "Scope 1  Localize    | rate=-36.805 mix=-0.334 -> 56% rate-driven",
     "Scope 1  Localize    | 0 segments tested, 0 naive hits -> 0 survive FDR control",
@@ -1456,7 +1458,7 @@
         ]
       },
       "withheld": false,
-      "narrative": "**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation.\n\n**Why inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.\n\n**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation.\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
+      "narrative": "**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (change -67.233). Detected by a isolated excursion of -6.20 sigma in a single week, with the worst week at -6.20 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=8.89e-03 with a 95% CI of [-115.100, -17.519].\n\n**Why inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.\n\n**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (change -67.233). Detected by a isolated excursion of -6.20 sigma in a single week, with the worst week at -6.20 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=8.89e-03 with a 95% CI of [-115.100, -17.519].\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
       "action": {
         "headline": "Do not act yet",
         "driver": "not established",
@@ -1472,26 +1474,26 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 980.9,
+      "total_ms": 994.9,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 72.9,
+          "ms": 77.3,
           "detail": "98,962 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 99.5,
-          "detail": "SIGNAL, z=-6.70"
+          "ms": 95.4,
+          "detail": "SIGNAL, z=-6.20"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 382.6,
+          "ms": 389.5,
           "detail": "0 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 425.2,
+          "ms": 432.0,
           "detail": "4 agents"
         },
         {

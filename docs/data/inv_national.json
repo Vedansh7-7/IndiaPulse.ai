@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "national",
-    "generated_at": "2026-08-30 01:36:53",
-    "runtime_seconds": 12.91,
+    "generated_at": "2026-08-30 01:47:34",
+    "runtime_seconds": 12.79,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -631,7 +631,9 @@
         "in_event": false
       }
     ],
-    "reasoning": "Weekly review_score fell to 3.904 against a robust baseline of 4.228 (delta -0.324). The worst week sits -6.36 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=0.00e+00 with a 95% CI of [-0.343, -0.297]. This is a real movement, not normal variation."
+    "reasoning": "Weekly review score fell to 3.904 against a robust baseline of 4.228 (change -0.324). Detected by a sustained run of 7 consecutive weeks beyond 2 sigma, with the worst week at -6.36 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=0.00e+00 with a 95% CI of [-0.343, -0.297].",
+    "direction": "down",
+    "rule": "sustained run of 7 consecutive weeks beyond 2 sigma"
   },
   "scope1_decomposition": {
     "total_delta": -0.320091700371925,
@@ -1066,11 +1068,11 @@
       "scope": "Scope 2 - Investigate",
       "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
       "supported": true,
-      "evidence_score": 0.6244674753000344,
+      "evidence_score": 0.6244674753000343,
       "components": {
         "statistical": 1.0,
         "temporal": 0.65,
-        "specificity": 0.1805887353764451,
+        "specificity": 0.18058873537644493,
         "discrimination": 0.4966014572796156,
         "weights": {
           "statistical": 0.35,
@@ -1489,11 +1491,11 @@
         "scope": "Scope 2 - Investigate",
         "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
         "supported": true,
-        "evidence_score": 0.6244674753000344,
+        "evidence_score": 0.6244674753000343,
         "components": {
           "statistical": 1.0,
           "temporal": 0.65,
-          "specificity": 0.1805887353764451,
+          "specificity": 0.18058873537644493,
           "discrimination": 0.4966014572796156,
           "weights": {
             "statistical": 0.35,
@@ -1861,7 +1863,7 @@
         ]
       },
       "withheld": false,
-      "narrative": "**What changed.** Weekly review_score fell to 3.904 against a robust baseline of 4.228 (delta -0.324). The worst week sits -6.36 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=0.00e+00 with a 95% CI of [-0.343, -0.297]. This is a real movement, not normal variation.\n\n**Where.** 99% of the movement is RATE: the same kinds of customers had a worse experience. This is an operational or product problem, not a change in who is buying.\n\n**Why.** On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.\n\n**What would falsify it.** Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
+      "narrative": "**What changed.** Weekly review score fell to 3.904 against a robust baseline of 4.228 (change -0.324). Detected by a sustained run of 7 consecutive weeks beyond 2 sigma, with the worst week at -6.36 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=0.00e+00 with a 95% CI of [-0.343, -0.297].\n\n**Where.** 99% of the movement is RATE: the same kinds of customers had a worse experience. This is an operational or product problem, not a change in who is buying.\n\n**Why.** On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.\n\n**What would falsify it.** Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
       "action": {
         "headline": "Geo-split intervention experiment (ladder rung 6)",
         "driver": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
@@ -1877,36 +1879,36 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 12908.9,
+      "total_ms": 12789.9,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 11195.6,
+          "ms": 11101.0,
           "detail": "98,962 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 92.3,
+          "ms": 90.6,
           "detail": "SIGNAL, z=-6.36"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 490.2,
+          "ms": 485.5,
           "detail": "22 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 560.2,
+          "ms": 537.8,
           "detail": "4 agents"
         },
         {
           "scope": "Scope 3 Adversary",
-          "ms": 507.7,
+          "ms": 512.7,
           "detail": "3/3 survived"
         },
         {
           "scope": "Scope 4 Arbiter",
-          "ms": 62.6,
+          "ms": 61.9,
           "detail": "CONFIRMED"
         }
       ],

@@ -10,13 +10,13 @@
       "orders": 96095
     },
     {
-      "key": "santa-catarina",
-      "title": "Santa Catarina - ambiguous evidence",
+      "key": "parana",
+      "title": "Parana - ambiguous evidence",
       "blurb": "A real movement the evidence cannot attribute to a single cause.",
-      "file": "inv_santa-catarina.json",
+      "file": "inv_parana.json",
       "state": "INCONCLUSIVE",
-      "headline": "Review Score moved significantly (-0.835), but the evidence cannot identify a single cause.",
-      "orders": 3536
+      "headline": "Review Score moved significantly (-0.952), but the evidence cannot identify a single cause.",
+      "orders": 4899
     },
     {
       "key": "goias",
@@ -29,11 +29,11 @@
     },
     {
       "key": "para",
-      "title": "Para - measurement artefact",
-      "blurb": "Integrity checks flag the metric itself before any cause is reported.",
+      "title": "Para - normal variation",
+      "blurb": "A dip that does not persist. Detection needs a sustained run, not one extreme week.",
       "file": "inv_para.json",
-      "state": "ARTEFACT",
-      "headline": "The metric movement appears to be a measurement artefact.",
+      "state": "NOISE",
+      "headline": "No investigation warranted: review_score is within normal variation.",
       "orders": 942
     },
     {
@@ -51,7 +51,7 @@
       "blurb": "A different KPI over the same sources, at the same grain.",
       "file": "inv_ontime.json",
       "state": "CONFIRMED",
-      "headline": "On Time fell 0.108 (0.95 to 0.84). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
+      "headline": "On Time fell 0.138 (0.95 to 0.81). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
       "orders": 96095
     }
   ]

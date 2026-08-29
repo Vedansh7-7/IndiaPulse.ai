@@ -7,7 +7,7 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "goias",
-    "generated_at": "2026-08-30 01:36:53",
+    "generated_at": "2026-08-30 01:47:35",
     "runtime_seconds": 0.05,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
@@ -17,10 +17,10 @@
     "verdict": "NOISE",
     "event_weeks": [],
     "baseline_weeks": [],
-    "event_value": 3.5135135135135136,
+    "event_value": 5.0,
     "baseline_value": 4.128205128205129,
-    "delta": -0.614691614691615,
-    "robust_z": -1.7446092069619747,
+    "delta": 0.8717948717948714,
+    "robust_z": 2.4743161018694044,
     "control_limits": [
       3.071191994996874,
       5.185218261413383
@@ -541,7 +541,9 @@
         "in_event": false
       }
     ],
-    "reasoning": "The largest weekly deviation is -1.74 robust SDs from the 4.128 baseline, inside the +/-3.0 control limit. This is normal variation; no investigation is warranted."
+    "reasoning": "The largest single deviation is 2.47 robust standard deviations from a baseline of 4.128, but it does not persist. The longest run beyond 2 sigma is under 3 weeks, and no week reaches the 5 sigma an isolated excursion would need to qualify. Searching 85 periods for the most extreme one produces deviations of this size routinely. This is normal variation and no investigation is warranted.",
+    "direction": "none",
+    "rule": "no rule fired"
   },
   "scope1_decomposition": null,
   "scope1_segments": null,
@@ -550,19 +552,19 @@
   "scope4_decision": {
     "state": "NOISE",
     "headline": "No investigation warranted: review_score is within normal variation.",
-    "narrative": "The largest weekly deviation is -1.74 robust SDs from the 4.128 baseline, inside the +/-3.0 control limit. This is normal variation; no investigation is warranted.",
+    "narrative": "The largest single deviation is 2.47 robust standard deviations from a baseline of 4.128, but it does not persist. The longest run beyond 2 sigma is under 3 weeks, and no week reaches the 5 sigma an isolated excursion would need to qualify. Searching 85 periods for the most extreme one produces deviations of this size routinely. This is normal variation and no investigation is warranted.",
     "ranked": [],
     "separability": {},
     "next_test": {
       "recommendation": "No action. Continue monitoring.",
-      "rationale": "The largest weekly deviation is -1.74 robust SDs from the 4.128 baseline, inside the +/-3.0 control limit. This is normal variation; no investigation is warranted."
+      "rationale": "The largest single deviation is 2.47 robust standard deviations from a baseline of 4.128, but it does not persist. The longest run beyond 2 sigma is under 3 weeks, and no week reaches the 5 sigma an isolated excursion would need to qualify. Searching 85 periods for the most extreme one produces deviations of this size routinely. This is normal variation and no investigation is warranted."
     },
     "caveats": []
   },
   "orchestration_log": [
     "Scope 0  Triage      | loading panel...",
     "Scope 0  Triage      | scenario='goias'  orders=2,011  states=['GO']",
-    "Scope 0  Triage      | NOISE  z=-1.74  delta=-0.615  weeks=0",
+    "Scope 0  Triage      | NOISE  z=2.47  delta=+0.872  weeks=0",
     "Scope 0  Triage      | inside control limits, stopping before any agent is spawned."
   ],
   "personas": [
@@ -602,7 +604,7 @@
         ]
       },
       "withheld": false,
-      "narrative": "**Nothing to act on.** Customer satisfaction sits within its normal weekly range. The largest deviation is -1.7 robust standard deviations, inside the +/-3 control limit. Keep monitoring; no change is warranted.",
+      "narrative": "**Nothing to act on.** Customer satisfaction sits within its normal weekly range. The largest deviation is 2.5 robust standard deviations, inside the +/-3 control limit. Keep monitoring; no change is warranted.",
       "action": {
         "headline": "No action",
         "owner": "Customer Experience",
@@ -623,7 +625,7 @@
         ]
       },
       "withheld": false,
-      "narrative": "**Within control limits.** The largest weekly deviation is -1.74 robust SDs from the 4.128 baseline, inside the +/-3.0 control limit. This is normal variation; no investigation is warranted.",
+      "narrative": "**Within control limits.** The largest single deviation is 2.47 robust standard deviations from a baseline of 4.128, but it does not persist. The longest run beyond 2 sigma is under 3 weeks, and no week reaches the 5 sigma an isolated excursion would need to qualify. Searching 85 periods for the most extreme one produces deviations of this size routinely. This is normal variation and no investigation is warranted.",
       "action": {
         "headline": "No action",
         "owner": "Customer Experience",
@@ -633,17 +635,17 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 48.8,
+      "total_ms": 46.4,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 45.1,
+          "ms": 42.9,
           "detail": "2,011 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 3.5,
-          "detail": "NOISE, z=-1.74"
+          "ms": 3.3,
+          "detail": "NOISE, z=2.47"
         }
       ],
       "llm_calls": 0,

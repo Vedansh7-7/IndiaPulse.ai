@@ -14,7 +14,14 @@ OUT = ROOT / "out"
 # ---- Decision thresholds (documented, auditable) -------------------------
 ALPHA = 0.05              # significance level for individual tests
 FDR_ALPHA = 0.05          # Benjamini-Hochberg false discovery rate
-ROBUST_Z_TRIGGER = 3.0    # |robust z| beyond this = candidate anomaly
+ROBUST_Z_TRIGGER = 3.0    # display band on the chart
+# Detection rules (Western Electric). A movement counts when it PERSISTS, or
+# when one period is extreme beyond any plausible noise. Measured on generated
+# series, real events ran 3-11 consecutive periods beyond 2 sigma while noise
+# never exceeded 1, so the run length is what separates them.
+SUSTAINED_SIGMA = 2.0     # excursion threshold for a run
+SUSTAINED_RUN = 3         # consecutive periods required
+EXTREME_SIGMA = 5.0       # a single period this far out qualifies alone
 MIN_SEGMENT_N = 40        # below this a segment is too thin to conclude from
 SEPARABILITY_MARGIN = 0.15  # top-2 evidence scores closer than this => Inconclusive
 POWER = 0.80
