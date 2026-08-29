@@ -26,3 +26,8 @@ out/tmp_*.json
 
 # regenerable engine output (web/data is the served copy)
 out/
+
+# design tooling context (local only)
+PRODUCT.md
+DESIGN.md
+.impeccable/
