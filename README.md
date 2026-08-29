@@ -28,16 +28,20 @@ The engine takes its parameters at call time, so an investigation can be run on
 a region, metric and window chosen on the spot.
 
 ```bash
-python demo.py --warm                 # preload the data first
-python demo.py --list                 # what can be selected
-python demo.py --state RJ             # one region
-python demo.py --metric on_time       # a different KPI
-python demo.py --state SP RJ MG --from 2017-06-01 --to 2018-06-01
+python serve.py            # http://localhost:8000
 ```
 
-Each run prints the scopes as they fire, then writes the result into the
-dashboard as the first tab. Warm the data once and later runs finish in a few
-seconds.
+The dashboard gains a **Run an investigation** panel: pick regions, a metric and
+a window, press the button, and each scope streams into the page as it fires.
+The result becomes the first tab. Warm-up happens at startup, so runs finish in
+well under a second.
+
+To show it to someone else, `ngrok http 8000` gives a public URL. Anyone with
+that link can trigger runs while the tunnel is open, so close it afterwards.
+
+Standard library only: there is nothing to install beyond the analysis
+dependencies. Opened from GitHub Pages there is no backend, `/api/options` is
+absent, and the page stays a static demo.
 
 Scopes 0 and 1 are dataset-agnostic: they need a date column, a metric and a
 segment. The agents in scope 2 read domain columns, so a new domain means new
@@ -153,6 +157,7 @@ engine/
   adversary.py     Scope 3
   arbiter.py       Scope 4
   run.py           orchestrator
+serve.py           local server for live runs
 docs/index.html    dashboard
 tests/             23 tests
 ```

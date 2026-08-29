@@ -59,7 +59,8 @@ METRIC_ORDER_COL = {"aov": "order_value", "orders": None, "revenue": None}
 def investigate(metric: str = "review_score", verbose: bool = True,
                 states: list[str] | None = None,
                 week_from: str | None = None, week_to: str | None = None,
-                scenario: str = "national", out_name: str = "investigation.json") -> dict:
+                scenario: str = "national", out_name: str = "investigation.json",
+                on_log=None, write: bool = True) -> dict:
     t0 = time.time()
     log = []
 
@@ -67,6 +68,8 @@ def investigate(metric: str = "review_score", verbose: bool = True,
         log.append(msg)
         if verbose:
             print(msg, flush=True)
+        if on_log is not None:
+            on_log(msg)
 
     say("Scope 0  Triage      | loading panel...")
     panel = D.load_panel()
@@ -92,7 +95,7 @@ def investigate(metric: str = "review_score", verbose: bool = True,
             "any agent is spawned.")
         dec = arbiter.decide(None, tri, None, None, [], None)
         return _package(tri, None, None, [], None, dec, log, t0, metric,
-                        scenario=scenario, out_name=out_name)
+                        scenario=scenario, out_name=out_name, write=write)
 
     event_set = set(tri.event_weeks)
     baseline_set = set(tri.baseline_weeks)
@@ -139,11 +142,11 @@ def investigate(metric: str = "review_score", verbose: bool = True,
     say(f"Scope 4  Arbiter     | {dec.separability.get('note', '')}")
 
     return _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric,
-                    ctx=ctx, scenario=scenario, out_name=out_name)
+                    ctx=ctx, scenario=scenario, out_name=out_name, write=write)
 
 
 def _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric, ctx=None,
-             scenario="national", out_name="investigation.json"):
+             scenario="national", out_name="investigation.json", write=True):
     payload = {
         "meta": {
             "product": "IndiaPulse AI",
@@ -174,10 +177,11 @@ def _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric
         payload["timeline"] = _timeline(ctx, tri)
         payload["dose_response"] = next(
             (v.to_dict() for v in verdicts if v.agent == "Ops & Fulfilment"), None)
-    C.OUT.mkdir(parents=True, exist_ok=True)
-    out = C.OUT / out_name
-    out.write_text(json.dumps(payload, cls=NpEncoder, indent=2), encoding="utf-8")
-    print(f"\n-> wrote {out}")
+    if write:
+        C.OUT.mkdir(parents=True, exist_ok=True)
+        out = C.OUT / out_name
+        out.write_text(json.dumps(payload, cls=NpEncoder, indent=2), encoding="utf-8")
+        print(f"\n-> wrote {out}")
     return payload
 
 

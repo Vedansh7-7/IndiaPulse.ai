@@ -351,6 +351,35 @@ footer{border-top:1px solid var(--rule);padding:26px 0 60px;
 footer p{max-width:74ch}
 footer a{text-decoration:underline;text-underline-offset:2px}
 
+
+/* ============================================================
+   Live run (only shown when a local backend is present)
+   ============================================================ */
+.live[hidden]{display:none!important}
+.live-controls{display:grid;gap:14px 20px;align-items:end;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  padding-bottom:20px;border-bottom:1px solid var(--rule)}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-size:12.5px;color:var(--ink-soft)}
+.field select,.field input{
+  font:inherit;font-size:13.5px;color:var(--ink);background:var(--surface);
+  border:1px solid var(--rule-strong);padding:9px 10px;min-width:0;
+  border-radius:0;appearance:none}
+.field select[multiple]{height:104px;padding:6px}
+.field input[type=date]{font-family:var(--mono);font-size:12.5px}
+.field .hint{font-size:11px;color:var(--ink-soft)}
+.live-go{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn[disabled]{opacity:0.45;cursor:not-allowed}
+.live-status{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
+.live-log{margin:20px 0 0;padding:0;list-style:none;
+  font-family:var(--mono);font-size:11.5px;line-height:1.85;color:var(--ink-soft);
+  max-height:270px;overflow-y:auto}
+.live-log li{padding:1px 0;animation:logIn 260ms var(--ease) both}
+.live-log li .sc{color:var(--ink);font-size:11.5px}
+@keyframes logIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.live-err{color:var(--signal);font-size:13px;margin-top:14px}
+@media (prefers-reduced-motion:reduce){.live-log li{animation:none}}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;
@@ -413,6 +442,39 @@ footer a{text-decoration:underline;text-underline-offset:2px}
   </section>
 
   <div class="shell" id="tool">
+    <section class="sec live" id="live" hidden>
+      <div class="sec-h">
+        <h2>Run an investigation</h2>
+        <span class="aside" id="liveAside">connected</span>
+      </div>
+      <div class="live-controls">
+        <div class="field">
+          <label for="fRegion">Region</label>
+          <select id="fRegion" multiple size="5"></select>
+          <span class="hint">none selected runs all regions</span>
+        </div>
+        <div class="field">
+          <label for="fMetric">Metric</label>
+          <select id="fMetric"></select>
+        </div>
+        <div class="field">
+          <label for="fFrom">From</label>
+          <input type="date" id="fFrom">
+        </div>
+        <div class="field">
+          <label for="fTo">To</label>
+          <input type="date" id="fTo">
+        </div>
+      </div>
+      <div class="live-go" style="margin-top:18px">
+        <button class="btn" type="button" id="runBtn">Run investigation</button>
+        <button class="btn ghost" type="button" id="resetBtn">Reset</button>
+        <span class="live-status" id="runStatus"></span>
+      </div>
+      <ol class="live-log" id="runLog" aria-live="polite" aria-label="Engine progress"></ol>
+      <p class="live-err" id="runErr" hidden></p>
+    </section>
+
     <section class="sec">
       <div class="sec-h">
         <h2>Investigations</h2>
@@ -704,7 +766,9 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 
   /* ---------- tabs ---------- */
   var tabs=document.getElementById('tabs');
-  var keys=D.index.map(function(s){return s.key;});
+  var keys=[];
+  function buildTabs(){
+  tabs.innerHTML=''; keys=D.index.map(function(s){return s.key;});
   D.index.forEach(function(s,i){
     var b=document.createElement('button');
     b.type='button'; b.setAttribute('role','tab'); b.id='tab-'+s.key;
@@ -725,6 +789,7 @@ footer a{text-decoration:underline;text-underline-offset:2px}
     });
     tabs.appendChild(b);
   });
+  }
   function select(key){
     D.index.forEach(function(s){
       var el=document.getElementById('tab-'+s.key), on=s.key===key;
@@ -735,7 +800,95 @@ footer a{text-decoration:underline;text-underline-offset:2px}
   }
   var panel=document.getElementById('panel');
   panel.id='panel'; panel.setAttribute('role','tabpanel');
+  buildTabs();
   select(keys[0]);
+
+  /* ---------- live mode ----------
+     The page ships as a static demo. These controls appear only when a local
+     backend answers /api/options, so the published version is unaffected. */
+  var live = document.getElementById('live');
+  var elRegion=document.getElementById('fRegion'), elMetric=document.getElementById('fMetric'),
+      elFrom=document.getElementById('fFrom'), elTo=document.getElementById('fTo'),
+      runBtn=document.getElementById('runBtn'), resetBtn=document.getElementById('resetBtn'),
+      runLog=document.getElementById('runLog'), runStatus=document.getElementById('runStatus'),
+      runErr=document.getElementById('runErr');
+  var stream=null, baseIndex=D.index.slice();
+
+  function optionsLoaded(o){
+    o.regions.forEach(function(r){
+      var op=document.createElement('option');
+      op.value=r.code; op.textContent=r.name+'  ('+r.orders.toLocaleString()+')';
+      elRegion.appendChild(op);
+    });
+    o.metrics.forEach(function(m){
+      var op=document.createElement('option');
+      op.value=m; op.textContent=m.replace(/_/g,' ');
+      elMetric.appendChild(op);
+    });
+    elFrom.min=elTo.min=o.window.start; elFrom.max=elTo.max=o.window.end;
+    document.getElementById('liveAside').textContent=
+      o.regions.length+' regions / '+o.metrics.length+' metrics';
+    live.hidden=false;
+  }
+
+  fetch('api/options',{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(optionsLoaded)
+    .catch(function(){ /* static mode: leave the section hidden */ });
+
+  function setBusy(on){
+    runBtn.disabled=on;
+    runBtn.textContent = on ? 'Running' : 'Run investigation';
+  }
+
+  function runLive(){
+    if(stream){ stream.close(); stream=null; }
+    runLog.innerHTML=''; runErr.hidden=true; runStatus.textContent='';
+    setBusy(true);
+
+    var q=[];
+    Array.prototype.forEach.call(elRegion.selectedOptions,function(o){
+      q.push('state='+encodeURIComponent(o.value)); });
+    q.push('metric='+encodeURIComponent(elMetric.value));
+    if(elFrom.value) q.push('from='+elFrom.value);
+    if(elTo.value)   q.push('to='+elTo.value);
+
+    stream=new EventSource('api/run?'+q.join('&'));
+    stream.addEventListener('log',function(e){
+      var line=JSON.parse(e.data).line;
+      var li=document.createElement('li');
+      var m=line.match(/^(Scope \d+\s+\S+)\s*\|\s*(.*)$/);
+      li.innerHTML = m ? '<span class="sc">'+esc(m[1])+'</span>  '+esc(m[2]) : esc(line);
+      runLog.appendChild(li); runLog.scrollTop=runLog.scrollHeight;
+    });
+    stream.addEventListener('done',function(e){
+      var d=JSON.parse(e.data);
+      stream.close(); stream=null; setBusy(false);
+      runStatus.textContent='completed in '+d.elapsed+'s';
+      D.investigations.live=d.investigation;
+      D.index=[{key:'live',title:d.label,state:d.investigation.scope4_decision.state}]
+              .concat(baseIndex);
+      buildTabs(); select('live');
+      document.getElementById('tool').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    stream.addEventListener('error',function(e){
+      var msg='Connection to the engine was lost.';
+      try { if(e.data) msg=JSON.parse(e.data).message; } catch(x){}
+      stream && stream.close(); stream=null; setBusy(false);
+      runErr.textContent=msg; runErr.hidden=false; runStatus.textContent='';
+    });
+  }
+
+  runBtn.addEventListener('click',runLive);
+  resetBtn.addEventListener('click',function(){
+    if(stream){ stream.close(); stream=null; setBusy(false); }
+    elRegion.selectedIndex=-1; elMetric.selectedIndex=0;
+    elFrom.value=''; elTo.value='';
+    runLog.innerHTML=''; runErr.hidden=true; runStatus.textContent='';
+    delete D.investigations.live; D.index=baseIndex.slice();
+    buildTabs(); select(D.index[0].key);
+  });
+
 })();
 </script>
 </body>
