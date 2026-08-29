@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IndiaPulse.ai</title>
+<style>
+  :root{
+    --bg:#f7f7f5; --panel:#ffffff; --ink:#15161a; --muted:#5c6070; --line:#e2e2de;
+    --accent:#1c6b52; --accent-soft:#e8f2ee;
+    --warn:#8a5a12; --warn-soft:#fbf1de;
+    --bad:#9a2f2f; --bad-soft:#fbeaea;
+    --info:#2a4d78; --info-soft:#e9f0f8;
+    --grid:#ececea; --focus:#1c6b52;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101216; --panel:#171a20; --ink:#e9eaee; --muted:#9aa0ae; --line:#272b34;
+      --accent:#5fd0a6; --accent-soft:#123027;
+      --warn:#e2b25f; --warn-soft:#33280f;
+      --bad:#f08c8c; --bad-soft:#341a1a;
+      --info:#8ab4e8; --info-soft:#16233a;
+      --grid:#22262e; --focus:#5fd0a6;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101216; --panel:#171a20; --ink:#e9eaee; --muted:#9aa0ae; --line:#272b34;
+    --accent:#5fd0a6; --accent-soft:#123027;
+    --warn:#e2b25f; --warn-soft:#33280f;
+    --bad:#f08c8c; --bad-soft:#341a1a;
+    --info:#8ab4e8; --info-soft:#16233a;
+    --grid:#22262e; --focus:#5fd0a6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+       font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px 80px}
+  a{color:var(--accent)}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:12px;top:12px;z-index:99;background:var(--panel);padding:10px 14px;
+              border:1px solid var(--line);border-radius:8px}
+
+  header.top{border-bottom:1px solid var(--line);background:var(--panel);margin-bottom:26px}
+  .top-in{max-width:1140px;margin:0 auto;padding:18px 20px;display:flex;flex-wrap:wrap;
+          gap:14px;align-items:baseline;justify-content:space-between}
+  h1{font-size:19px;margin:0;letter-spacing:-.01em}
+  h1 small{font-weight:400;color:var(--muted);font-size:13px;margin-left:8px}
+  .prov{font-size:12px;color:var(--muted);font-family:var(--mono)}
+  .prov a{color:var(--muted)}
+
+  h2{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);
+     margin:32px 0 12px;font-weight:600}
+  h3{font-size:15px;margin:0 0 6px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .grid{display:grid;gap:14px}
+  @media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+
+  /* scenario tabs */
+  [role=tablist]{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  [role=tab]{background:var(--panel);border:1px solid var(--line);color:var(--ink);
+    padding:9px 14px;border-radius:9px;cursor:pointer;font:inherit;font-size:13px;text-align:left}
+  [role=tab][aria-selected=true]{border-color:var(--accent);background:var(--accent-soft);
+    box-shadow:inset 0 0 0 1px var(--accent)}
+  [role=tab] b{display:block;font-size:13px}
+  [role=tab] span{display:block;font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:2px}
+
+  /* decision banner */
+  .decision{border-radius:12px;padding:20px 22px;border:1px solid;margin-bottom:8px}
+  .d-CONFIRMED{background:var(--accent-soft);border-color:var(--accent)}
+  .d-INCONCLUSIVE{background:var(--warn-soft);border-color:var(--warn)}
+  .d-NOISE{background:var(--info-soft);border-color:var(--info)}
+  .d-ARTEFACT{background:var(--bad-soft);border-color:var(--bad)}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+        padding:4px 10px;border-radius:999px;border:1px solid currentColor;margin-bottom:10px}
+  .p-CONFIRMED{color:var(--accent)} .p-INCONCLUSIVE{color:var(--warn)}
+  .p-NOISE{color:var(--info)} .p-ARTEFACT{color:var(--bad)}
+  .decision h3{font-size:18px;line-height:1.4}
+
+  /* scope pipeline */
+  .scopes{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 4px;padding:0;list-style:none}
+  .scopes li{flex:1 1 150px;background:var(--panel);border:1px solid var(--line);
+    border-radius:9px;padding:10px 12px;font-size:12px}
+  .scopes b{display:block;font-family:var(--mono);font-size:10px;color:var(--muted);
+    letter-spacing:.07em;margin-bottom:3px}
+  .scopes .st{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:4px;display:block}
+  .scopes li.done{border-color:var(--accent)}
+  .scopes li.stopped{border-color:var(--info);opacity:.72}
+
+  /* chart */
+  figure{margin:0}
+  svg{display:block;width:100%;height:auto}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-top:8px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;
+            vertical-align:-1px}
+
+  /* metrics */
+  .kpis{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .kpi .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .kpi .val{font-size:21px;font-family:var(--mono);margin-top:3px;letter-spacing:-.02em}
+  .kpi .sub{font-size:11px;color:var(--muted);font-family:var(--mono)}
+  .up{color:var(--accent)} .down{color:var(--bad)}
+
+  /* agent cards */
+  .agent{border-left:3px solid var(--line)}
+  .agent.sup{border-left-color:var(--accent)}
+  .agent.rej{border-left-color:var(--muted);opacity:.9}
+  .agent header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;
+                flex-wrap:wrap;margin-bottom:8px}
+  .score{font-family:var(--mono);font-size:20px}
+  .fam{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--line);
+       padding:2px 7px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+  .bars{display:grid;gap:5px;margin:12px 0}
+  .bar{display:grid;grid-template-columns:96px 1fr 42px;gap:9px;align-items:center;font-size:11px}
+  .bar .track{height:7px;background:var(--grid);border-radius:4px;overflow:hidden}
+  .bar .fill{height:100%;background:var(--accent);border-radius:4px}
+  .bar .n{font-family:var(--mono);color:var(--muted);text-align:right}
+  details{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+  summary{cursor:pointer;font-size:12px;color:var(--muted);font-weight:600}
+  .ev{border-left:2px solid var(--line);padding:6px 0 6px 11px;margin:9px 0;font-size:13px}
+  .ev b{font-weight:600}
+  .ev .src{font-family:var(--mono);font-size:10.5px;color:var(--muted);
+           word-break:break-word;margin-top:3px;display:block}
+  .falsi{background:var(--bg);border-radius:8px;padding:10px 12px;font-size:12.5px;
+         margin-top:10px;border:1px dashed var(--line)}
+  .falsi b{font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--muted);
+           display:block;text-transform:uppercase;margin-bottom:3px}
+
+  /* challenges */
+  .chal{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .chal:last-child{border-bottom:0}
+  .mark{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;
+        height:fit-content;white-space:nowrap}
+  .pass{background:var(--accent-soft);color:var(--accent)}
+  .fail{background:var(--bad-soft);color:var(--bad)}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  .scroll{overflow-x:auto}
+  th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+  td.num{font-family:var(--mono);text-align:right}
+  tr.sig td:first-child{font-weight:600}
+  .no{color:var(--muted)}
+
+  .narr p{margin:0 0 13px}
+  .narr strong{font-weight:650}
+  .note{font-size:12.5px;color:var(--muted);margin-top:9px}
+  footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+         font-size:12px;color:var(--muted)}
+  code{font-family:var(--mono);font-size:12px;background:var(--bg);padding:1px 5px;
+       border-radius:4px;border:1px solid var(--line)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="top">
+  <div class="top-in">
+    <h1>IndiaPulse.ai <small>KPI investigation engine</small></h1>
+    <div class="prov" id="prov"></div>
+  </div>
+</header>
+
+<div class="wrap">
+<main id="main">
+  <h2 id="scen-h">Investigation</h2>
+  <div role="tablist" aria-labelledby="scen-h" id="tabs"></div>
+  <div id="panel"></div>
+</main>
+
+<footer>
+  <p><strong>Provenance.</strong> Every figure on this page is computed from the public
+  Olist Brazilian E-Commerce dataset (~99k orders, ~41k free-text reviews). There are no
+  hand-tuned effect constants in the engine. Retrieved web context is labelled as context
+  and is excluded from evidence scoring by design.</p>
+  <p>Method is region-agnostic: it requires a KPI time series plus timestamped
+  unstructured text, and applies wherever both exist.</p>
+</footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  "use strict";
+  var D = window.__INDIAPULSE__;
+  var tabs = document.getElementById('tabs');
+  var panel = document.getElementById('panel');
+  var esc = function(s){ return String(s==null?'':s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+  var n2 = function(v,d){ return (v==null||isNaN(v)) ? '-' : Number(v).toFixed(d==null?2:d); };
+  var pct = function(v,d){ return (v==null||isNaN(v)) ? '-' : (v*100).toFixed(d==null?1:d)+'%'; };
+  var sgn = function(v,d){ if(v==null||isNaN(v)) return '-';
+      return (v>0?'+':'')+Number(v).toFixed(d==null?3:d); };
+
+  // markdown-lite: **bold** and *italic*, paragraphs
+  function md(t){
+    return String(t||'').split('\n\n').map(function(p){
+      return '<p>'+esc(p).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+                         .replace(/\*(.+?)\*/g,'<em>$1</em>')+'</p>';
+    }).join('');
+  }
+
+  /* ---------- line chart with control limits ---------- */
+  function chart(inv){
+    var tl = inv.timeline || [];
+    if(!tl.length) return '';
+    var W=1000,H=270,L=52,R=18,T=16,B=42;
+    var vals = tl.map(function(d){return d.review_score;}).filter(function(v){return v!=null;});
+    var lim = inv.scope0_triage.control_limits || [];
+    var lo = Math.min.apply(null, vals.concat(lim[0]!=null?[lim[0]]:[]));
+    var hi = Math.max.apply(null, vals.concat(lim[1]!=null?[lim[1]]:[]));
+    var pad=(hi-lo)*0.12||0.1; lo-=pad; hi+=pad;
+    var x=function(i){return L+i*(W-L-R)/Math.max(tl.length-1,1);};
+    var y=function(v){return T+(hi-v)*(H-T-B)/(hi-lo);};
+
+    var evIdx = tl.map(function(d,i){return d.in_event?i:-1;}).filter(function(i){return i>=0;});
+    var bands='';
+    if(evIdx.length){
+      var a=x(evIdx[0])-2, b=x(evIdx[evIdx.length-1])+2;
+      bands='<rect x="'+a+'" y="'+T+'" width="'+Math.max(b-a,3)+'" height="'+(H-T-B)+
+            '" fill="var(--bad)" opacity="0.10"/>';
+    }
+    var band='';
+    if(lim.length===2 && lim[0]!=null){
+      band='<rect x="'+L+'" y="'+y(lim[1])+'" width="'+(W-L-R)+'" height="'+
+           Math.max(y(lim[0])-y(lim[1]),1)+'" fill="var(--accent)" opacity="0.07"/>'+
+           '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(lim[0])+'" y2="'+y(lim[0])+
+           '" stroke="var(--accent)" stroke-dasharray="4 4" stroke-width="1" opacity=".7"/>'+
+           '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(lim[1])+'" y2="'+y(lim[1])+
+           '" stroke="var(--accent)" stroke-dasharray="4 4" stroke-width="1" opacity=".7"/>';
+    }
+    var path='',dots='';
+    tl.forEach(function(d,i){
+      if(d.review_score==null) return;
+      path += (path?'L':'M')+x(i).toFixed(1)+' '+y(d.review_score).toFixed(1)+' ';
+      if(d.in_event) dots+='<circle cx="'+x(i).toFixed(1)+'" cy="'+y(d.review_score).toFixed(1)+
+                           '" r="2.6" fill="var(--bad)"/>';
+    });
+    var ticks='';
+    for(var k=0;k<=4;k++){
+      var v=lo+(hi-lo)*k/4, yy=y(v);
+      ticks+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+yy+'" y2="'+yy+'" stroke="var(--grid)"/>'+
+             '<text x="'+(L-8)+'" y="'+(yy+4)+'" text-anchor="end" font-size="11" '+
+             'fill="var(--muted)" font-family="var(--mono)">'+v.toFixed(2)+'</text>';
+    }
+    var xl='';
+    [0,Math.floor(tl.length/3),Math.floor(2*tl.length/3),tl.length-1].forEach(function(i){
+      if(tl[i]) xl+='<text x="'+x(i)+'" y="'+(H-B+20)+'" text-anchor="middle" font-size="11" '+
+        'fill="var(--muted)" font-family="var(--mono)">'+esc(tl[i].week)+'</text>';
+    });
+
+    var t=inv.scope0_triage;
+    var alt='Weekly value from '+tl[0].week+' to '+tl[tl.length-1].week+
+      '. Baseline '+n2(t.baseline_value)+', event-window mean '+n2(t.event_value)+
+      ', change '+sgn(t.delta)+'. Control limits '+n2(lim[0])+' to '+n2(lim[1])+'. '+
+      (t.event_weeks.length? t.event_weeks.length+' weeks flagged, beginning '+t.event_weeks[0]+'.'
+                           : 'No weeks breached the control limits.');
+
+    // accessible data table alternative
+    var rows = tl.filter(function(d,i){return i%4===0 || d.in_event;}).map(function(d){
+      return '<tr><td>'+esc(d.week)+'</td><td class="num">'+n2(d.review_score)+
+        '</td><td class="num">'+pct(d.on_time)+'</td><td class="num">'+n2(d.delivery_days,1)+
+        '</td><td>'+(d.in_event?'flagged':'')+'</td></tr>';
+    }).join('');
+
+    return '<figure><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(alt)+'">'+
+      ticks+band+bands+
+      '<path d="'+path+'" fill="none" stroke="var(--ink)" stroke-width="1.7" '+
+      'stroke-linejoin="round"/>'+dots+xl+
+      '</svg>'+
+      '<div class="legend">'+
+        '<span><i style="background:var(--ink)"></i>Weekly value</span>'+
+        '<span><i style="background:var(--accent);opacity:.35"></i>Control limits</span>'+
+        '<span><i style="background:var(--bad);opacity:.35"></i>Flagged window</span>'+
+      '</div>'+
+      '<details><summary>View as table</summary>'+
+      '<div class="scroll"><table><caption class="vh">Weekly KPI values</caption><thead><tr>'+
+      '<th scope="col">Week</th><th scope="col">Review score</th><th scope="col">On-time</th>'+
+      '<th scope="col">Delivery days</th><th scope="col">Status</th></tr></thead><tbody>'+
+      rows+'</tbody></table></div></details></figure>';
+  }
+
+  /* ---------- scope pipeline ---------- */
+  function scopes(inv){
+    var t=inv.scope0_triage, seg=inv.scope1_segments, vs=inv.scope2_verdicts||[],
+        adv=inv.scope3_adversary, dec=inv.scope4_decision;
+    var items=[
+      ['Scope 0','Triage', t.is_signal?'SIGNAL z='+n2(t.robust_z):'NOISE z='+n2(t.robust_z),
+        t.is_signal?'done':'stopped'],
+      ['Scope 1','Localize', seg? seg.n_tested+' segments · '+seg.n_significant_fdr+' survive FDR':'not run',
+        seg?'done':'stopped'],
+      ['Scope 2','Investigate', vs.length? vs.length+' agents · '+
+        vs.filter(function(v){return v.supported;}).length+' supported':'not run',
+        vs.length?'done':'stopped'],
+      ['Scope 3','Adversary', adv? adv.n_passed+'/'+adv.n_total+' challenges survived':'not run',
+        adv?'done':'stopped'],
+      ['Scope 4','Arbiter', dec.state, 'done']
+    ];
+    return '<ul class="scopes">'+items.map(function(i){
+      return '<li class="'+i[3]+'"><b>'+i[0]+'</b>'+esc(i[1])+
+             '<span class="st">'+esc(i[2])+'</span></li>';
+    }).join('')+'</ul>';
+  }
+
+  /* ---------- agent card ---------- */
+  function agentCard(v){
+    var c=v.components||{};
+    var bars=['statistical','temporal','specificity','discrimination'].map(function(k){
+      var val=c[k]||0;
+      return '<div class="bar"><span>'+k+'</span>'+
+        '<span class="track"><span class="fill" style="width:'+(val*100).toFixed(0)+'%"></span></span>'+
+        '<span class="n">'+val.toFixed(2)+'</span></div>';
+    }).join('');
+    var ev=(v.evidence||[]).map(function(e){
+      return '<div class="ev"><b>'+esc(e.claim)+'</b>: '+esc(e.detail)+
+             '<span class="src">'+esc(e.source)+'</span></div>';
+    }).join('');
+    return '<article class="card agent '+(v.supported?'sup':'rej')+'">'+
+      '<header><div><h3>'+esc(v.agent)+'</h3>'+
+        '<span class="fam">'+esc(v.cause_family)+'</span> '+
+        '<span class="fam">'+(v.supported?'supported':'not supported')+'</span></div>'+
+        '<div class="score">'+n2(v.evidence_score,3)+'</div></header>'+
+      '<p class="note"><em>'+esc(v.hypothesis)+'</em></p>'+
+      '<div class="bars">'+bars+'</div>'+
+      '<p>'+esc(v.reasoning)+'</p>'+
+      '<div class="falsi"><b>Falsifiable by</b>'+esc(v.falsifiable_by)+'</div>'+
+      (ev?'<details><summary>Evidence ('+(v.evidence||[]).length+')</summary>'+ev+'</details>':'')+
+      '</article>';
+  }
+
+  function render(key){
+    var inv=D.investigations[key];
+    var t=inv.scope0_triage, dec=inv.scope4_decision, seg=inv.scope1_segments,
+        dcp=inv.scope1_decomposition, adv=inv.scope3_adversary, nt=dec.next_test||{};
+    var h='';
+
+    h+='<div class="decision d-'+dec.state+'">'+
+       '<span class="pill p-'+dec.state+'">'+dec.state+'</span>'+
+       '<h3>'+esc(dec.headline)+'</h3></div>';
+
+    h+=scopes(inv);
+
+    // KPI tiles
+    h+='<h2>What moved</h2><div class="kpis">'+
+      tile('Baseline', n2(t.baseline_value), t.metric.replace(/_/g,' ')) +
+      tile('Event window', n2(t.event_value), (t.event_weeks.length||0)+' weeks') +
+      tile('Change', sgn(t.delta), 'robust z = '+n2(t.robust_z)) +
+      tile('Significance', t.p_value<1e-12?'p < 1e-12':'p = '+t.p_value.toExponential(1),
+           '95% CI ['+sgn(t.ci_low)+', '+sgn(t.ci_high)+']') +
+      '</div>';
+
+    h+='<div class="card" style="margin-top:14px">'+chart(inv)+'</div>';
+
+    // narrative
+    h+='<h2>The story</h2><div class="card narr">'+md(dec.narrative)+'</div>';
+
+    if(dcp){
+      h+='<h2>Where it moved</h2><div class="grid g2">'+
+        '<div class="card"><h3>Mix vs rate</h3><p>'+esc(dcp.interpretation)+'</p>'+
+        '<div class="bars" style="margin-top:12px">'+
+          barRow('rate effect', Math.abs(dcp.rate_share), sgn(dcp.rate_effect))+
+          barRow('mix effect', Math.abs(dcp.mix_share), sgn(dcp.mix_effect))+
+        '</div></div>'+
+        '<div class="card"><h3>Segment scan</h3><p class="note">'+esc(seg.note)+'</p>'+
+        segTable(seg)+'</div></div>';
+    }
+
+    if((inv.scope2_verdicts||[]).length){
+      h+='<h2>Hypotheses</h2>'+
+        '<p class="note" style="margin-top:-4px;margin-bottom:12px">'+
+        'Agents in the same cause family corroborate each other. Only different '+
+        'families compete. A family scores at its strongest single line of '+
+        'evidence, since sources inside a family are correlated.</p>'+
+        '<div class="grid g2">'+
+        inv.scope2_verdicts.slice().sort(function(a,b){
+          return b.evidence_score-a.evidence_score;
+        }).map(agentCard).join('')+'</div>';
+    }
+
+    if(dec.separability && dec.separability.note){
+      h+='<div class="card" style="margin-top:14px"><h3>Separability test</h3>'+
+         '<p>'+esc(dec.separability.note)+'</p></div>';
+    }
+
+    if(adv){
+      h+='<h2>Challenges</h2><div class="card">'+
+        adv.challenges.map(function(c){
+          return '<div class="chal"><span class="mark '+(c.passed?'pass':'fail')+'">'+
+            (c.passed?'SURVIVED':'FAILED')+'</span><div><strong>'+esc(c.name)+'</strong>: '+
+            '<span class="no">'+esc(c.question)+'</span><br>'+esc(c.finding)+'</div></div>';
+        }).join('')+'</div>';
+    }
+
+    h+='<h2>Recommended next step</h2><div class="card">'+
+       '<h3>'+esc(nt.recommendation||'-')+'</h3>'+
+       '<p>'+esc(nt.rationale||'')+'</p>';
+    var ds=nt.design;
+    if(ds && ds.n_per_arm){
+      h+='<div class="kpis" style="margin-top:14px">'+
+        tile('n per arm', Number(ds.n_per_arm).toLocaleString(), 'power '+pct(ds.power,0))+
+        tile('MDE', pct(ds.mde_absolute), 'absolute, on '+esc(ds.primary_metric))+
+        tile('Duration', ds.estimated_weeks+' wks', 'at observed volume')+
+        tile('Unit', 'geo-split', esc(ds.unit_of_randomisation))+
+        '</div><p class="note">'+esc(ds.note||'')+'</p>';
+    } else if(ds && ds.discriminating_checks){
+      h+='<ul class="note">'+ds.discriminating_checks.map(function(x){
+        return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+    }
+    h+='</div>';
+
+    if((dec.caveats||[]).length){
+      h+='<h2>Caveats</h2><div class="card"><ul class="note" '+
+        'style="margin:0;padding-left:18px">'+
+        dec.caveats.map(function(c){return '<li>'+esc(c)+'</li>';}).join('')+'</ul></div>';
+    }
+
+    h+='<h2>Run log</h2><div class="card scroll"><pre style="margin:0;font-size:11.5px;'+
+       'font-family:var(--mono);color:var(--muted);white-space:pre">'+
+       esc((inv.orchestration_log||[]).join('\n'))+'</pre></div>';
+
+    panel.innerHTML=h;
+    document.getElementById('prov').innerHTML =
+      esc(inv.meta.dataset)+' · run '+esc(inv.meta.generated_at)+
+      ' · '+esc(inv.meta.runtime_seconds)+'s';
+  }
+
+  function tile(lab,val,sub){
+    return '<div class="kpi"><div class="lab">'+esc(lab)+'</div>'+
+           '<div class="val">'+esc(val)+'</div><div class="sub">'+esc(sub)+'</div></div>';
+  }
+  function barRow(lab,frac,val){
+    return '<div class="bar"><span>'+esc(lab)+'</span>'+
+      '<span class="track"><span class="fill" style="width:'+(Math.min(frac,1)*100).toFixed(0)+
+      '%"></span></span><span class="n">'+esc(val)+'</span></div>';
+  }
+  function segTable(seg){
+    var rows=(seg.findings||[]).slice(0,10).map(function(f){
+      return '<tr class="'+(f.significant?'sig':'')+'"><td>'+esc(f.label)+'</td>'+
+        '<td class="num">'+sgn(f.delta,2)+'</td>'+
+        '<td class="num">'+(f.p_adjusted<1e-4?f.p_adjusted.toExponential(1):n2(f.p_adjusted,4))+'</td>'+
+        '<td class="num">'+f.n_event+'</td>'+
+        '<td>'+(f.significant?'<span class="mark pass">FDR ✓</span>':'<span class="no">-</span>')+'</td></tr>';
+    }).join('');
+    if(!rows) return '<p class="note">No segment carries enough volume in both windows '+
+      'to test at the configured minimum. Segment-level attribution is withheld rather '+
+      'than reported on thin data.</p>';
+    return '<div class="scroll"><table><thead><tr><th scope="col">Segment</th>'+
+      '<th scope="col">Δ</th><th scope="col">p (BH-adj)</th><th scope="col">n</th>'+
+      '<th scope="col">Survives FDR</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  }
+
+  // build tabs
+  D.index.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.setAttribute('role','tab'); b.id='tab-'+s.key;
+    b.setAttribute('aria-selected', i===0?'true':'false');
+    b.tabIndex = i===0?0:-1;
+    b.innerHTML='<b>'+esc(s.title)+'</b><span>'+esc(s.state)+'</span>';
+    b.addEventListener('click',function(){ select(s.key); });
+    b.addEventListener('keydown',function(e){
+      var ks=D.index.map(function(x){return x.key;}), idx=ks.indexOf(s.key), nx=-1;
+      if(e.key==='ArrowRight') nx=(idx+1)%ks.length;
+      if(e.key==='ArrowLeft')  nx=(idx-1+ks.length)%ks.length;
+      if(e.key==='Home') nx=0;
+      if(e.key==='End')  nx=ks.length-1;
+      if(nx>=0){ e.preventDefault(); select(ks[nx]); document.getElementById('tab-'+ks[nx]).focus(); }
+    });
+    tabs.appendChild(b);
+  });
+  function select(key){
+    D.index.forEach(function(s){
+      var el=document.getElementById('tab-'+s.key);
+      var on = s.key===key;
+      el.setAttribute('aria-selected', on?'true':'false');
+      el.tabIndex = on?0:-1;
+    });
+    render(key);
+  }
+  select(D.index[0].key);
+})();
+</script>
+</body>
+</html>

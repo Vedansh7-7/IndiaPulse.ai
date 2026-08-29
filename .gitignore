@@ -1,0 +1,28 @@
+# local reference material, not part of the product
+reference/
+
+# dataset (fetch with: python download_data.py)
+data/raw/*.csv
+
+# secrets
+.env
+.env.*
+*.key
+*.pem
+secrets.json
+credentials.json
+.kaggle/
+
+# python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# scratch
+out/tmp_*.json
+*.log
+
+# regenerable engine output (web/data is the served copy)
+out/

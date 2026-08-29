@@ -1,0 +1,40 @@
+{
+  "scenarios": [
+    {
+      "key": "national",
+      "title": "National - satisfaction decline",
+      "blurb": "The full dataset. A sustained 11-week drop in customer satisfaction.",
+      "file": "inv_national.json",
+      "state": "CONFIRMED",
+      "headline": "Review Score fell 0.324 (4.23 to 3.90). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
+      "orders": 96095
+    },
+    {
+      "key": "santa-catarina",
+      "title": "Santa Catarina - ambiguous evidence",
+      "blurb": "A real movement the evidence cannot attribute to a single cause.",
+      "file": "inv_santa-catarina.json",
+      "state": "INCONCLUSIVE",
+      "headline": "Review Score moved significantly (-0.835), but the evidence cannot identify a single cause.",
+      "orders": 3536
+    },
+    {
+      "key": "goias",
+      "title": "Goias - normal variation",
+      "blurb": "A dip that looks alarming on a dashboard and is statistically ordinary.",
+      "file": "inv_goias.json",
+      "state": "NOISE",
+      "headline": "No investigation warranted: review_score is within normal variation.",
+      "orders": 1950
+    },
+    {
+      "key": "para",
+      "title": "Para - measurement artefact",
+      "blurb": "Integrity checks flag the metric itself before any cause is reported.",
+      "file": "inv_para.json",
+      "state": "ARTEFACT",
+      "headline": "The metric movement appears to be a measurement artefact.",
+      "orders": 942
+    }
+  ]
+}

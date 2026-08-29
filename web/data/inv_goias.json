@@ -1,0 +1,568 @@
+{
+  "meta": {
+    "product": "IndiaPulse AI",
+    "subtitle": "KPI storytelling engine. Accenture Innovation Challenge 2026",
+    "problem_statement": "BusinessIntelligence.ai",
+    "dataset": "Olist Brazilian E-Commerce (public, ~99k orders, ~41k free-text reviews)",
+    "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
+    "metric": "review_score",
+    "scenario": "goias",
+    "generated_at": "2026-08-29 23:17:13",
+    "runtime_seconds": 0.23,
+    "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
+  },
+  "scope0_triage": {
+    "metric": "review_score",
+    "is_signal": false,
+    "verdict": "NOISE",
+    "event_weeks": [],
+    "baseline_weeks": [],
+    "event_value": 3.5135135135135136,
+    "baseline_value": 4.128205128205129,
+    "delta": -0.614691614691615,
+    "robust_z": -1.7446092069619747,
+    "control_limits": [
+      3.071191994996874,
+      5.185218261413383
+    ],
+    "changepoint_week": null,
+    "p_value": 1.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "series": [
+      {
+        "week": "2017-01-09",
+        "value": 5.0,
+        "orders": 2,
+        "in_event": false
+      },
+      {
+        "week": "2017-01-16",
+        "value": 5.0,
+        "orders": 4,
+        "in_event": false
+      },
+      {
+        "week": "2017-01-23",
+        "value": 4.0,
+        "orders": 11,
+        "in_event": false
+      },
+      {
+        "week": "2017-01-30",
+        "value": 5.0,
+        "orders": 2,
+        "in_event": false
+      },
+      {
+        "week": "2017-02-06",
+        "value": 4.5,
+        "orders": 10,
+        "in_event": false
+      },
+      {
+        "week": "2017-02-13",
+        "value": 4.142857142857143,
+        "orders": 7,
+        "in_event": false
+      },
+      {
+        "week": "2017-02-20",
+        "value": 4.2,
+        "orders": 5,
+        "in_event": false
+      },
+      {
+        "week": "2017-02-27",
+        "value": 3.625,
+        "orders": 8,
+        "in_event": false
+      },
+      {
+        "week": "2017-03-06",
+        "value": 3.9,
+        "orders": 10,
+        "in_event": false
+      },
+      {
+        "week": "2017-03-13",
+        "value": 3.5454545454545454,
+        "orders": 11,
+        "in_event": false
+      },
+      {
+        "week": "2017-03-20",
+        "value": 4.230769230769231,
+        "orders": 13,
+        "in_event": false
+      },
+      {
+        "week": "2017-03-27",
+        "value": 3.875,
+        "orders": 8,
+        "in_event": false
+      },
+      {
+        "week": "2017-04-03",
+        "value": 4.5,
+        "orders": 6,
+        "in_event": false
+      },
+      {
+        "week": "2017-04-10",
+        "value": 4.0,
+        "orders": 5,
+        "in_event": false
+      },
+      {
+        "week": "2017-04-17",
+        "value": 3.6666666666666665,
+        "orders": 12,
+        "in_event": false
+      },
+      {
+        "week": "2017-04-24",
+        "value": 3.6923076923076925,
+        "orders": 13,
+        "in_event": false
+      },
+      {
+        "week": "2017-05-01",
+        "value": 4.055555555555555,
+        "orders": 18,
+        "in_event": false
+      },
+      {
+        "week": "2017-05-08",
+        "value": 4.4375,
+        "orders": 16,
+        "in_event": false
+      },
+      {
+        "week": "2017-05-15",
+        "value": 4.4,
+        "orders": 20,
+        "in_event": false
+      },
+      {
+        "week": "2017-05-22",
+        "value": 3.8125,
+        "orders": 16,
+        "in_event": false
+      },
+      {
+        "week": "2017-05-29",
+        "value": 4.1,
+        "orders": 20,
+        "in_event": false
+      },
+      {
+        "week": "2017-06-05",
+        "value": 4.095238095238095,
+        "orders": 21,
+        "in_event": false
+      },
+      {
+        "week": "2017-06-12",
+        "value": 4.0,
+        "orders": 17,
+        "in_event": false
+      },
+      {
+        "week": "2017-06-19",
+        "value": 4.125,
+        "orders": 16,
+        "in_event": false
+      },
+      {
+        "week": "2017-06-26",
+        "value": 4.266666666666667,
+        "orders": 15,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-03",
+        "value": 4.352941176470588,
+        "orders": 17,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-10",
+        "value": 4.6923076923076925,
+        "orders": 13,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-17",
+        "value": 4.136363636363637,
+        "orders": 22,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-24",
+        "value": 4.666666666666667,
+        "orders": 21,
+        "in_event": false
+      },
+      {
+        "week": "2017-07-31",
+        "value": 4.055555555555555,
+        "orders": 18,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-07",
+        "value": 4.421052631578948,
+        "orders": 19,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-14",
+        "value": 4.083333333333333,
+        "orders": 24,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-21",
+        "value": 3.7777777777777777,
+        "orders": 19,
+        "in_event": false
+      },
+      {
+        "week": "2017-08-28",
+        "value": 4.366666666666666,
+        "orders": 15,
+        "in_event": false
+      },
+      {
+        "week": "2017-09-04",
+        "value": 4.346153846153846,
+        "orders": 26,
+        "in_event": false
+      },
+      {
+        "week": "2017-09-11",
+        "value": 4.304347826086956,
+        "orders": 23,
+        "in_event": false
+      },
+      {
+        "week": "2017-09-18",
+        "value": 3.7777777777777777,
+        "orders": 18,
+        "in_event": false
+      },
+      {
+        "week": "2017-09-25",
+        "value": 4.3076923076923075,
+        "orders": 13,
+        "in_event": false
+      },
+      {
+        "week": "2017-10-02",
+        "value": 4.090909090909091,
+        "orders": 22,
+        "in_event": false
+      },
+      {
+        "week": "2017-10-09",
+        "value": 4.2272727272727275,
+        "orders": 22,
+        "in_event": false
+      },
+      {
+        "week": "2017-10-16",
+        "value": 4.5,
+        "orders": 25,
+        "in_event": false
+      },
+      {
+        "week": "2017-10-23",
+        "value": 4.5,
+        "orders": 20,
+        "in_event": false
+      },
+      {
+        "week": "2017-10-30",
+        "value": 4.56,
+        "orders": 25,
+        "in_event": false
+      },
+      {
+        "week": "2017-11-06",
+        "value": 4.625,
+        "orders": 24,
+        "in_event": false
+      },
+      {
+        "week": "2017-11-13",
+        "value": 4.208333333333333,
+        "orders": 25,
+        "in_event": false
+      },
+      {
+        "week": "2017-11-20",
+        "value": 3.782608695652174,
+        "orders": 71,
+        "in_event": false
+      },
+      {
+        "week": "2017-11-27",
+        "value": 4.0344827586206895,
+        "orders": 30,
+        "in_event": false
+      },
+      {
+        "week": "2017-12-04",
+        "value": 3.775,
+        "orders": 40,
+        "in_event": false
+      },
+      {
+        "week": "2017-12-11",
+        "value": 3.7142857142857144,
+        "orders": 36,
+        "in_event": false
+      },
+      {
+        "week": "2017-12-18",
+        "value": 4.619047619047619,
+        "orders": 21,
+        "in_event": false
+      },
+      {
+        "week": "2017-12-25",
+        "value": 4.2727272727272725,
+        "orders": 22,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-01",
+        "value": 4.038461538461538,
+        "orders": 26,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-08",
+        "value": 4.128205128205129,
+        "orders": 39,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-15",
+        "value": 3.7567567567567566,
+        "orders": 37,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-22",
+        "value": 4.08,
+        "orders": 26,
+        "in_event": false
+      },
+      {
+        "week": "2018-01-29",
+        "value": 4.365853658536586,
+        "orders": 41,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-05",
+        "value": 3.8194444444444446,
+        "orders": 36,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-12",
+        "value": 3.5135135135135136,
+        "orders": 37,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-19",
+        "value": 3.769230769230769,
+        "orders": 28,
+        "in_event": false
+      },
+      {
+        "week": "2018-02-26",
+        "value": 3.725,
+        "orders": 40,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-05",
+        "value": 4.0,
+        "orders": 32,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-12",
+        "value": 3.6153846153846154,
+        "orders": 39,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-19",
+        "value": 3.8518518518518516,
+        "orders": 27,
+        "in_event": false
+      },
+      {
+        "week": "2018-03-26",
+        "value": 4.0,
+        "orders": 26,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-02",
+        "value": 4.185185185185185,
+        "orders": 28,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-09",
+        "value": 3.869565217391304,
+        "orders": 23,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-16",
+        "value": 4.4523809523809526,
+        "orders": 42,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-23",
+        "value": 4.206896551724138,
+        "orders": 29,
+        "in_event": false
+      },
+      {
+        "week": "2018-04-30",
+        "value": 3.9183673469387754,
+        "orders": 49,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-07",
+        "value": 4.069767441860465,
+        "orders": 43,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-14",
+        "value": 3.8275862068965516,
+        "orders": 29,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-21",
+        "value": 4.583333333333333,
+        "orders": 12,
+        "in_event": false
+      },
+      {
+        "week": "2018-05-28",
+        "value": 3.8666666666666667,
+        "orders": 15,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-04",
+        "value": 4.413793103448276,
+        "orders": 29,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-11",
+        "value": 4.5,
+        "orders": 18,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-18",
+        "value": 4.25,
+        "orders": 24,
+        "in_event": false
+      },
+      {
+        "week": "2018-06-25",
+        "value": 3.933333333333333,
+        "orders": 30,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-02",
+        "value": 4.32,
+        "orders": 25,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-09",
+        "value": 3.892857142857143,
+        "orders": 28,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-16",
+        "value": 4.296296296296297,
+        "orders": 27,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-23",
+        "value": 4.04,
+        "orders": 25,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-30",
+        "value": 4.1875,
+        "orders": 32,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-06",
+        "value": 4.27906976744186,
+        "orders": 43,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-13",
+        "value": 4.631578947368421,
+        "orders": 38,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-20",
+        "value": 4.2,
+        "orders": 10,
+        "in_event": false
+      }
+    ],
+    "reasoning": "The largest weekly deviation is -1.74 robust SDs from the 4.128 baseline, inside the +/-3.0 control limit. This is normal variation; no investigation is warranted."
+  },
+  "scope1_decomposition": null,
+  "scope1_segments": null,
+  "scope2_verdicts": [],
+  "scope3_adversary": null,
+  "scope4_decision": {
+    "state": "NOISE",
+    "headline": "No investigation warranted: review_score is within normal variation.",
+    "narrative": "The largest weekly deviation is -1.74 robust SDs from the 4.128 baseline, inside the +/-3.0 control limit. This is normal variation; no investigation is warranted.",
+    "ranked": [],
+    "separability": {},
+    "next_test": {
+      "recommendation": "No action. Continue monitoring.",
+      "rationale": "The largest weekly deviation is -1.74 robust SDs from the 4.128 baseline, inside the +/-3.0 control limit. This is normal variation; no investigation is warranted."
+    },
+    "caveats": []
+  },
+  "orchestration_log": [
+    "Scope 0  Triage      | loading panel...",
+    "Scope 0  Triage      | scenario='goias'  orders=2,011  states=['GO']",
+    "Scope 0  Triage      | NOISE  z=-1.74  delta=-0.615  weeks=0",
+    "Scope 0  Triage      | inside control limits, stopping before any agent is spawned."
+  ]
+}
