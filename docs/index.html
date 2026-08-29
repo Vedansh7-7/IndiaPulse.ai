@@ -411,6 +411,37 @@ footer a{text-decoration:underline;text-underline-offset:2px}
   color:var(--ink-soft);padding-top:3px}
 .idle li span{color:var(--ink-soft)}
 
+/* personas */
+.pers{display:flex;gap:0;border:1px solid var(--rule);margin-bottom:22px;flex-wrap:wrap}
+.pers button{appearance:none;background:none;border:0;border-right:1px solid var(--rule);
+  color:var(--ink-soft);font:inherit;font-size:13px;padding:11px 16px;cursor:pointer;
+  text-align:left;flex:1 1 150px;transition:background 160ms var(--ease)}
+.pers button:last-child{border-right:0}
+.pers button:hover{background:var(--sunken);color:var(--ink)}
+.pers button[aria-pressed=true]{background:var(--surface);color:var(--ink)}
+.pers b{display:block;font-weight:500}
+.pers span{display:block;font-size:10.5px;font-family:var(--mono);color:var(--ink-soft);
+  margin-top:3px}
+.chain{margin:22px 0 0;border-top:1px solid var(--rule-firm)}
+.chain>div{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:11px 0;
+  border-bottom:1px solid var(--rule);font-size:13.5px}
+.chain dt{font-family:var(--mono);font-size:10.5px;letter-spacing:0.07em;
+  color:var(--ink-soft);text-transform:uppercase;padding-top:2px}
+.chain dd{margin:0;color:var(--ink-soft)}
+.held{border:1px dashed var(--rule-strong);padding:16px 18px}
+
+/* governance */
+.gov{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  border-top:1px solid var(--rule-firm);margin-bottom:24px}
+.gov>div{padding:14px 18px 16px 0}
+.gov dt{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px}
+.gov dd{margin:0;font-family:var(--mono);font-size:1.35rem;letter-spacing:-0.02em}
+.claim{padding:16px 0 20px;max-width:74ch;font-size:13.5px;
+  color:var(--ink-soft);text-wrap:pretty}
+.claim strong{color:var(--ink);font-weight:600}
+td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
+  color:var(--ink-soft)}
+
 @media (prefers-reduced-motion:reduce){.live-log li{animation:none}}
 
 @media (prefers-reduced-motion:reduce){
@@ -763,6 +794,96 @@ footer a{text-decoration:underline;text-underline-offset:2px}
       (aside?'<span class="aside">'+esc(aside)+'</span>':'')+'</div>'+body+'</section>';
   }
 
+
+  /* ---------- personas ---------- */
+  var personaPick = 0;
+  function personaBlock(inv){
+    var ps = inv.personas || [];
+    if(!ps.length) return '';
+    if(personaPick >= ps.length) personaPick = 0;
+    var v = ps[personaPick];
+    var tabs = ps.map(function(x,i){
+      return '<button type="button" data-p="'+i+'" aria-pressed="'+
+        (i===personaPick)+'"><b>'+esc(x.persona.title)+'</b><span>'+
+        esc(x.persona.depth)+' / '+esc(x.persona.clearance)+'</span></button>';
+    }).join('');
+    var body;
+    if(v.withheld){
+      body = '<div class="held prose">'+md(v.narrative)+'</div>';
+    } else {
+      var a = v.action || {};
+      var rows = [['Driver',a.driver],['Lever',a.lever],['Action',a.action],
+        ['Expected impact',a.expected_impact],['Owner',a.owner],
+        ['Confidence',a.confidence],['Monitoring',a.monitoring]];
+      var chain = rows.filter(function(r){return r[1];}).map(function(r){
+        return '<div><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'; }).join('');
+      var steps = (a.steps||[]).length
+        ? '<div><dt>Steps</dt><dd>'+a.steps.map(esc).join('<br>')+'</dd></div>' : '';
+      body = '<div class="prose">'+md(v.narrative)+'</div>'+
+        '<p class="note" style="margin-top:24px;font-weight:500;color:var(--ink)">'+
+        esc(a.headline||'')+'</p><dl class="chain">'+chain+steps+'</dl>';
+    }
+    return '<div class="pers" role="group" aria-label="Reader">'+tabs+'</div>'+body;
+  }
+
+  /* ---------- method, cost and lineage ---------- */
+  function governanceBlock(inv){
+    var g = inv.governance; if(!g) return '';
+    var t = g.telemetry || {}, m = g.methods || {};
+    function read(l,v,sub){
+      return '<div><dt>'+esc(l)+'</dt><dd>'+esc(v)+'</dd>'+
+        (sub?'<span style="display:block;font-size:11px;color:var(--ink-soft);'+
+        'font-family:var(--mono);margin-top:5px">'+esc(sub)+'</span>':'')+'</div>';
+    }
+    var tele = '<dl class="gov">'+
+      read('Model calls', t.llm_calls, 'language model')+
+      read('Tokens', (t.total_tokens||0).toLocaleString(), 'in + out')+
+      read('Estimated cost', '$'+Number(t.estimated_cost_usd||0).toFixed(4), 'per run')+
+      read('Latency', Math.round(t.total_ms||0)+' ms', 'end to end')+
+      '</dl>';
+    var scopes = (t.scopes||[]).map(function(s){
+      return '<tr><td>'+esc(s.scope)+'</td><td class="n">'+s.ms.toFixed(1)+'</td><td>'+
+        esc(s.detail||'')+'</td></tr>'; }).join('');
+    var meth = (m.methods||[]).map(function(x){
+      return '<tr><td>'+esc(x.scope)+'</td><td>'+esc(x.step)+'</td><td>'+
+        esc(x.technique)+'</td><td class="klass">'+esc(x.klass)+'</td></tr>'; }).join('');
+    var lin = ((g.lineage||{}).sources||[]).map(function(x){
+      return '<tr><td>'+esc(x.table)+'</td><td>'+esc(x.grain)+'</td><td>'+
+        esc(x.refresh)+'</td><td>'+esc(x.owner)+'</td><td>'+
+        esc(x.sensitivity)+'</td></tr>'; }).join('');
+    var c = g.contract, con = '';
+    if(c){
+      var cr = [['Definition',c.definition],['Formula',c.formula],['Unit',c.unit],
+        ['Grain',c.grain],['Sources',(c.sources||[]).join(', ')],['Cadence',c.cadence],
+        ['Material change',c.material_threshold],
+        ['Known drivers',(c.drivers||[]).join(', ')],['Owner',c.owner],
+        ['Access',c.access]];
+      con = '<div class="scroll"><table><tbody>'+cr.map(function(r){
+        return '<tr><td style="width:170px;color:var(--ink-soft)">'+esc(r[0])+
+          '</td><td>'+esc(r[1])+'</td></tr>'; }).join('')+'</tbody></table></div>';
+    }
+    var st = m.statement||'';
+    var head = st.split('. ')[0];
+    var rest = st.slice(head.length+2);
+    var out = tele + '<p class="claim"><strong>'+esc(head)+'.</strong> '+esc(rest)+'</p>'+
+      '<details open><summary>METHOD BY STEP ('+(m.methods||[]).length+')</summary>'+
+      '<div class="scroll"><table><thead><tr><th scope="col">Scope</th>'+
+      '<th scope="col">Step</th><th scope="col">Technique</th>'+
+      '<th scope="col">Class</th></tr></thead><tbody>'+meth+
+      '</tbody></table></div></details>';
+    if(con) out += '<details><summary>KPI CONTRACT</summary>'+con+'</details>';
+    if(lin) out += '<details><summary>SOURCES AND LINEAGE</summary>'+
+      '<div class="scroll"><table><thead><tr><th scope="col">Table</th>'+
+      '<th scope="col">Grain</th><th scope="col">Refresh</th>'+
+      '<th scope="col">Owner</th><th scope="col">Sensitivity</th></tr></thead><tbody>'+
+      lin+'</tbody></table></div></details>';
+    if(scopes) out += '<details><summary>LATENCY BY SCOPE</summary>'+
+      '<div class="scroll"><table><thead><tr><th scope="col">Scope</th>'+
+      '<th scope="col">ms</th><th scope="col">Detail</th></tr></thead><tbody>'+
+      scopes+'</tbody></table></div></details>';
+    return out;
+  }
+
   /* ---------- render ---------- */
   function render(key){
     var inv=D.investigations[key];
@@ -774,7 +895,10 @@ footer a{text-decoration:underline;text-underline-offset:2px}
        '<h3>'+esc(dc.headline)+'</h3></div>'+pipeline(inv);
 
     h+=sec('Reading','', readings(t)+plot(inv));
-    h+=sec('Finding','', '<div class="prose">'+md(dc.narrative)+'</div>');
+    var pb=personaBlock(inv);
+    h+=sec('Finding', pb?'framed for the reader':'',
+           pb || '<div class="prose">'+md(dc.narrative)+'</div>');
+    if(pb) h+=sec('Full analysis','', '<div class="prose">'+md(dc.narrative)+'</div>');
 
     if(dcp){
       h+=sec('Location', seg.n_tested+' segments tested',
@@ -826,11 +950,17 @@ footer a{text-decoration:underline;text-underline-offset:2px}
       h+=sec('Caveats','', '<ul class="prose" style="padding-left:18px;margin:0">'+
         dc.caveats.map(function(c){return '<li>'+esc(c)+'</li>';}).join('')+'</ul>');
     }
+    h+=sec('Method, cost and lineage','how every number was produced',
+           governanceBlock(inv));
     h+=sec('Run log','', '<details><summary>SHOW</summary><div class="scroll">'+
       '<pre class="log">'+esc((inv.orchestration_log||[]).join('\n'))+'</pre></div></details>');
 
     var p=document.getElementById('panel');
     p.innerHTML=h;
+    Array.prototype.forEach.call(p.querySelectorAll('.pers button'),function(b){
+      b.addEventListener('click',function(){
+        personaPick=parseInt(b.getAttribute('data-p'),10); render(key); });
+    });
     document.getElementById('meta').textContent =
       inv.meta.generated_at.slice(0,10)+' / '+inv.meta.runtime_seconds+'s';
   }

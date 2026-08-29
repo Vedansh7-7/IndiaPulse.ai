@@ -35,6 +35,24 @@
       "state": "ARTEFACT",
       "headline": "The metric movement appears to be a measurement artefact.",
       "orders": 942
+    },
+    {
+      "key": "entitlement",
+      "title": "Average order value - restricted",
+      "blurb": "A confidential KPI. The operations reader is told what is withheld, not shown a redacted number.",
+      "file": "inv_entitlement.json",
+      "state": "INCONCLUSIVE",
+      "headline": "Aov moved significantly (-67.233), but the evidence cannot identify a single cause.",
+      "orders": 96095
+    },
+    {
+      "key": "ontime",
+      "title": "On-time delivery - second KPI",
+      "blurb": "A different KPI over the same sources, at the same grain.",
+      "file": "inv_ontime.json",
+      "state": "CONFIRMED",
+      "headline": "On Time fell 0.108 (0.95 to 0.84). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
+      "orders": 96095
     }
   ]
 }

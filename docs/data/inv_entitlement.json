@@ -5,33 +5,20 @@
     "problem_statement": "BusinessIntelligence.ai",
     "dataset": "Olist Brazilian E-Commerce (public, ~99k orders, ~41k free-text reviews)",
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
-    "metric": "review_score",
-    "scenario": "national",
-    "generated_at": "2026-08-30 01:36:53",
-    "runtime_seconds": 12.91,
+    "metric": "aov",
+    "scenario": "entitlement",
+    "generated_at": "2026-08-30 01:36:54",
+    "runtime_seconds": 0.98,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
-    "metric": "review_score",
+    "metric": "aov",
     "is_signal": true,
     "verdict": "SIGNAL",
     "event_weeks": [
-      "2018-01-15",
-      "2018-01-22",
-      "2018-01-29",
-      "2018-02-05",
-      "2018-02-12",
-      "2018-02-19",
-      "2018-02-26",
-      "2018-03-05",
-      "2018-03-12",
-      "2018-03-19",
-      "2018-03-26"
+      "2017-01-02"
     ],
     "baseline_weeks": [
-      "2017-01-02",
-      "2017-01-09",
-      "2017-01-16",
       "2017-01-23",
       "2017-01-30",
       "2017-02-06",
@@ -81,6 +68,21 @@
       "2017-12-11",
       "2017-12-18",
       "2017-12-25",
+      "2018-01-01",
+      "2018-01-08",
+      "2018-01-15",
+      "2018-01-22",
+      "2018-01-29",
+      "2018-02-05",
+      "2018-02-12",
+      "2018-02-19",
+      "2018-02-26",
+      "2018-03-05",
+      "2018-03-12",
+      "2018-03-19",
+      "2018-03-26",
+      "2018-04-02",
+      "2018-04-09",
       "2018-04-16",
       "2018-04-23",
       "2018-04-30",
@@ -101,854 +103,567 @@
       "2018-08-13",
       "2018-08-20"
     ],
-    "event_value": 3.90368581818439,
-    "baseline_value": 4.227766262557749,
-    "delta": -0.3240804443733589,
-    "robust_z": -6.364178706399242,
+    "event_value": 70.79454545454546,
+    "baseline_value": 138.0271156018835,
+    "delta": -67.23257014733805,
+    "robust_z": -6.698486864650995,
     "control_limits": [
-      3.9079354815108642,
-      4.506078797464066
+      106.87759003072908,
+      165.41457431106434
     ],
     "changepoint_week": "2017-01-02",
-    "p_value": 0.0,
-    "ci_low": -0.34345442452058356,
-    "ci_high": -0.2967289762232665,
+    "p_value": 0.008889799432841627,
+    "ci_low": -115.10044375644783,
+    "ci_high": -17.51856542946173,
     "series": [
       {
         "week": "2017-01-02",
-        "value": 4.681818181818182,
+        "value": 70.79454545454546,
         "orders": 44,
-        "in_event": false
+        "in_event": true
       },
       {
         "week": "2017-01-09",
-        "value": 4.041666666666667,
+        "value": 150.26931506849314,
         "orders": 73,
         "in_event": false
       },
       {
         "week": "2017-01-16",
-        "value": 4.143243243243243,
+        "value": 123.36931216931217,
         "orders": 189,
         "in_event": false
       },
       {
         "week": "2017-01-23",
-        "value": 4.192771084337349,
+        "value": 161.6842168674699,
         "orders": 332,
         "in_event": false
       },
       {
         "week": "2017-01-30",
-        "value": 4.252927400468384,
+        "value": 159.0698611111111,
         "orders": 432,
         "in_event": false
       },
       {
         "week": "2017-02-06",
-        "value": 4.301181102362205,
+        "value": 148.72600782778866,
         "orders": 511,
         "in_event": false
       },
       {
         "week": "2017-02-13",
-        "value": 4.114058355437666,
+        "value": 134.65696569920843,
         "orders": 379,
         "in_event": false
       },
       {
         "week": "2017-02-20",
-        "value": 4.135838150289017,
+        "value": 122.41530085959886,
         "orders": 349,
         "in_event": false
       },
       {
         "week": "2017-02-27",
-        "value": 4.220524017467249,
+        "value": 146.32559652928418,
         "orders": 461,
         "in_event": false
       },
       {
         "week": "2017-03-06",
-        "value": 4.206261510128914,
+        "value": 133.3725,
         "orders": 548,
         "in_event": false
       },
       {
         "week": "2017-03-13",
-        "value": 4.170940170940171,
+        "value": 158.18827411167513,
         "orders": 591,
         "in_event": false
       },
       {
         "week": "2017-03-20",
-        "value": 4.1362903225806456,
+        "value": 134.44633012820512,
         "orders": 624,
         "in_event": false
       },
       {
         "week": "2017-03-27",
-        "value": 4.2707182320441985,
+        "value": 154.31369963369963,
         "orders": 546,
         "in_event": false
       },
       {
         "week": "2017-04-03",
-        "value": 4.190518783542039,
+        "value": 155.7884191829485,
         "orders": 563,
         "in_event": false
       },
       {
         "week": "2017-04-10",
-        "value": 4.059523809523809,
+        "value": 132.47767220902614,
         "orders": 421,
         "in_event": false
       },
       {
         "week": "2017-04-17",
-        "value": 4.023148148148148,
+        "value": 153.8837247706422,
         "orders": 545,
         "in_event": false
       },
       {
         "week": "2017-04-24",
-        "value": 4.165109034267913,
+        "value": 134.78681677018633,
         "orders": 644,
         "in_event": false
       },
       {
         "week": "2017-05-01",
-        "value": 4.204819277108434,
+        "value": 129.16819999999998,
         "orders": 750,
         "in_event": false
       },
       {
         "week": "2017-05-08",
-        "value": 4.2399463806970505,
+        "value": 144.97467463479416,
         "orders": 753,
         "in_event": false
       },
       {
         "week": "2017-05-15",
-        "value": 4.196902654867257,
+        "value": 131.29948689956333,
         "orders": 916,
         "in_event": false
       },
       {
         "week": "2017-05-22",
-        "value": 4.309018567639257,
+        "value": 148.19448684210525,
         "orders": 760,
         "in_event": false
       },
       {
         "week": "2017-05-29",
-        "value": 4.227959697732998,
+        "value": 140.5119,
         "orders": 800,
         "in_event": false
       },
       {
         "week": "2017-06-05",
-        "value": 4.210656753407683,
+        "value": 129.75474201474202,
         "orders": 814,
         "in_event": false
       },
       {
         "week": "2017-06-12",
-        "value": 4.215767634854772,
+        "value": 137.63972451790633,
         "orders": 726,
         "in_event": false
       },
       {
         "week": "2017-06-19",
-        "value": 4.224603174603175,
+        "value": 134.36415748031496,
         "orders": 635,
         "in_event": false
       },
       {
         "week": "2017-06-26",
-        "value": 4.263532763532764,
+        "value": 129.8849150141643,
         "orders": 706,
         "in_event": false
       },
       {
         "week": "2017-07-03",
-        "value": 4.295019157088123,
+        "value": 130.0510579345088,
         "orders": 794,
         "in_event": false
       },
       {
         "week": "2017-07-10",
-        "value": 4.244820065430752,
+        "value": 120.36327213822894,
         "orders": 926,
         "in_event": false
       },
       {
         "week": "2017-07-17",
-        "value": 4.207752768846016,
+        "value": 127.21647812166488,
         "orders": 937,
         "in_event": false
       },
       {
         "week": "2017-07-24",
-        "value": 4.298087739032621,
+        "value": 121.0018477043673,
         "orders": 893,
         "in_event": false
       },
       {
         "week": "2017-07-31",
-        "value": 4.262130801687764,
+        "value": 122.62965408805032,
         "orders": 954,
         "in_event": false
       },
       {
         "week": "2017-08-07",
-        "value": 4.346916299559472,
+        "value": 137.7148627881449,
         "orders": 911,
         "in_event": false
       },
       {
         "week": "2017-08-14",
-        "value": 4.301301301301302,
+        "value": 120.48636904761904,
         "orders": 1008,
         "in_event": false
       },
       {
         "week": "2017-08-21",
-        "value": 4.286464410735123,
+        "value": 120.88034802784223,
         "orders": 862,
         "in_event": false
       },
       {
         "week": "2017-08-28",
-        "value": 4.361767728674203,
+        "value": 180.88924412665986,
         "orders": 979,
         "in_event": false
       },
       {
         "week": "2017-09-04",
-        "value": 4.245109321058688,
+        "value": 148.59135381114905,
         "orders": 879,
         "in_event": false
       },
       {
         "week": "2017-09-11",
-        "value": 4.187889581478183,
+        "value": 137.35521126760563,
         "orders": 1136,
         "in_event": false
       },
       {
         "week": "2017-09-18",
-        "value": 4.287368421052632,
+        "value": 130.69351464435147,
         "orders": 956,
         "in_event": false
       },
       {
         "week": "2017-09-25",
-        "value": 4.3242950108459866,
+        "value": 151.7374054054054,
         "orders": 925,
         "in_event": false
       },
       {
         "week": "2017-10-02",
-        "value": 4.17610710607621,
+        "value": 144.93361025641025,
         "orders": 975,
         "in_event": false
       },
       {
         "week": "2017-10-09",
-        "value": 4.199902248289345,
+        "value": 143.5123203883495,
         "orders": 1030,
         "in_event": false
       },
       {
         "week": "2017-10-16",
-        "value": 4.198723792160438,
+        "value": 146.46104977375566,
         "orders": 1105,
         "in_event": false
       },
       {
         "week": "2017-10-23",
-        "value": 4.25,
+        "value": 143.2300947368421,
         "orders": 950,
         "in_event": false
       },
       {
         "week": "2017-10-30",
-        "value": 4.19453734671126,
+        "value": 157.54764444444444,
         "orders": 900,
         "in_event": false
       },
       {
         "week": "2017-11-06",
-        "value": 4.16580310880829,
+        "value": 132.19093321917808,
         "orders": 1168,
         "in_event": false
       },
       {
         "week": "2017-11-13",
-        "value": 4.172785315243416,
+        "value": 136.58413820492453,
         "orders": 1259,
         "in_event": false
       },
       {
         "week": "2017-11-20",
-        "value": 3.8488412314078175,
+        "value": 136.50299828473413,
         "orders": 2915,
         "in_event": false
       },
       {
         "week": "2017-11-27",
-        "value": 3.894542772861357,
+        "value": 128.6868197361993,
         "orders": 2047,
         "in_event": false
       },
       {
         "week": "2017-12-04",
-        "value": 4.049658597144631,
+        "value": 133.1025689760883,
         "orders": 1631,
         "in_event": false
       },
       {
         "week": "2017-12-11",
-        "value": 4.069372693726938,
+        "value": 135.78916605705925,
         "orders": 1367,
         "in_event": false
       },
       {
         "week": "2017-12-18",
-        "value": 4.192675159235669,
+        "value": 131.7439600840336,
         "orders": 952,
         "in_event": false
       },
       {
         "week": "2017-12-25",
-        "value": 4.213191990577149,
+        "value": 115.91354725787632,
         "orders": 857,
         "in_event": false
       },
       {
         "week": "2018-01-01",
-        "value": 4.154483798040693,
+        "value": 133.23230425055928,
         "orders": 1341,
         "in_event": false
       },
       {
         "week": "2018-01-08",
-        "value": 4.161066048667439,
+        "value": 133.88567894131185,
         "orders": 1738,
         "in_event": false
       },
       {
         "week": "2018-01-15",
-        "value": 4.076718009478673,
+        "value": 125.62688380281689,
         "orders": 1704,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-01-22",
-        "value": 4.0674267100977195,
+        "value": 134.86326860841424,
         "orders": 1545,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-01-29",
-        "value": 4.0911139729555694,
+        "value": 124.23846893017297,
         "orders": 1561,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-02-05",
-        "value": 3.987924281984334,
+        "value": 129.87504218040235,
         "orders": 1541,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-02-12",
-        "value": 3.923562855337966,
+        "value": 118.90831347962383,
         "orders": 1595,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-02-19",
-        "value": 3.804377699254024,
+        "value": 120.19766491535319,
         "orders": 1713,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-02-26",
-        "value": 3.572558647026732,
+        "value": 137.80775554353704,
         "orders": 1849,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-03-05",
-        "value": 3.6211258697027198,
+        "value": 138.6074593241552,
         "orders": 1598,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-03-12",
-        "value": 3.786697247706422,
+        "value": 136.84099935107074,
         "orders": 1541,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-03-19",
-        "value": 3.9984975961538463,
+        "value": 133.84706762417716,
         "orders": 1671,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-03-26",
-        "value": 4.010541110330288,
+        "value": 138.88153738644306,
         "orders": 1431,
-        "in_event": true
+        "in_event": false
       },
       {
         "week": "2018-04-02",
-        "value": 4.168717616580311,
+        "value": 142.9156270096463,
         "orders": 1555,
         "in_event": false
       },
       {
         "week": "2018-04-09",
-        "value": 4.201393497013935,
+        "value": 149.25353482260184,
         "orders": 1522,
         "in_event": false
       },
       {
         "week": "2018-04-16",
-        "value": 4.236051502145923,
+        "value": 139.22921808185706,
         "orders": 1637,
         "in_event": false
       },
       {
         "week": "2018-04-23",
-        "value": 4.224022004889975,
+        "value": 141.05637742718446,
         "orders": 1648,
         "in_event": false
       },
       {
         "week": "2018-04-30",
-        "value": 4.2798723897911835,
+        "value": 138.3407785467128,
         "orders": 1734,
         "in_event": false
       },
       {
         "week": "2018-05-07",
-        "value": 4.230113636363637,
+        "value": 149.04517756047352,
         "orders": 1943,
         "in_event": false
       },
       {
         "week": "2018-05-14",
-        "value": 4.158800666296502,
+        "value": 141.3346703601108,
         "orders": 1805,
         "in_event": false
       },
       {
         "week": "2018-05-21",
-        "value": 4.288008565310492,
+        "value": 140.8192667375133,
         "orders": 941,
         "in_event": false
       },
       {
         "week": "2018-05-28",
-        "value": 4.277985074626866,
+        "value": 168.6168651162791,
         "orders": 1075,
         "in_event": false
       },
       {
         "week": "2018-06-04",
-        "value": 4.2126760563380286,
+        "value": 142.4624753867792,
         "orders": 1422,
         "in_event": false
       },
       {
         "week": "2018-06-11",
-        "value": 4.33556597454789,
+        "value": 146.2509018036072,
         "orders": 1497,
         "in_event": false
       },
       {
         "week": "2018-06-18",
-        "value": 4.378133704735376,
+        "value": 131.95708246708247,
         "orders": 1443,
         "in_event": false
       },
       {
         "week": "2018-06-25",
-        "value": 4.336489439184268,
+        "value": 131.9953111432706,
         "orders": 1382,
         "in_event": false
       },
       {
         "week": "2018-07-02",
-        "value": 4.372331340734415,
+        "value": 130.93040747028863,
         "orders": 1178,
         "in_event": false
       },
       {
         "week": "2018-07-09",
-        "value": 4.198132780082988,
+        "value": 157.88618312757202,
         "orders": 972,
         "in_event": false
       },
       {
         "week": "2018-07-16",
-        "value": 4.333333333333333,
+        "value": 131.87216494845362,
         "orders": 1649,
         "in_event": false
       },
       {
         "week": "2018-07-23",
-        "value": 4.3508114856429465,
+        "value": 146.8934285714286,
         "orders": 1610,
         "in_event": false
       },
       {
         "week": "2018-07-30",
-        "value": 4.22149673530889,
+        "value": 135.5216983016983,
         "orders": 2002,
         "in_event": false
       },
       {
         "week": "2018-08-06",
-        "value": 4.243523316062176,
+        "value": 139.94655618850337,
         "orders": 1931,
         "in_event": false
       },
       {
         "week": "2018-08-13",
-        "value": 4.384299781181619,
+        "value": 132.38609026644914,
         "orders": 1839,
         "in_event": false
       },
       {
         "week": "2018-08-20",
-        "value": 4.434947768281102,
+        "value": 118.98719165085389,
         "orders": 1054,
         "in_event": false
       }
     ],
-    "reasoning": "Weekly review_score fell to 3.904 against a robust baseline of 4.228 (delta -0.324). The worst week sits -6.36 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=0.00e+00 with a 95% CI of [-0.343, -0.297]. This is a real movement, not normal variation."
+    "reasoning": "Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation."
   },
   "scope1_decomposition": {
-    "total_delta": -0.320091700371925,
-    "mix_effect": 0.0021294551435480976,
-    "rate_effect": -0.32441496179120644,
-    "interaction": 0.0021938062757338858,
-    "mix_share": 0.006477662143305509,
-    "rate_share": 0.9868489238122033,
-    "interpretation": "99% of the movement is RATE: the same kinds of customers had a worse experience. This is an operational or product problem, not a change in who is buying."
+    "total_delta": -66.30950459295478,
+    "mix_effect": -0.33395672061189385,
+    "rate_effect": -36.804850522154595,
+    "interaction": -29.17069735018831,
+    "mix_share": 0.005036332614184179,
+    "rate_share": 0.5550463805767146,
+    "interpretation": "The movement is mixed (56% rate, 1% mix). Both the customer composition and the within-segment experience moved; neither alone explains it."
   },
   "scope1_segments": {
-    "findings": [
-      {
-        "segment": "CE",
-        "label": "Ceara",
-        "n_event": 211,
-        "n_baseline": 969,
-        "event_value": 3.1137440758293837,
-        "baseline_value": 4.124871001031992,
-        "delta": -1.0111269252026083,
-        "p_value": 3.774758283725532e-15,
-        "p_adjusted": 2.0761170560490427e-14,
-        "significant": true,
-        "contribution": 0.03783610443117382
-      },
-      {
-        "segment": "PA",
-        "label": "Para",
-        "n_event": 159,
-        "n_baseline": 712,
-        "event_value": 3.289308176100629,
-        "baseline_value": 4.084269662921348,
-        "delta": -0.7949614868207191,
-        "p_value": 2.7755810538820924e-08,
-        "p_adjusted": 7.632847898175754e-08,
-        "significant": true,
-        "contribution": 0.022416174474963725
-      },
-      {
-        "segment": "TO",
-        "label": "Tocantins",
-        "n_event": 47,
-        "n_baseline": 206,
-        "event_value": 3.5106382978723403,
-        "baseline_value": 4.286407766990291,
-        "delta": -0.7757694691179511,
-        "p_value": 0.002536625532085557,
-        "p_adjusted": 0.003720384113725483,
-        "significant": true,
-        "contribution": 0.00646619543256908
-      },
-      {
-        "segment": "RJ",
-        "label": "Rio de Janeiro",
-        "n_event": 2201,
-        "n_baseline": 9246,
-        "event_value": 3.397243677116462,
-        "baseline_value": 4.099232100367726,
-        "delta": -0.7019884232512643,
-        "p_value": 0.0,
-        "p_adjusted": 0.0,
-        "significant": true,
-        "contribution": 0.27401117656418156
-      },
-      {
-        "segment": "AL",
-        "label": "Alagoas",
-        "n_event": 76,
-        "n_baseline": 295,
-        "event_value": 3.3947368421052633,
-        "baseline_value": 3.9661016949152543,
-        "delta": -0.571364852809991,
-        "p_value": 0.006250665964908864,
-        "p_adjusted": 0.008594665701749687,
-        "significant": true,
-        "contribution": 0.007700969416241145
-      },
-      {
-        "segment": "MA",
-        "label": "Maranhao",
-        "n_event": 125,
-        "n_baseline": 534,
-        "event_value": 3.344,
-        "baseline_value": 3.897940074906367,
-        "delta": -0.5539400749063672,
-        "p_value": 0.000684513045174695,
-        "p_adjusted": 0.0010756633567030921,
-        "significant": true,
-        "contribution": 0.01227979405453608
-      },
-      {
-        "segment": "MS",
-        "label": "Mato Grosso do Sul",
-        "n_event": 155,
-        "n_baseline": 487,
-        "event_value": 3.767741935483871,
-        "baseline_value": 4.305954825462012,
-        "delta": -0.5382128899781415,
-        "p_value": 6.044024720597285e-05,
-        "p_adjusted": 0.00011080711987761689,
-        "significant": true,
-        "contribution": 0.014794628958658226
-      },
-      {
-        "segment": "PI",
-        "label": "Piaui",
-        "n_event": 92,
-        "n_baseline": 341,
-        "event_value": 3.630434782608696,
-        "baseline_value": 4.073313782991202,
-        "delta": -0.4428790003825065,
-        "p_value": 0.017388240787913567,
-        "p_adjusted": 0.02250242925494697,
-        "significant": true,
-        "contribution": 0.007225887577618762
-      },
-      {
-        "segment": "BA",
-        "label": "Bahia",
-        "n_event": 563,
-        "n_baseline": 2453,
-        "event_value": 3.5746003552397867,
-        "baseline_value": 4.009580105992662,
-        "delta": -0.43497975075287565,
-        "p_value": 1.479967925988035e-09,
-        "p_adjusted": 4.651327767390967e-09,
-        "significant": true,
-        "contribution": 0.04343058905463637
-      },
-      {
-        "segment": "SC",
-        "label": "Santa Catarina",
-        "n_event": 678,
-        "n_baseline": 2602,
-        "event_value": 3.793510324483776,
-        "baseline_value": 4.218101460415065,
-        "delta": -0.4245911359312893,
-        "p_value": 7.94209142895852e-12,
-        "p_adjusted": 3.494520228741749e-11,
-        "significant": true,
-        "contribution": 0.05105272194194467
-      },
-      {
-        "segment": "ES",
-        "label": "Espirito Santo",
-        "n_event": 359,
-        "n_baseline": 1473,
-        "event_value": 3.753481894150418,
-        "baseline_value": 4.15173116089613,
-        "delta": -0.39824926674571204,
-        "p_value": 6.492953325221151e-06,
-        "p_adjusted": 1.4284497315486532e-05,
-        "significant": true,
-        "contribution": 0.025355239566682702
-      },
-      {
-        "segment": "SE",
-        "label": "Sergipe",
-        "n_event": 42,
-        "n_baseline": 274,
-        "event_value": 3.5476190476190474,
-        "baseline_value": 3.934306569343066,
-        "delta": -0.38668752172401843,
-        "p_value": 0.16728349940254628,
-        "p_adjusted": 0.19369668351873778,
-        "significant": false,
-        "contribution": 0.002880233736522725
-      },
-      {
-        "segment": "DF",
-        "label": "Distrito Federal",
-        "n_event": 404,
-        "n_baseline": 1549,
-        "event_value": 3.85519801980198,
-        "baseline_value": 4.203679793415106,
-        "delta": -0.34848177361312604,
-        "p_value": 1.7393556235090202e-05,
-        "p_adjusted": 3.4787112470180404e-05,
-        "significant": true,
-        "contribution": 0.024967767896274355
-      },
-      {
-        "segment": "MG",
-        "label": "Minas Gerais",
-        "n_event": 2136,
-        "n_baseline": 8409,
-        "event_value": 3.9213483146067416,
-        "baseline_value": 4.261327149482697,
-        "delta": -0.33997883487595537,
-        "p_value": 0.0,
-        "p_adjusted": 0.0,
-        "significant": true,
-        "contribution": 0.12878681842381226
-      },
-      {
-        "segment": "RS",
-        "label": "Rio Grande do Sul",
-        "n_event": 994,
-        "n_baseline": 4002,
-        "event_value": 3.9069416498993963,
-        "baseline_value": 4.24487756121939,
-        "delta": -0.33793591131999356,
-        "p_value": 1.2257972414886353e-11,
-        "p_adjusted": 4.49458988545833e-11,
-        "significant": true,
-        "contribution": 0.05957156567841201
-      },
-      {
-        "segment": "GO",
-        "label": "Goias",
-        "n_event": 366,
-        "n_baseline": 1458,
-        "event_value": 3.8565573770491803,
-        "baseline_value": 4.166323731138546,
-        "delta": -0.30976635408936604,
-        "p_value": 0.00011241813380724608,
-        "p_adjusted": 0.00019024607259687798,
-        "significant": true,
-        "contribution": 0.020106367417477324
-      },
-      {
-        "segment": "MT",
-        "label": "Mato Grosso",
-        "n_event": 168,
-        "n_baseline": 650,
-        "event_value": 3.9166666666666665,
-        "baseline_value": 4.1838461538461535,
-        "delta": -0.26717948717948703,
-        "p_value": 0.030332166549015938,
-        "p_adjusted": 0.03707264800435281,
-        "significant": true,
-        "contribution": 0.00796032278724965
-      },
-      {
-        "segment": "PR",
-        "label": "Parana",
-        "n_event": 919,
-        "n_baseline": 3630,
-        "event_value": 4.054406964091403,
-        "baseline_value": 4.288429752066116,
-        "delta": -0.23402278797471254,
-        "p_value": 1.8764943430227277e-06,
-        "p_adjusted": 4.586986171833334e-06,
-        "significant": true,
-        "contribution": 0.038140988560497475
-      },
-      {
-        "segment": "SP",
-        "label": "Sao Paulo",
-        "n_event": 7370,
-        "n_baseline": 30055,
-        "event_value": 4.118453188602443,
-        "baseline_value": 4.278084622636277,
-        "delta": -0.15963143403383473,
-        "p_value": 0.0,
-        "p_adjusted": 0.0,
-        "significant": true,
-        "contribution": 0.2086431773572847
-      },
-      {
-        "segment": "PE",
-        "label": "Pernambuco",
-        "n_event": 287,
-        "n_baseline": 1203,
-        "event_value": 4.02787456445993,
-        "baseline_value": 4.118869492934331,
-        "delta": -0.09099492847440072,
-        "p_value": 0.3154171824719234,
-        "p_adjusted": 0.3469589007191157,
-        "significant": false,
-        "contribution": 0.0046314541556766635
-      },
-      {
-        "segment": "PB",
-        "label": "Paraiba",
-        "n_event": 90,
-        "n_baseline": 389,
-        "event_value": 4.044444444444444,
-        "baseline_value": 4.079691516709511,
-        "delta": -0.03524707226506685,
-        "p_value": 0.8347197626990592,
-        "p_adjusted": 0.8744683228275859,
-        "significant": false,
-        "contribution": 0.0005625794229271882
-      },
-      {
-        "segment": "RN",
-        "label": "Rio Grande do Norte",
-        "n_event": 86,
-        "n_baseline": 352,
-        "event_value": 4.156976744186046,
-        "baseline_value": 4.144886363636363,
-        "delta": 0.012090380549683033,
-        "p_value": 0.9393677800419669,
-        "p_adjusted": 0.939367780041967,
-        "significant": false,
-        "contribution": -0.0001843982124830493
-      }
-    ],
-    "n_tested": 22,
-    "n_significant_naive": 18,
-    "n_significant_fdr": 18,
+    "findings": [],
+    "n_tested": 0,
+    "n_significant_naive": 0,
+    "n_significant_fdr": 0,
     "fdr_alpha": 0.05,
-    "note": "Tested 22 segments. At a naive alpha=0.05 threshold 18 would be called significant; after Benjamini-Hochberg FDR control 18 survive. The difference is the number of findings that would have been noise reported as insight."
+    "note": "Tested 0 segments. At a naive alpha=0.05 threshold 0 would be called significant; after Benjamini-Hochberg FDR control 0 survive. The difference is the number of findings that would have been noise reported as insight."
   },
   "scope2_verdicts": [
     {
       "agent": "Ops & Fulfilment",
       "scope": "Scope 2 - Investigate",
       "hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
-      "supported": true,
-      "evidence_score": 0.900524725426525,
+      "supported": false,
+      "evidence_score": 0.5587526554060389,
       "components": {
-        "statistical": 1.0,
+        "statistical": 0.6535790154458252,
         "temporal": 0.65,
-        "specificity": 0.9370214401500877,
-        "discrimination": 0.9313468269450154,
+        "specificity": 0.0,
+        "discrimination": 1.0,
         "weights": {
           "statistical": 0.35,
           "temporal": 0.2,
@@ -958,13 +673,13 @@
       },
       "cause_family": "fulfilment",
       "effect": {
-        "estimate": -0.09937998154573124,
-        "ci_low": -0.10510005227145969,
-        "ci_high": -0.0936599108200028,
-        "p_value": 0.0,
+        "estimate": 0.058781586023418986,
+        "ci_low": 0.014711968623252067,
+        "ci_high": 0.1028512034235859,
+        "p_value": 0.15417741554987985,
         "method": "two_proportion_z",
-        "n_treat": 17749,
-        "n_control": 72182,
+        "n_treat": 44,
+        "n_control": 95781,
         "significant": true
       },
       "temporal": {
@@ -1025,38 +740,38 @@
         {
           "kind": "metric",
           "claim": "On-time delivery rate fell",
-          "value": -0.09937998154573124,
+          "value": 0.058781586023418986,
           "units": "pp",
-          "detail": "93.6% -> 83.7% (95% CI [-0.105, -0.094], p=0.00e+00)",
-          "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=17749, n_base=72182"
+          "detail": "91.8% -> 97.7% (95% CI [+0.015, +0.103], p=1.54e-01)",
+          "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=44, n_base=95781"
         },
         {
           "kind": "metric",
           "claim": "Average delivery time rose",
-          "value": 4.355555490676178,
+          "value": -1.0308912313620873,
           "units": "days",
-          "detail": "11.68 -> 16.03 days (95% CI [+4.18, +4.54])",
-          "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=17749"
+          "detail": "12.55 -> 11.52 days (95% CI [-3.35, +1.28])",
+          "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=44"
         },
         {
           "kind": "metric",
           "claim": "Degradation is in the CARRIER leg, not the seller leg",
-          "value": 0.9313468269450154,
+          "value": 2.598300876952502,
           "units": "share",
-          "detail": "seller->carrier handoff moved only +0.30 days while total moved +4.36; the carrier leg accounts for +4.06 days (93% of the increase)",
+          "detail": "seller->carrier handoff moved only +1.65 days while total moved -1.03; the carrier leg accounts for -2.68 days (260% of the increase)",
           "source": "olist_orders: delivered_carrier_date vs purchase & delivered_customer_date"
         },
         {
           "kind": "causal",
           "claim": "Dose-response across segments",
-          "value": 0.9370214401500877,
+          "value": 0.0,
           "units": "pearson r",
-          "detail": "across 22 segments, the size of the on-time drop predicts the size of the satisfaction drop (r=0.937, p=1.36e-10). A coincidental association would not show this gradient.",
+          "detail": "across 0 segments, the size of the on-time drop predicts the size of the satisfaction drop (r=0.000, p=1.00e+00). A coincidental association would not show this gradient.",
           "source": "per-state deltas, event vs baseline windows"
         }
       ],
       "falsifiable_by": "Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
-      "reasoning": "On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.",
+      "reasoning": "On-time delivery fell 5.9% (91.8% -> 97.7%, p=1.54e-01) and average delivery time rose -1.0 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+1.65d) while the carrier leg absorbed 260% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
       "caveats": [
         "contemporaneous at lag 0 (r=0.829); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
       ]
@@ -1065,13 +780,13 @@
       "agent": "Voice of Customer",
       "scope": "Scope 2 - Investigate",
       "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
-      "supported": true,
-      "evidence_score": 0.6244674753000344,
+      "supported": false,
+      "evidence_score": 0.208539776445879,
       "components": {
-        "statistical": 1.0,
+        "statistical": 0.22439936127394003,
         "temporal": 0.65,
-        "specificity": 0.1805887353764451,
-        "discrimination": 0.4966014572796156,
+        "specificity": 0.0,
+        "discrimination": 0.0,
         "weights": {
           "statistical": 0.35,
           "temporal": 0.2,
@@ -1081,14 +796,14 @@
       },
       "cause_family": "fulfilment",
       "effect": {
-        "estimate": 0.09968069242516057,
-        "ci_low": 0.0903661685020076,
-        "ci_high": 0.10899521634831355,
-        "p_value": 0.0,
+        "estimate": -0.038432884166882605,
+        "ci_low": -0.12235519631100139,
+        "ci_high": 0.04548942797723618,
+        "p_value": 0.47059165172101247,
         "method": "two_proportion_z",
-        "n_treat": 7397,
-        "n_control": 28851,
-        "significant": true
+        "n_treat": 32,
+        "n_control": 38590,
+        "significant": false
       },
       "temporal": {
         "note": "review text is written after delivery; ordering is structural",
@@ -1098,48 +813,48 @@
         {
           "kind": "text",
           "claim": "Delivery-delay complaints rose sharply",
-          "value": 2.2316435362562346,
+          "value": 0.6192233632862645,
           "units": "x baseline",
-          "detail": "8.1% -> 18.1% of reviews (2.23x, 95% CI [+0.090, +0.109], p=0.00e+00)",
-          "source": "olist_order_reviews.review_comment_message, 7397 event / 28851 baseline reviews with text"
+          "detail": "10.1% -> 6.2% of reviews (0.62x, 95% CI [-0.122, +0.045], p=4.71e-01)",
+          "source": "olist_order_reviews.review_comment_message, 32 event / 38590 baseline reviews with text"
         },
         {
           "kind": "text",
           "claim": "Product quality complaints did NOT rise",
-          "value": 0.7897035334645176,
+          "value": 0.0,
           "units": "x baseline",
-          "detail": "2.8% -> 2.2% (0.79x) -- this competing explanation is not supported by customer text",
-          "source": "olist_order_reviews.review_comment_message, n=7397"
+          "detail": "2.7% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+          "source": "olist_order_reviews.review_comment_message, n=32"
         },
         {
           "kind": "text",
           "claim": "Wrong item received did NOT rise",
-          "value": 1.1234061040227539,
+          "value": 0.0,
           "units": "x baseline",
-          "detail": "2.1% -> 2.4% (1.12x) -- this competing explanation is not supported by customer text",
-          "source": "olist_order_reviews.review_comment_message, n=7397"
+          "detail": "2.2% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+          "source": "olist_order_reviews.review_comment_message, n=32"
         },
         {
           "kind": "text",
           "claim": "Missing / incomplete order did NOT rise",
-          "value": 1.002328439054637,
+          "value": 1.6749131944444444,
           "units": "x baseline",
-          "detail": "1.9% -> 1.9% (1.00x) -- this competing explanation is not supported by customer text",
-          "source": "olist_order_reviews.review_comment_message, n=7397"
+          "detail": "1.9% -> 3.1% (1.67x) -- this competing explanation is not supported by customer text",
+          "source": "olist_order_reviews.review_comment_message, n=32"
         },
         {
           "kind": "text",
           "claim": "Positive sentiment fell",
-          "value": 0.811039293467316,
+          "value": 2.2002946650124073,
           "units": "x baseline",
-          "detail": "37.0% -> 30.0% (0.81x)",
-          "source": "olist_order_reviews.review_comment_message, n=7397"
+          "detail": "35.5% -> 78.1% (2.20x)",
+          "source": "olist_order_reviews.review_comment_message, n=32"
         }
       ],
       "falsifiable_by": "If product-quality or wrong-item complaints had risen by a similar multiple, the text would not discriminate between causes and this verdict would collapse to 'customers were unhappy', which is not a root cause.",
-      "reasoning": "Delivery-delay complaints rose from 8.1% to 18.1% of reviews carrying text, a 2.23x lift (p=0.0e+00). Competing themes did not follow: Product quality complaints 0.79x, Wrong item received 1.12x, Missing / incomplete order 1.00x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Missing / incomplete order.",
+      "reasoning": "Delivery-delay complaints rose from 10.1% to 6.2% of reviews carrying text, a 0.62x lift (p=4.7e-01). Competing themes did not follow: Product quality complaints 0.00x, Wrong item received 0.00x, Missing / incomplete order 1.67x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Wrong item received.",
       "caveats": [
-        "Topic detection is lexicon-based over Portuguese review text; only 7397/18247 event-window orders carry free text, so text rates describe reviewers, not all customers."
+        "Topic detection is lexicon-based over Portuguese review text; only 32/46 event-window orders carry free text, so text rates describe reviewers, not all customers."
       ]
     },
     {
@@ -1147,12 +862,12 @@
       "scope": "Scope 2 - Investigate",
       "hypothesis": "The movement is a measurement or collection artefact rather than a real change.",
       "supported": false,
-      "evidence_score": 0.37363491077279176,
+      "evidence_score": 0.8999999999999999,
       "components": {
-        "statistical": 0.34204363846598973,
+        "statistical": 1.0,
         "temporal": 0.5,
-        "specificity": 0.34204363846598973,
-        "discrimination": 0.34204363846598973,
+        "specificity": 1.0,
+        "discrimination": 1.0,
         "weights": {
           "statistical": 0.35,
           "temporal": 0.2,
@@ -1162,13 +877,13 @@
       },
       "cause_family": "measurement",
       "effect": {
-        "estimate": 0.017102181923299486,
+        "estimate": 0.3244080977223614,
         "ci_low": 0.0,
         "ci_high": 0.0,
         "p_value": 1.0,
         "method": "integrity_checks",
-        "n_treat": 17749,
-        "n_control": 72190
+        "n_treat": 44,
+        "n_control": 95789
       },
       "temporal": {
         "note": "not applicable to artefact detection",
@@ -1178,38 +893,38 @@
         {
           "kind": "integrity",
           "claim": "Review coverage is stable",
-          "value": -0.0011628632166645891,
+          "value": 0.0066500328847780565,
           "units": "pp",
-          "detail": "99.4% -> 99.3% of delivered orders carry a review (no significant shift). A collapse in coverage would make the score a selection artefact.",
-          "source": "olist_order_reviews joined to olist_orders; n_event=17749"
+          "detail": "99.3% -> 100.0% of delivered orders carry a review (SHIFTED). A collapse in coverage would make the score a selection artefact.",
+          "source": "olist_order_reviews joined to olist_orders; n_event=44"
         },
         {
           "kind": "integrity",
           "claim": "Free-text rate is stable",
-          "value": 0.017102181923299486,
+          "value": 0.3244080977223614,
           "units": "pp",
-          "detail": "40.0% -> 41.7% of orders carry review text (SHIFTED)",
+          "detail": "40.3% -> 72.7% of orders carry review text (SHIFTED)",
           "source": "olist_order_reviews.review_comment_message non-null rate"
         },
         {
           "kind": "integrity",
           "claim": "No pipeline gap in key date fields",
-          "value": -0.00011081867294639146,
+          "value": -8.351689651212561e-05,
           "units": "pp",
-          "detail": "largest null-rate shift is order_delivered_customer_date (0.01% -> 0.00%, p=0.161). A broken feed would show a step change here. Judged by significance AND a 5% materiality floor, so small-sample noise is not mistaken for a pipeline break.",
+          "detail": "largest null-rate shift is order_delivered_customer_date (0.01% -> 0.00%, p=0.952). A broken feed would show a step change here. Judged by significance AND a 5% materiality floor, so small-sample noise is not mistaken for a pipeline break.",
           "source": "null-rate comparison across event vs baseline windows"
         },
         {
           "kind": "integrity",
           "claim": "Order-status mix is stable",
-          "value": 0.002451266709337596,
+          "value": -0.014585023914608253,
           "units": "pp",
-          "detail": "delivered share 97.0% -> 97.3% (p=0.078)",
+          "detail": "delivered share 97.1% -> 95.7% (p=0.555)",
           "source": "olist_orders.order_status distribution"
         }
       ],
       "falsifiable_by": "A step change in review coverage, free-text rate, null rates, or order-status mix coinciding with the event window would support the artefact hypothesis and invalidate the substantive findings.",
-      "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 1.71%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
+      "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 1 of 4 flagged. The largest movement across all checks is 32.44%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
       "caveats": []
     },
     {
@@ -1232,13 +947,13 @@
       },
       "cause_family": "demand",
       "effect": {
-        "estimate": 7.545454545454504,
-        "ci_low": -544.8444482595003,
-        "ci_high": 559.9353573504093,
-        "p_value": 0.9753055135611715,
+        "estimate": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "p_value": 1.0,
         "method": "welch_t",
-        "n_treat": 11,
-        "n_control": 8,
+        "n_treat": 1,
+        "n_control": 0,
         "significant": false
       },
       "temporal": {
@@ -1249,18 +964,18 @@
         {
           "kind": "external",
           "claim": "Volume vs GLOBAL baseline looks like a spike",
-          "value": 1.5446341752088057,
+          "value": 0.038937647707988465,
           "units": "x",
-          "detail": "event weeks averaged 1614 orders vs 1045 across all other weeks (1.54x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
+          "detail": "event weeks averaged 44 orders vs 1130 across all other weeks (0.04x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
           "source": "olist_orders weekly volume, all non-event weeks"
         },
         {
           "kind": "external",
           "claim": "Volume vs LOCAL trend shows no spike",
-          "value": 1.0046982905015283,
+          "value": NaN,
           "units": "x",
-          "detail": "against the 8 weeks immediately preceding the event (1606 orders/wk), event volume was 1614 (1.00x, p=0.975). Demand was already at this level before satisfaction fell and did not rise further.",
-          "source": "olist_orders weekly volume, 8 weeks preceding 2018-01-15"
+          "detail": "against the 8 weeks immediately preceding the event (nan orders/wk), event volume was 44 (nanx, p=1.000). Demand was already at this level before satisfaction fell and did not rise further.",
+          "source": "olist_orders weekly volume, 8 weeks preceding 2017-01-02"
         },
         {
           "kind": "external",
@@ -1280,98 +995,99 @@
         }
       ],
       "falsifiable_by": "Event-window volume significantly exceeding the 8-week pre-event trend would support the overload hypothesis. It does not.",
-      "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 1.54x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 1.00x (p=0.975): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. Retrieved context notes that Brazilian Carnival (9-14 Feb 2018) falls inside the event window and is documented to disrupt logistics via road congestion and staff leave. This is a plausible contributing mechanism, but it is external context rather than measured evidence and is not scored as such.",
+      "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 0.04x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was nanx (p=1.000): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. ",
       "caveats": [
         "Retrieved web context is not verifiable against this dataset and is excluded from the evidence score by design."
       ]
     }
   ],
-  "scope3_adversary": {
-    "target_hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
-    "challenges": [
-      {
-        "name": "Simpson's paradox",
-        "question": "Is the national drop an aggregation artefact of shifting segment mix?",
-        "passed": true,
-        "finding": "21 of 22 segments (95%) fell independently. The direction is consistent within segments, so the national movement is not an aggregation artefact.",
-        "detail": {
-          "n_segments": 22,
-          "n_negative": 21,
-          "fraction": 0.9545454545454546
-        }
-      },
-      {
-        "name": "Difference-in-differences",
-        "question": "Does the effect hold against segments that were NOT exposed?",
-        "passed": true,
-        "finding": "Exposed segments (Ceara, Tocantins, Maranhao, Rio de Janeiro...) changed -0.718 while control segments changed -0.162. DiD estimate -0.556 (95% CI [-0.631, -0.480], p=0.00e+00). Parallel-trends test p=0.199 (trends were parallel pre-event, so DiD is credible). The exposed-vs-control gap confirms the delivery mechanism.",
-        "detail": {
-          "did_estimate": -0.5557312232849885,
-          "treat_change": -0.7176367585630743,
-          "control_change": -0.16190553527808582,
-          "ci_low": -0.6310806892027208,
-          "ci_high": -0.4803817573672562,
-          "p_value": 0.0,
-          "parallel_trends_p": 0.1990478669248786,
-          "parallel_trends_ok": true,
-          "treat": [
-            "CE",
-            "TO",
-            "MA",
-            "RJ",
-            "AL"
-          ],
-          "control": [
-            "PE",
-            "PR",
-            "RN",
-            "SP",
-            "PB"
-          ]
-        }
-      },
-      {
-        "name": "Reverse causation / order-level check",
-        "question": "Does the mechanism hold at the individual order level, not just in aggregate?",
-        "passed": true,
-        "finding": "Within the event window, orders delivered LATE scored 2.24 against 4.22 for on-time orders (difference -1.98, 95% CI [-2.04, -1.92], p=0.00e+00, n_late=2840). The mechanism holds at order level: the same customers who experienced a late delivery are the ones who scored lower. A reverse-causation story cannot produce this, because the review is written after the delivery outcome is known.",
-        "detail": {
-          "late_mean": 2.239612676056338,
-          "ontime_mean": 4.217029868254828,
-          "n_late": 2840,
-          "n_ontime": 14776,
-          "estimate": -1.97741719219849,
-          "ci_low": -2.0378493517405123,
-          "ci_high": -1.9169850326564677,
-          "p_value": 0.0,
-          "method": "welch_t",
-          "n_treat": 2840,
-          "n_control": 14776,
-          "significant": true
-        }
-      }
-    ],
-    "n_passed": 3,
-    "n_total": 3,
-    "survived": true,
-    "summary": "The leading hypothesis was challenged on 3 fronts and survived 3. No challenge overturned it."
-  },
+  "scope3_adversary": null,
   "scope4_decision": {
-    "state": "CONFIRMED",
-    "headline": "Review Score fell 0.324 (4.23 to 3.90). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
-    "narrative": "**What changed.** Weekly review score fell from 4.228 to 3.904 (-0.324) across 11 consecutive weeks beginning 2018-01-15. The worst week sits -6.4 robust standard deviations below baseline, outside the \u00b13.0\u03c3 control limit (p=0.0e+00). This is not normal variation.\n\n**Is the metric real?** Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 1.71%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.\n\n**Where.** 99% of the movement is RATE: the same kinds of customers had a worse experience. This is an operational or product problem, not a change in who is buying. 18 of 22 segments moved significantly after Benjamini-Hochberg FDR control, led by Ceara (-1.01), Para (-0.79), Tocantins (-0.78).\n\n**Why.** On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.\n\n**What was ruled out.** *Market & External:* The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 1.54x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 1.00x (p=0.975): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. Retrieved context notes that Brazilian Carnival (9-14 Feb 2018) falls inside the event window and is documented to disrupt logistics via road congestion and staff leave. This is a plausible contributing mechanism, but it is external context rather than measured evidence and is not scored as such.",
+    "state": "INCONCLUSIVE",
+    "headline": "Aov moved significantly (-67.233), but the evidence cannot identify a single cause.",
+    "narrative": "**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation.\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
     "ranked": [
+      {
+        "agent": "Data Integrity",
+        "scope": "Scope 2 - Investigate",
+        "hypothesis": "The movement is a measurement or collection artefact rather than a real change.",
+        "supported": false,
+        "evidence_score": 0.8999999999999999,
+        "components": {
+          "statistical": 1.0,
+          "temporal": 0.5,
+          "specificity": 1.0,
+          "discrimination": 1.0,
+          "weights": {
+            "statistical": 0.35,
+            "temporal": 0.2,
+            "specificity": 0.25,
+            "discrimination": 0.2
+          }
+        },
+        "cause_family": "measurement",
+        "effect": {
+          "estimate": 0.3244080977223614,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "p_value": 1.0,
+          "method": "integrity_checks",
+          "n_treat": 44,
+          "n_control": 95789
+        },
+        "temporal": {
+          "note": "not applicable to artefact detection",
+          "score": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "integrity",
+            "claim": "Review coverage is stable",
+            "value": 0.0066500328847780565,
+            "units": "pp",
+            "detail": "99.3% -> 100.0% of delivered orders carry a review (SHIFTED). A collapse in coverage would make the score a selection artefact.",
+            "source": "olist_order_reviews joined to olist_orders; n_event=44"
+          },
+          {
+            "kind": "integrity",
+            "claim": "Free-text rate is stable",
+            "value": 0.3244080977223614,
+            "units": "pp",
+            "detail": "40.3% -> 72.7% of orders carry review text (SHIFTED)",
+            "source": "olist_order_reviews.review_comment_message non-null rate"
+          },
+          {
+            "kind": "integrity",
+            "claim": "No pipeline gap in key date fields",
+            "value": -8.351689651212561e-05,
+            "units": "pp",
+            "detail": "largest null-rate shift is order_delivered_customer_date (0.01% -> 0.00%, p=0.952). A broken feed would show a step change here. Judged by significance AND a 5% materiality floor, so small-sample noise is not mistaken for a pipeline break.",
+            "source": "null-rate comparison across event vs baseline windows"
+          },
+          {
+            "kind": "integrity",
+            "claim": "Order-status mix is stable",
+            "value": -0.014585023914608253,
+            "units": "pp",
+            "detail": "delivered share 97.1% -> 95.7% (p=0.555)",
+            "source": "olist_orders.order_status distribution"
+          }
+        ],
+        "falsifiable_by": "A step change in review coverage, free-text rate, null rates, or order-status mix coinciding with the event window would support the artefact hypothesis and invalidate the substantive findings.",
+        "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 1 of 4 flagged. The largest movement across all checks is 32.44%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
+        "caveats": []
+      },
       {
         "agent": "Ops & Fulfilment",
         "scope": "Scope 2 - Investigate",
         "hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
-        "supported": true,
-        "evidence_score": 0.900524725426525,
+        "supported": false,
+        "evidence_score": 0.5587526554060389,
         "components": {
-          "statistical": 1.0,
+          "statistical": 0.6535790154458252,
           "temporal": 0.65,
-          "specificity": 0.9370214401500877,
-          "discrimination": 0.9313468269450154,
+          "specificity": 0.0,
+          "discrimination": 1.0,
           "weights": {
             "statistical": 0.35,
             "temporal": 0.2,
@@ -1381,13 +1097,13 @@
         },
         "cause_family": "fulfilment",
         "effect": {
-          "estimate": -0.09937998154573124,
-          "ci_low": -0.10510005227145969,
-          "ci_high": -0.0936599108200028,
-          "p_value": 0.0,
+          "estimate": 0.058781586023418986,
+          "ci_low": 0.014711968623252067,
+          "ci_high": 0.1028512034235859,
+          "p_value": 0.15417741554987985,
           "method": "two_proportion_z",
-          "n_treat": 17749,
-          "n_control": 72182,
+          "n_treat": 44,
+          "n_control": 95781,
           "significant": true
         },
         "temporal": {
@@ -1448,38 +1164,38 @@
           {
             "kind": "metric",
             "claim": "On-time delivery rate fell",
-            "value": -0.09937998154573124,
+            "value": 0.058781586023418986,
             "units": "pp",
-            "detail": "93.6% -> 83.7% (95% CI [-0.105, -0.094], p=0.00e+00)",
-            "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=17749, n_base=72182"
+            "detail": "91.8% -> 97.7% (95% CI [+0.015, +0.103], p=1.54e-01)",
+            "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=44, n_base=95781"
           },
           {
             "kind": "metric",
             "claim": "Average delivery time rose",
-            "value": 4.355555490676178,
+            "value": -1.0308912313620873,
             "units": "days",
-            "detail": "11.68 -> 16.03 days (95% CI [+4.18, +4.54])",
-            "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=17749"
+            "detail": "12.55 -> 11.52 days (95% CI [-3.35, +1.28])",
+            "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=44"
           },
           {
             "kind": "metric",
             "claim": "Degradation is in the CARRIER leg, not the seller leg",
-            "value": 0.9313468269450154,
+            "value": 2.598300876952502,
             "units": "share",
-            "detail": "seller->carrier handoff moved only +0.30 days while total moved +4.36; the carrier leg accounts for +4.06 days (93% of the increase)",
+            "detail": "seller->carrier handoff moved only +1.65 days while total moved -1.03; the carrier leg accounts for -2.68 days (260% of the increase)",
             "source": "olist_orders: delivered_carrier_date vs purchase & delivered_customer_date"
           },
           {
             "kind": "causal",
             "claim": "Dose-response across segments",
-            "value": 0.9370214401500877,
+            "value": 0.0,
             "units": "pearson r",
-            "detail": "across 22 segments, the size of the on-time drop predicts the size of the satisfaction drop (r=0.937, p=1.36e-10). A coincidental association would not show this gradient.",
+            "detail": "across 0 segments, the size of the on-time drop predicts the size of the satisfaction drop (r=0.000, p=1.00e+00). A coincidental association would not show this gradient.",
             "source": "per-state deltas, event vs baseline windows"
           }
         ],
         "falsifiable_by": "Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
-        "reasoning": "On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.",
+        "reasoning": "On-time delivery fell 5.9% (91.8% -> 97.7%, p=1.54e-01) and average delivery time rose -1.0 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+1.65d) while the carrier leg absorbed 260% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
         "caveats": [
           "contemporaneous at lag 0 (r=0.829); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
         ]
@@ -1488,13 +1204,13 @@
         "agent": "Voice of Customer",
         "scope": "Scope 2 - Investigate",
         "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
-        "supported": true,
-        "evidence_score": 0.6244674753000344,
+        "supported": false,
+        "evidence_score": 0.208539776445879,
         "components": {
-          "statistical": 1.0,
+          "statistical": 0.22439936127394003,
           "temporal": 0.65,
-          "specificity": 0.1805887353764451,
-          "discrimination": 0.4966014572796156,
+          "specificity": 0.0,
+          "discrimination": 0.0,
           "weights": {
             "statistical": 0.35,
             "temporal": 0.2,
@@ -1504,14 +1220,14 @@
         },
         "cause_family": "fulfilment",
         "effect": {
-          "estimate": 0.09968069242516057,
-          "ci_low": 0.0903661685020076,
-          "ci_high": 0.10899521634831355,
-          "p_value": 0.0,
+          "estimate": -0.038432884166882605,
+          "ci_low": -0.12235519631100139,
+          "ci_high": 0.04548942797723618,
+          "p_value": 0.47059165172101247,
           "method": "two_proportion_z",
-          "n_treat": 7397,
-          "n_control": 28851,
-          "significant": true
+          "n_treat": 32,
+          "n_control": 38590,
+          "significant": false
         },
         "temporal": {
           "note": "review text is written after delivery; ordering is structural",
@@ -1521,119 +1237,49 @@
           {
             "kind": "text",
             "claim": "Delivery-delay complaints rose sharply",
-            "value": 2.2316435362562346,
+            "value": 0.6192233632862645,
             "units": "x baseline",
-            "detail": "8.1% -> 18.1% of reviews (2.23x, 95% CI [+0.090, +0.109], p=0.00e+00)",
-            "source": "olist_order_reviews.review_comment_message, 7397 event / 28851 baseline reviews with text"
+            "detail": "10.1% -> 6.2% of reviews (0.62x, 95% CI [-0.122, +0.045], p=4.71e-01)",
+            "source": "olist_order_reviews.review_comment_message, 32 event / 38590 baseline reviews with text"
           },
           {
             "kind": "text",
             "claim": "Product quality complaints did NOT rise",
-            "value": 0.7897035334645176,
+            "value": 0.0,
             "units": "x baseline",
-            "detail": "2.8% -> 2.2% (0.79x) -- this competing explanation is not supported by customer text",
-            "source": "olist_order_reviews.review_comment_message, n=7397"
+            "detail": "2.7% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+            "source": "olist_order_reviews.review_comment_message, n=32"
           },
           {
             "kind": "text",
             "claim": "Wrong item received did NOT rise",
-            "value": 1.1234061040227539,
+            "value": 0.0,
             "units": "x baseline",
-            "detail": "2.1% -> 2.4% (1.12x) -- this competing explanation is not supported by customer text",
-            "source": "olist_order_reviews.review_comment_message, n=7397"
+            "detail": "2.2% -> 0.0% (0.00x) -- this competing explanation is not supported by customer text",
+            "source": "olist_order_reviews.review_comment_message, n=32"
           },
           {
             "kind": "text",
             "claim": "Missing / incomplete order did NOT rise",
-            "value": 1.002328439054637,
+            "value": 1.6749131944444444,
             "units": "x baseline",
-            "detail": "1.9% -> 1.9% (1.00x) -- this competing explanation is not supported by customer text",
-            "source": "olist_order_reviews.review_comment_message, n=7397"
+            "detail": "1.9% -> 3.1% (1.67x) -- this competing explanation is not supported by customer text",
+            "source": "olist_order_reviews.review_comment_message, n=32"
           },
           {
             "kind": "text",
             "claim": "Positive sentiment fell",
-            "value": 0.811039293467316,
+            "value": 2.2002946650124073,
             "units": "x baseline",
-            "detail": "37.0% -> 30.0% (0.81x)",
-            "source": "olist_order_reviews.review_comment_message, n=7397"
+            "detail": "35.5% -> 78.1% (2.20x)",
+            "source": "olist_order_reviews.review_comment_message, n=32"
           }
         ],
         "falsifiable_by": "If product-quality or wrong-item complaints had risen by a similar multiple, the text would not discriminate between causes and this verdict would collapse to 'customers were unhappy', which is not a root cause.",
-        "reasoning": "Delivery-delay complaints rose from 8.1% to 18.1% of reviews carrying text, a 2.23x lift (p=0.0e+00). Competing themes did not follow: Product quality complaints 0.79x, Wrong item received 1.12x, Missing / incomplete order 1.00x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Missing / incomplete order.",
+        "reasoning": "Delivery-delay complaints rose from 10.1% to 6.2% of reviews carrying text, a 0.62x lift (p=4.7e-01). Competing themes did not follow: Product quality complaints 0.00x, Wrong item received 0.00x, Missing / incomplete order 1.67x. Because the rise is confined to one theme rather than spread across all complaint types, the text discriminates between explanations instead of merely registering dissatisfaction, and rules out: Product quality complaints, Wrong item received.",
         "caveats": [
-          "Topic detection is lexicon-based over Portuguese review text; only 7397/18247 event-window orders carry free text, so text rates describe reviewers, not all customers."
+          "Topic detection is lexicon-based over Portuguese review text; only 32/46 event-window orders carry free text, so text rates describe reviewers, not all customers."
         ]
-      },
-      {
-        "agent": "Data Integrity",
-        "scope": "Scope 2 - Investigate",
-        "hypothesis": "The movement is a measurement or collection artefact rather than a real change.",
-        "supported": false,
-        "evidence_score": 0.37363491077279176,
-        "components": {
-          "statistical": 0.34204363846598973,
-          "temporal": 0.5,
-          "specificity": 0.34204363846598973,
-          "discrimination": 0.34204363846598973,
-          "weights": {
-            "statistical": 0.35,
-            "temporal": 0.2,
-            "specificity": 0.25,
-            "discrimination": 0.2
-          }
-        },
-        "cause_family": "measurement",
-        "effect": {
-          "estimate": 0.017102181923299486,
-          "ci_low": 0.0,
-          "ci_high": 0.0,
-          "p_value": 1.0,
-          "method": "integrity_checks",
-          "n_treat": 17749,
-          "n_control": 72190
-        },
-        "temporal": {
-          "note": "not applicable to artefact detection",
-          "score": 0.5
-        },
-        "evidence": [
-          {
-            "kind": "integrity",
-            "claim": "Review coverage is stable",
-            "value": -0.0011628632166645891,
-            "units": "pp",
-            "detail": "99.4% -> 99.3% of delivered orders carry a review (no significant shift). A collapse in coverage would make the score a selection artefact.",
-            "source": "olist_order_reviews joined to olist_orders; n_event=17749"
-          },
-          {
-            "kind": "integrity",
-            "claim": "Free-text rate is stable",
-            "value": 0.017102181923299486,
-            "units": "pp",
-            "detail": "40.0% -> 41.7% of orders carry review text (SHIFTED)",
-            "source": "olist_order_reviews.review_comment_message non-null rate"
-          },
-          {
-            "kind": "integrity",
-            "claim": "No pipeline gap in key date fields",
-            "value": -0.00011081867294639146,
-            "units": "pp",
-            "detail": "largest null-rate shift is order_delivered_customer_date (0.01% -> 0.00%, p=0.161). A broken feed would show a step change here. Judged by significance AND a 5% materiality floor, so small-sample noise is not mistaken for a pipeline break.",
-            "source": "null-rate comparison across event vs baseline windows"
-          },
-          {
-            "kind": "integrity",
-            "claim": "Order-status mix is stable",
-            "value": 0.002451266709337596,
-            "units": "pp",
-            "detail": "delivered share 97.0% -> 97.3% (p=0.078)",
-            "source": "olist_orders.order_status distribution"
-          }
-        ],
-        "falsifiable_by": "A step change in review coverage, free-text rate, null rates, or order-status mix coinciding with the event window would support the artefact hypothesis and invalidate the substantive findings.",
-        "reasoning": "Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 1.71%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.",
-        "caveats": []
       },
       {
         "agent": "Market & External",
@@ -1655,13 +1301,13 @@
         },
         "cause_family": "demand",
         "effect": {
-          "estimate": 7.545454545454504,
-          "ci_low": -544.8444482595003,
-          "ci_high": 559.9353573504093,
-          "p_value": 0.9753055135611715,
+          "estimate": 0.0,
+          "ci_low": 0.0,
+          "ci_high": 0.0,
+          "p_value": 1.0,
           "method": "welch_t",
-          "n_treat": 11,
-          "n_control": 8,
+          "n_treat": 1,
+          "n_control": 0,
           "significant": false
         },
         "temporal": {
@@ -1672,18 +1318,18 @@
           {
             "kind": "external",
             "claim": "Volume vs GLOBAL baseline looks like a spike",
-            "value": 1.5446341752088057,
+            "value": 0.038937647707988465,
             "units": "x",
-            "detail": "event weeks averaged 1614 orders vs 1045 across all other weeks (1.54x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
+            "detail": "event weeks averaged 44 orders vs 1130 across all other weeks (0.04x). This comparison is MISLEADING: the baseline spans a growth period, so ordinary growth is misread as an event-driven surge.",
             "source": "olist_orders weekly volume, all non-event weeks"
           },
           {
             "kind": "external",
             "claim": "Volume vs LOCAL trend shows no spike",
-            "value": 1.0046982905015283,
+            "value": NaN,
             "units": "x",
-            "detail": "against the 8 weeks immediately preceding the event (1606 orders/wk), event volume was 1614 (1.00x, p=0.975). Demand was already at this level before satisfaction fell and did not rise further.",
-            "source": "olist_orders weekly volume, 8 weeks preceding 2018-01-15"
+            "detail": "against the 8 weeks immediately preceding the event (nan orders/wk), event volume was 44 (nanx, p=1.000). Demand was already at this level before satisfaction fell and did not rise further.",
+            "source": "olist_orders weekly volume, 8 weeks preceding 2017-01-02"
           },
           {
             "kind": "external",
@@ -1703,89 +1349,48 @@
           }
         ],
         "falsifiable_by": "Event-window volume significantly exceeding the 8-week pre-event trend would support the overload hypothesis. It does not.",
-        "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 1.54x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 1.00x (p=0.975): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. Retrieved context notes that Brazilian Carnival (9-14 Feb 2018) falls inside the event window and is documented to disrupt logistics via road congestion and staff leave. This is a plausible contributing mechanism, but it is external context rather than measured evidence and is not scored as such.",
+        "reasoning": "The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 0.04x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was nanx (p=1.000): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. ",
         "caveats": [
           "Retrieved web context is not verifiable against this dataset and is excluded from the evidence score by design."
         ]
       }
     ],
     "separability": {
-      "gap": 1.0,
+      "gap": 0.0,
       "margin": 0.15,
-      "separable": true,
-      "families": [
-        {
-          "family": "fulfilment",
-          "score": 0.900524725426525,
-          "lead": "Ops & Fulfilment",
-          "corroborated_by": [
-            "Voice of Customer"
-          ],
-          "members": [
-            "Ops & Fulfilment",
-            "Voice of Customer"
-          ]
-        }
-      ],
-      "top": "fulfilment",
+      "separable": false,
+      "families": [],
+      "top": null,
       "runner_up": null,
-      "note": "The 'fulfilment' cause family leads with no competing family, at or above the 0.15 separability margin, so the evidence distinguishes the explanations. Within that family, Ops & Fulfilment is corroborated independently by Voice of Customer, a second data source reaching the same conclusion."
+      "note": "No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar."
     },
     "next_test": {
-      "recommendation": "Geo-split intervention experiment (ladder rung 6)",
-      "rationale": "Causation is already established observationally: the dose-response gradient, the difference-in-differences against unexposed control segments, and the order-level late-vs-on-time comparison all agree. Spending an RCT to re-prove the cause would be waste. The open question is whether a specific carrier intervention RECOVERS the metric, which is a different and cheaper experiment. A geo-split is the right instrument because carrier capacity is assigned geographically. User-level randomisation would contaminate arms, since two customers in the same city share the same carrier route.",
+      "recommendation": "Smallest disambiguating experiment (ladder rung 7 -> 5)",
+      "rationale": "Do not act on the leading hypothesis. Run the cheapest test that separates the top two explanations; each agent has already stated what observation would falsify it.",
       "design": {
-        "unit_of_randomisation": "delivery region (geo-split)",
-        "treatment": "priority carrier routing / added capacity in affected regions",
-        "primary_metric": "on-time delivery rate",
-        "guardrail_metrics": [
-          "review_score",
-          "delivery_days",
-          "freight cost per order"
-        ],
-        "baseline_rate": 0.8368922192799594,
-        "mde_absolute": 0.04968999077286562,
-        "alpha": 0.05,
-        "power": 0.8,
-        "n_per_arm": 757,
-        "estimated_weeks": 6,
-        "affected_segments": [
-          "CE",
-          "PA",
-          "TO",
-          "RJ",
-          "AL",
-          "MA"
-        ],
-        "note": "n=757 orders per arm gives 80% power to detect a 5.0% absolute recovery in on-time rate from a 83.7% base at alpha=0.05. At roughly 253 weekly orders across the affected regions, that is about 6 week(s) of exposure. A secondary read on review score would need n=1,487 per arm to detect a 0.15-point move (SD=1.46)."
+        "discriminating_checks": []
       }
     },
     "caveats": [
-      "contemporaneous at lag 0 (r=0.829); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it.",
-      "Topic detection is lexicon-based over Portuguese review text; only 7397/18247 event-window orders carry free text, so text rates describe reviewers, not all customers.",
-      "Retrieved web context is not verifiable against this dataset and is excluded from the evidence score by design."
+      "No recommendation is issued because the evidence does not support one."
     ]
   },
   "orchestration_log": [
     "Scope 0  Triage      | loading panel...",
-    "Scope 0  Triage      | scenario='national'  orders=98,962",
-    "Scope 0  Triage      | SIGNAL  z=-6.36  delta=-0.324  weeks=11",
+    "Scope 0  Triage      | scenario='entitlement'  orders=98,962",
+    "Scope 0  Triage      | SIGNAL  z=-6.70  delta=-67.233  weeks=1",
     "Scope 1  Localize    | mix-vs-rate decomposition...",
-    "Scope 1  Localize    | rate=-0.324 mix=+0.002 -> 99% rate-driven",
-    "Scope 1  Localize    | 22 segments tested, 18 naive hits -> 18 survive FDR control",
+    "Scope 1  Localize    | rate=-36.805 mix=-0.334 -> 56% rate-driven",
+    "Scope 1  Localize    | 0 segments tested, 0 naive hits -> 0 survive FDR control",
     "Scope 2  Investigate | spawning agents...",
-    "Scope 2  Ops & Fulfilment  | supported=True  score=0.901  [stat=1.00 temp=0.65 spec=0.94 disc=0.93]",
-    "Scope 2  Voice of Customer | supported=True  score=0.624  [stat=1.00 temp=0.65 spec=0.18 disc=0.50]",
-    "Scope 2  Data Integrity    | supported=False score=0.374  [stat=0.34 temp=0.50 spec=0.34 disc=0.34]",
+    "Scope 2  Ops & Fulfilment  | supported=False score=0.559  [stat=0.65 temp=0.65 spec=0.00 disc=1.00]",
+    "Scope 2  Voice of Customer | supported=False score=0.209  [stat=0.22 temp=0.65 spec=0.00 disc=0.00]",
+    "Scope 2  Data Integrity    | supported=False score=0.900  [stat=1.00 temp=0.50 spec=1.00 disc=1.00]",
     "Scope 2  Market & External | supported=False score=0.100  [stat=0.00 temp=0.50 spec=0.00 disc=0.00]",
-    "Scope 3  Adversary   | challenging: Ops & Fulfilment",
-    "Scope 3  Adversary   | PASS  Simpson's paradox",
-    "Scope 3  Adversary   | PASS  Difference-in-differences",
-    "Scope 3  Adversary   | PASS  Reverse causation / order-level check",
     "Scope 4  Arbiter     | ranking and deciding...",
-    "Scope 4  Arbiter     | STATE = CONFIRMED",
-    "Scope 4  Arbiter     | The 'fulfilment' cause family leads with no competing family, at or above the 0.15 separability margin, so the evidence distinguishes the explanations. Within that family, Ops & Fulfilment is corroborated independently by Voice of Customer, a second data source reaching the same conclusion.",
-    "Scope 4  Arbiter     | 3 of 3 personas served, 0 model calls"
+    "Scope 4  Arbiter     | STATE = INCONCLUSIVE",
+    "Scope 4  Arbiter     | No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.",
+    "Scope 4  Arbiter     | 2 of 3 personas served, 0 model calls"
   ],
   "personas": [
     {
@@ -1802,16 +1407,16 @@
         ]
       },
       "withheld": false,
-      "narrative": "**Customer satisfaction fell 0.32**, from 4.23 to 3.90, over 11 weeks from 2018-01-15. This is a real movement, not normal variation.\n\n**The cause is identified and it is operational, not market-wide.** It is concentrated in Ceara, Para, Tocantins. Competing explanations, including a demand surge, were tested and rejected. The finding survived 3 of 3 independent challenges.\n\n**Decision required:** fund the targeted fix, or accept a recurring loss of about 0.32 points on Customer satisfaction in the affected segments.",
+      "narrative": "**Average order value moved, but the cause is not established.** The evidence supports more than one explanation and cannot separate them. No recommendation is being made, because acting on the wrong one would cost more than waiting.\n\n**Decision required:** approve a short follow-up analysis, or accept the movement without a cause.",
       "action": {
-        "headline": "Fund the targeted fix in the affected segments",
-        "driver": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
-        "lever": "budget approval and priority",
-        "action": "Authorise a scoped intervention in Ceara, Para, Tocantins rather than a platform-wide programme.",
-        "expected_impact": "Recovering half the observed gap is worth 0.32 points of Customer satisfaction in those segments.",
-        "owner": "Customer Experience",
-        "confidence": "High. The finding survived every independent challenge.",
-        "monitoring": "Weekly Customer satisfaction for the affected segments, reviewed at the point the test is powered to read out.",
+        "headline": "Do not act yet",
+        "driver": "not established",
+        "lever": "further analysis, not process change",
+        "action": "Do not act on the leading hypothesis. Run the cheapest test that separates the top two explanations; each agent has already stated what observation would falsify it.",
+        "expected_impact": "Avoids the cost of acting on the wrong cause.",
+        "owner": "Analytics",
+        "confidence": "Low by construction. That is why no change is recommended.",
+        "monitoring": "Continue weekly monitoring while the follow-up runs.",
         "steps": []
       }
     },
@@ -1829,22 +1434,12 @@
           "seller dispatch SLAs"
         ]
       },
-      "withheld": false,
-      "narrative": "**What happened.** Customer satisfaction fell from 4.23 to 3.90 across 11 weeks, starting 2018-01-15.\n\n**Where.** 99% of the movement is within-segment, not a change in who is buying, so this is something you can act on. The affected segments are Ceara, Para, Tocantins, and 18 segments in total moved significantly.\n\n**Why.** On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.\n\n**Confidence.** The explanation was challenged on independent grounds and survived 3 of 3.",
+      "withheld": true,
+      "narrative": "**Access.** Average order value is classified confidential and your role is cleared for internal. The figure and its drivers are not shown.\n\nThe investigation did complete. Its conclusion was **INCONCLUSIVE**. To see the evidence, request confidential access from Commerce.",
       "action": {
-        "headline": "Geo-split intervention experiment (ladder rung 6)",
-        "driver": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
-        "lever": "carrier routing and capacity in the affected regions",
-        "action": "priority carrier routing / added capacity in affected regions",
-        "expected_impact": "5.0% recovery on on-time delivery rate",
-        "owner": "Customer Experience",
-        "confidence": "Challenged on independent grounds and not overturned.",
-        "monitoring": "on-time delivery rate weekly, with review_score, delivery_days, freight cost per order as guardrails, for 6 weeks.",
-        "steps": [
-          "Scope the change to Ceara, Para, Tocantins.",
-          "Hold unaffected segments as control.",
-          "Read out at n=757"
-        ]
+        "headline": "Request access to view this KPI",
+        "owner": "Commerce",
+        "steps": []
       }
     },
     {
@@ -1861,53 +1456,48 @@
         ]
       },
       "withheld": false,
-      "narrative": "**What changed.** Weekly review_score fell to 3.904 against a robust baseline of 4.228 (delta -0.324). The worst week sits -6.36 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=0.00e+00 with a 95% CI of [-0.343, -0.297]. This is a real movement, not normal variation.\n\n**Where.** 99% of the movement is RATE: the same kinds of customers had a worse experience. This is an operational or product problem, not a change in who is buying.\n\n**Why.** On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.\n\n**What would falsify it.** Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
+      "narrative": "**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation.\n\n**Why inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar.\n\n**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (delta -67.233). The worst week sits -6.70 robust SDs below centre, outside the +/-3.0 control limit. Welch's t-test on the underlying orders gives p=8.89e-03 with a 95% CI of [-115.100, -17.519]. This is a real movement, not normal variation.\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
       "action": {
-        "headline": "Geo-split intervention experiment (ladder rung 6)",
-        "driver": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
-        "lever": "experiment design",
-        "action": "Causation is already established observationally: the dose-response gradient, the difference-in-differences against unexposed control segments, and the order-level late-vs-on-time comparison all agree. Spending an RCT to re-prove the cause would be waste. The open question is whether a specific carrier intervention RECOVERS the metric, which is a different and cheaper experiment. A geo-split is the right instrument because carrier capacity is assigned geographically. User-level randomisation would contaminate arms, since two customers in the same city share the same carrier route.",
-        "expected_impact": "n=757 orders per arm gives 80% power to detect a 5.0% absolute recovery in on-time rate from a 83.7% base at alpha=0.05. At roughly 253 weekly orders across the affected regions, that is about 6 week(s) of exposure. A secondary read on review score would need n=1,487 per arm to detect a 0.15-point move (SD=1.46).",
-        "owner": "Customer Experience",
-        "confidence": "The 'fulfilment' cause family leads with no competing family, at or above the 0.15 separability margin, so the evidence distinguishes the explanations. Within that family, Ops & Fulfilment is corroborated independently by Voice of Customer, a second data source reaching the same conclusion.",
-        "monitoring": "Primary on-time delivery rate; guardrails review_score, delivery_days, freight cost per order.",
+        "headline": "Do not act yet",
+        "driver": "not established",
+        "lever": "further analysis, not process change",
+        "action": "Do not act on the leading hypothesis. Run the cheapest test that separates the top two explanations; each agent has already stated what observation would falsify it.",
+        "expected_impact": "Avoids the cost of acting on the wrong cause.",
+        "owner": "Analytics",
+        "confidence": "Low by construction. That is why no change is recommended.",
+        "monitoring": "Continue weekly monitoring while the follow-up runs.",
         "steps": []
       }
     }
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 12908.9,
+      "total_ms": 980.9,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 11195.6,
+          "ms": 72.9,
           "detail": "98,962 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 92.3,
-          "detail": "SIGNAL, z=-6.36"
+          "ms": 99.5,
+          "detail": "SIGNAL, z=-6.70"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 490.2,
-          "detail": "22 segments"
+          "ms": 382.6,
+          "detail": "0 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 560.2,
+          "ms": 425.2,
           "detail": "4 agents"
         },
         {
-          "scope": "Scope 3 Adversary",
-          "ms": 507.7,
-          "detail": "3/3 survived"
-        },
-        {
           "scope": "Scope 4 Arbiter",
-          "ms": 62.6,
-          "detail": "CONFIRMED"
+          "ms": 0.2,
+          "detail": "INCONCLUSIVE"
         }
       ],
       "llm_calls": 0,
@@ -2056,25 +1646,25 @@
       "statement": "No quantitative value in this report is produced by a language model. Detection, decomposition, ranking, causal testing and experiment sizing are classical statistics, causal inference and exact arithmetic. A language model is used nowhere in the numeric path; the narrative is composed from computed values by template. Retrieved web context is labelled as context and excluded from evidence scoring."
     },
     "contract": {
-      "label": "Customer satisfaction",
-      "definition": "Mean review score of delivered orders, by purchase week.",
-      "formula": "mean(review_score) grouped by purchase week",
-      "unit": "1-5 scale",
+      "label": "Average order value",
+      "definition": "Mean item value per order, by purchase week.",
+      "formula": "mean(order_value) grouped by purchase week",
+      "unit": "BRL",
       "grain": "order",
       "sources": [
-        "reviews",
+        "order_items",
         "orders"
       ],
       "cadence": "weekly",
       "direction": "higher is better",
-      "material_threshold": "robust z beyond -3, or a change past 0.15 points",
+      "material_threshold": "robust z beyond -3",
       "drivers": [
-        "delivery timeliness",
-        "product quality",
-        "order accuracy"
+        "basket size",
+        "product mix",
+        "discounting"
       ],
-      "owner": "Customer Experience",
-      "access": "internal"
+      "owner": "Commerce",
+      "access": "confidential"
     },
     "lineage": {
       "sources": [
@@ -2122,7 +1712,7 @@
   "timeline": [
     {
       "week": "2017-01-02",
-      "in_event": false,
+      "in_event": true,
       "orders": 44,
       "review_score": 4.681818181818182,
       "on_time": 0.9772727272727273,
@@ -2770,7 +2360,7 @@
     },
     {
       "week": "2018-01-15",
-      "in_event": true,
+      "in_event": false,
       "orders": 1704,
       "review_score": 4.076718009478673,
       "on_time": 0.9237089201877934,
@@ -2782,7 +2372,7 @@
     },
     {
       "week": "2018-01-22",
-      "in_event": true,
+      "in_event": false,
       "orders": 1545,
       "review_score": 4.0674267100977195,
       "on_time": 0.9158576051779935,
@@ -2794,7 +2384,7 @@
     },
     {
       "week": "2018-01-29",
-      "in_event": true,
+      "in_event": false,
       "orders": 1561,
       "review_score": 4.0911139729555694,
       "on_time": 0.9212043561819346,
@@ -2806,7 +2396,7 @@
     },
     {
       "week": "2018-02-05",
-      "in_event": true,
+      "in_event": false,
       "orders": 1541,
       "review_score": 3.987924281984334,
       "on_time": 0.9033095392602206,
@@ -2818,7 +2408,7 @@
     },
     {
       "week": "2018-02-12",
-      "in_event": true,
+      "in_event": false,
       "orders": 1595,
       "review_score": 3.923562855337966,
       "on_time": 0.8526645768025078,
@@ -2830,7 +2420,7 @@
     },
     {
       "week": "2018-02-19",
-      "in_event": true,
+      "in_event": false,
       "orders": 1713,
       "review_score": 3.804377699254024,
       "on_time": 0.7869235259778167,
@@ -2842,7 +2432,7 @@
     },
     {
       "week": "2018-02-26",
-      "in_event": true,
+      "in_event": false,
       "orders": 1849,
       "review_score": 3.572558647026732,
       "on_time": 0.7101135749053542,
@@ -2854,7 +2444,7 @@
     },
     {
       "week": "2018-03-05",
-      "in_event": true,
+      "in_event": false,
       "orders": 1598,
       "review_score": 3.6211258697027198,
       "on_time": 0.723404255319149,
@@ -2866,7 +2456,7 @@
     },
     {
       "week": "2018-03-12",
-      "in_event": true,
+      "in_event": false,
       "orders": 1541,
       "review_score": 3.786697247706422,
       "on_time": 0.7689811810512654,
@@ -2878,7 +2468,7 @@
     },
     {
       "week": "2018-03-19",
-      "in_event": true,
+      "in_event": false,
       "orders": 1671,
       "review_score": 3.9984975961538463,
       "on_time": 0.8587672052663076,
@@ -2890,7 +2480,7 @@
     },
     {
       "week": "2018-03-26",
-      "in_event": true,
+      "in_event": false,
       "orders": 1431,
       "review_score": 4.010541110330288,
       "on_time": 0.8651292802236199,
@@ -3157,13 +2747,13 @@
     "agent": "Ops & Fulfilment",
     "scope": "Scope 2 - Investigate",
     "hypothesis": "Delivery performance degraded, and that degradation drove the satisfaction drop.",
-    "supported": true,
-    "evidence_score": 0.900524725426525,
+    "supported": false,
+    "evidence_score": 0.5587526554060389,
     "components": {
-      "statistical": 1.0,
+      "statistical": 0.6535790154458252,
       "temporal": 0.65,
-      "specificity": 0.9370214401500877,
-      "discrimination": 0.9313468269450154,
+      "specificity": 0.0,
+      "discrimination": 1.0,
       "weights": {
         "statistical": 0.35,
         "temporal": 0.2,
@@ -3173,13 +2763,13 @@
     },
     "cause_family": "fulfilment",
     "effect": {
-      "estimate": -0.09937998154573124,
-      "ci_low": -0.10510005227145969,
-      "ci_high": -0.0936599108200028,
-      "p_value": 0.0,
+      "estimate": 0.058781586023418986,
+      "ci_low": 0.014711968623252067,
+      "ci_high": 0.1028512034235859,
+      "p_value": 0.15417741554987985,
       "method": "two_proportion_z",
-      "n_treat": 17749,
-      "n_control": 72182,
+      "n_treat": 44,
+      "n_control": 95781,
       "significant": true
     },
     "temporal": {
@@ -3240,38 +2830,38 @@
       {
         "kind": "metric",
         "claim": "On-time delivery rate fell",
-        "value": -0.09937998154573124,
+        "value": 0.058781586023418986,
         "units": "pp",
-        "detail": "93.6% -> 83.7% (95% CI [-0.105, -0.094], p=0.00e+00)",
-        "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=17749, n_base=72182"
+        "detail": "91.8% -> 97.7% (95% CI [+0.015, +0.103], p=1.54e-01)",
+        "source": "olist_orders: delivered_customer_date <= estimated_delivery_date; n_event=44, n_base=95781"
       },
       {
         "kind": "metric",
         "claim": "Average delivery time rose",
-        "value": 4.355555490676178,
+        "value": -1.0308912313620873,
         "units": "days",
-        "detail": "11.68 -> 16.03 days (95% CI [+4.18, +4.54])",
-        "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=17749"
+        "detail": "12.55 -> 11.52 days (95% CI [-3.35, +1.28])",
+        "source": "olist_orders: delivered_customer_date - purchase_timestamp; n=44"
       },
       {
         "kind": "metric",
         "claim": "Degradation is in the CARRIER leg, not the seller leg",
-        "value": 0.9313468269450154,
+        "value": 2.598300876952502,
         "units": "share",
-        "detail": "seller->carrier handoff moved only +0.30 days while total moved +4.36; the carrier leg accounts for +4.06 days (93% of the increase)",
+        "detail": "seller->carrier handoff moved only +1.65 days while total moved -1.03; the carrier leg accounts for -2.68 days (260% of the increase)",
         "source": "olist_orders: delivered_carrier_date vs purchase & delivered_customer_date"
       },
       {
         "kind": "causal",
         "claim": "Dose-response across segments",
-        "value": 0.9370214401500877,
+        "value": 0.0,
         "units": "pearson r",
-        "detail": "across 22 segments, the size of the on-time drop predicts the size of the satisfaction drop (r=0.937, p=1.36e-10). A coincidental association would not show this gradient.",
+        "detail": "across 0 segments, the size of the on-time drop predicts the size of the satisfaction drop (r=0.000, p=1.00e+00). A coincidental association would not show this gradient.",
         "source": "per-state deltas, event vs baseline windows"
       }
     ],
     "falsifiable_by": "Segments with large on-time drops but NO satisfaction drop would break the dose-response. So would the degradation sitting in the seller handoff rather than the carrier leg.",
-    "reasoning": "On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.",
+    "reasoning": "On-time delivery fell 5.9% (91.8% -> 97.7%, p=1.54e-01) and average delivery time rose -1.0 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+1.65d) while the carrier leg absorbed 260% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 0 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.00, p=1.0e+00), the gradient a real cause produces.",
     "caveats": [
       "contemporaneous at lag 0 (r=0.829); both metrics are anchored to purchase week, so lag 0 is expected. Mechanism ordering, delivery before review, is structural and cross-correlation cannot add to it."
     ]

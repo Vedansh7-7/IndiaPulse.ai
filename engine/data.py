@@ -58,6 +58,11 @@ def load_panel(force: bool = False) -> pd.DataFrame:
     ).reset_index()
     df = df.merge(it, on="order_id", how="left")
 
+    # Average order value is the mean of per-order values, so the order-level
+    # observation for `aov` is simply the order's own value. Naming it lets the
+    # scopes test AOV the same way they test any other order-level metric.
+    df["aov"] = df["order_value"]
+
     df["week"] = df["order_purchase_timestamp"].dt.to_period("W").dt.start_time
     df["delivered"] = df["order_status"].eq("delivered")
 

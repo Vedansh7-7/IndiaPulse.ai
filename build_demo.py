@@ -27,6 +27,13 @@ SCENARIOS = [
     {"key": "para", "states": ["PA"],
      "title": "Para - measurement artefact",
      "blurb": "Integrity checks flag the metric itself before any cause is reported."},
+    {"key": "entitlement", "states": None, "metric": "aov",
+     "title": "Average order value - restricted",
+     "blurb": "A confidential KPI. The operations reader is told what is withheld, "
+              "not shown a redacted number."},
+    {"key": "ontime", "states": None, "metric": "on_time",
+     "title": "On-time delivery - second KPI",
+     "blurb": "A different KPI over the same sources, at the same grain."},
 ]
 
 
@@ -39,7 +46,8 @@ def main() -> None:
     index = []
     for sc in SCENARIOS:
         print(f"\n{'=' * 70}\n{sc['key']}\n{'=' * 70}")
-        r = investigate(states=sc["states"], scenario=sc["key"],
+        r = investigate(states=sc["states"], metric=sc.get("metric", "review_score"),
+                        scenario=sc["key"],
                         out_name=f"inv_{sc['key']}.json", verbose=True)
         d = r["scope4_decision"]
         index.append({

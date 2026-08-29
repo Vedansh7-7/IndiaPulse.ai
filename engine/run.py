@@ -23,6 +23,8 @@ from .agents.ops import OpsAgent
 from .agents.voc import VoiceOfCustomerAgent
 from .agents.integrity import DataIntegrityAgent
 from .agents.external import MarketExternalAgent
+from . import governance as G
+from . import personas as P
 
 
 @dataclass
@@ -71,6 +73,10 @@ def investigate(metric: str = "review_score", verbose: bool = True,
         if on_log is not None:
             on_log(msg)
 
+    tel = G.Telemetry()
+    # Data load is timed separately. Folding a cold read into Scope 0 would
+    # report the cache state as if it were the cost of detection.
+    tel.start("Data load")
     say("Scope 0  Triage      | loading panel...")
     panel = D.load_panel()
     panel = panel.assign(wk=panel["week"].astype(str).str[:10])
@@ -85,34 +91,50 @@ def investigate(metric: str = "review_score", verbose: bool = True,
         + (f"  window={week_from or 'start'}..{week_to or 'end'}"
            if (week_from or week_to) else ""))
     weekly_national = D.weekly(panel)
+    tel.stop("Data load", f"{len(panel):,} rows")
 
+    tel.start("Scope 0 Triage")
     tri = detect.triage(panel, weekly_national, metric)
     say(f"Scope 0  Triage      | {tri.verdict}  z={tri.robust_z:.2f}  "
         f"delta={tri.delta:+.3f}  weeks={len(tri.event_weeks)}")
 
+    tel.stop("Scope 0 Triage", f"{tri.verdict}, z={tri.robust_z:.2f}")
     if not tri.is_signal:
         say("Scope 0  Triage      | inside control limits, stopping before "
             "any agent is spawned.")
         dec = arbiter.decide(None, tri, None, None, [], None)
+        views = P.build_all(tri, dec, None, [], None, None, metric)
         return _package(tri, None, None, [], None, dec, log, t0, metric,
-                        scenario=scenario, out_name=out_name, write=write)
+                        scenario=scenario, out_name=out_name, write=write,
+                        telemetry=tel, personas=views, panel=panel)
 
     event_set = set(tri.event_weeks)
     baseline_set = set(tri.baseline_weeks)
 
-    say("Scope 1  Localize    | mix-vs-rate decomposition...")
-    decomp = localize.mix_vs_rate(panel, tri.event_weeks, tri.baseline_weeks, metric)
-    say(f"Scope 1  Localize    | rate={decomp.rate_effect:+.3f} "
-        f"mix={decomp.mix_effect:+.3f} -> {decomp.rate_share:.0%} rate-driven")
+    tel.start("Scope 1 Localize")
+    decomp = None
+    segs = {"findings": [], "n_tested": 0, "n_significant_naive": 0,
+            "n_significant_fdr": 0, "fdr_alpha": C.FDR_ALPHA,
+            "note": f"'{metric}' is a period-level total with no per-order value, "
+                    f"so it cannot be decomposed across segments."}
+    if metric in panel.columns:
+        say("Scope 1  Localize    | mix-vs-rate decomposition...")
+        decomp = localize.mix_vs_rate(panel, tri.event_weeks, tri.baseline_weeks, metric)
+        say(f"Scope 1  Localize    | rate={decomp.rate_effect:+.3f} "
+            f"mix={decomp.mix_effect:+.3f} -> {decomp.rate_share:.0%} rate-driven")
+        segs = localize.segment_scan(panel, tri.event_weeks, tri.baseline_weeks, metric)
+        say(f"Scope 1  Localize    | {segs['n_tested']} segments tested, "
+            f"{segs['n_significant_naive']} naive hits -> "
+            f"{segs['n_significant_fdr']} survive FDR control")
+    else:
+        say(f"Scope 1  Localize    | {metric} has no per-order value; "
+            f"segment decomposition skipped")
 
-    segs = localize.segment_scan(panel, tri.event_weeks, tri.baseline_weeks, metric)
-    say(f"Scope 1  Localize    | {segs['n_tested']} segments tested, "
-        f"{segs['n_significant_naive']} naive hits -> "
-        f"{segs['n_significant_fdr']} survive FDR control")
-
+    tel.stop("Scope 1 Localize", f"{segs['n_tested']} segments")
     top_segments = [s["segment"] for s in segs["findings"] if s["significant"]][:8]
     ctx = Context(panel, weekly_national, event_set, baseline_set, top_segments)
 
+    tel.start("Scope 2 Investigate")
     say("Scope 2  Investigate | spawning agents...")
     agents = [OpsAgent(), VoiceOfCustomerAgent(), DataIntegrityAgent(), MarketExternalAgent()]
     verdicts = []
@@ -126,27 +148,39 @@ def investigate(metric: str = "review_score", verbose: bool = True,
             f"spec={v.components['specificity']:.2f} "
             f"disc={v.components['discrimination']:.2f}]")
 
+    tel.stop("Scope 2 Investigate", f"{len(agents)} agents")
+    tel.retrieval_calls += 1          # Market & External consults its context pack
     ranked = sorted(verdicts, key=lambda v: v.evidence_score, reverse=True)
     lead = next((v for v in ranked if v.supported and v.agent != "Data Integrity"), None)
 
     adversary_result = None
     if lead is not None:
+        tel.start("Scope 3 Adversary")
         say(f"Scope 3  Adversary   | challenging: {lead.agent}")
         adversary_result = adv.run_adversary(ctx, lead.hypothesis)
         for c in adversary_result["challenges"]:
             say(f"Scope 3  Adversary   | {'PASS' if c['passed'] else 'FAIL'}  {c['name']}")
+        tel.stop("Scope 3 Adversary", f"{adversary_result['n_passed']}/"
+                                      f"{adversary_result['n_total']} survived")
 
+    tel.start("Scope 4 Arbiter")
     say("Scope 4  Arbiter     | ranking and deciding...")
     dec = arbiter.decide(ctx, tri, decomp, segs, verdicts, adversary_result)
     say(f"Scope 4  Arbiter     | STATE = {dec.state}")
     say(f"Scope 4  Arbiter     | {dec.separability.get('note', '')}")
 
+    views = P.build_all(tri, dec, segs, verdicts, adversary_result, decomp, metric)
+    tel.stop("Scope 4 Arbiter", dec.state)
+    say(f"Scope 4  Arbiter     | {len([v for v in views if not v['withheld']])} of "
+        f"{len(views)} personas served, 0 model calls")
     return _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric,
-                    ctx=ctx, scenario=scenario, out_name=out_name, write=write)
+                    ctx=ctx, scenario=scenario, out_name=out_name, write=write,
+                    telemetry=tel, personas=views, panel=panel)
 
 
 def _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric, ctx=None,
-             scenario="national", out_name="investigation.json", write=True):
+             scenario="national", out_name="investigation.json", write=True,
+             telemetry=None, personas=None, panel=None):
     payload = {
         "meta": {
             "product": "IndiaPulse AI",
@@ -172,6 +206,13 @@ def _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric
         "scope3_adversary": adversary_result,
         "scope4_decision": dec.to_dict(),
         "orchestration_log": log,
+        "personas": personas or [],
+        "governance": {
+            "telemetry": telemetry.to_dict() if telemetry else None,
+            "methods": G.method_summary(),
+            "contract": G.KPI_CONTRACT.get(metric),
+            "lineage": G.data_freshness(panel) if panel is not None else None,
+        },
     }
     if ctx is not None:
         payload["timeline"] = _timeline(ctx, tri)
