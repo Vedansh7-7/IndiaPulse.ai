@@ -399,6 +399,18 @@ footer a{text-decoration:underline;text-underline-offset:2px}
   padding:14px 0 4px}
 .warn{color:var(--caution);font-size:12.5px;margin-top:10px}
 
+/* nothing selected yet */
+.idle{padding:52px 0 40px;border-top:1px solid var(--rule)}
+.idle h3{font-size:1.05rem;margin-bottom:10px}
+.idle p{color:var(--ink-soft);max-width:52ch;font-size:14px;text-wrap:pretty}
+.idle ol{margin:22px 0 0;padding:0;list-style:none;counter-reset:step}
+.idle li{counter-increment:step;display:grid;grid-template-columns:26px 1fr;gap:14px;
+  padding:11px 0;border-bottom:1px solid var(--rule);max-width:60ch;font-size:14px}
+.idle li:last-child{border-bottom:0}
+.idle li::before{content:counter(step);font-family:var(--mono);font-size:11px;
+  color:var(--ink-soft);padding-top:3px}
+.idle li span{color:var(--ink-soft)}
+
 @media (prefers-reduced-motion:reduce){.live-log li{animation:none}}
 
 @media (prefers-reduced-motion:reduce){
@@ -859,8 +871,30 @@ footer a{text-decoration:underline;text-underline-offset:2px}
   }
   var panel=document.getElementById('panel');
   panel.id='panel'; panel.setAttribute('role','tabpanel');
+
+  /* Nothing is shown until something is chosen. A report already on screen at
+     page load reads as a script rather than a run. */
+  function idle(){
+    D.index.forEach(function(s){
+      var el=document.getElementById('tab-'+s.key);
+      if(el){ el.setAttribute('aria-selected','false'); el.tabIndex=-1; }
+    });
+    var first=document.getElementById('tab-'+D.index[0].key);
+    if(first) first.tabIndex=0;          // keep one stop for keyboard entry
+    panel.innerHTML=
+      '<section class="idle"><h3>No investigation loaded</h3>'+
+      '<p>Pick one above to load its result, or give the engine a file and it will '+
+      'run now.</p><ol>'+
+      '<li><span>Choose an investigation, or drop in a CSV.</span></li>'+
+      '<li><span>The engine reads the file, works out the columns, and reports each '+
+      'scope as it runs.</span></li>'+
+      '<li><span>It returns a cause, or says the evidence cannot name one.</span></li>'+
+      '</ol></section>';
+    document.getElementById('meta').textContent='';
+  }
+
   buildTabs();
-  select(keys[0]);
+  idle();
 
   /* ---------- live mode ----------
      The page ships as a static demo. These controls appear only when a local
@@ -1023,7 +1057,7 @@ footer a{text-decoration:underline;text-underline-offset:2px}
     elFrom.value=''; elTo.value='';
     runLog.innerHTML=''; runErr.hidden=true; runStatus.textContent='';
     delete D.investigations.live; D.index=baseIndex.slice();
-    buildTabs(); select(D.index[0].key);
+    buildTabs(); idle();
   });
 
 })();
