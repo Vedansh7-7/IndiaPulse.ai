@@ -30,6 +30,8 @@ from urllib.parse import urlparse, parse_qs
 
 from engine import config as C
 from engine.run import investigate, NpEncoder
+from engine.generic_run import investigate_upload
+from engine.ingest import read_csv_bytes, profile as build_profile
 
 METRICS = ["review_score", "on_time", "delivery_days", "days_late", "days_to_carrier"]
 WEB = C.ROOT / "docs"
@@ -37,6 +39,12 @@ WEB = C.ROOT / "docs"
 # One investigation at a time. The engine shares a cached panel and a demo has a
 # single operator; serialising keeps runs predictable rather than interleaved.
 RUN_LOCK = threading.Lock()
+
+# Uploaded files are held in memory only, keyed by a short id, and the oldest is
+# dropped once a few are held. Nothing an operator uploads is written to disk.
+UPLOADS: "dict[str, dict]" = {}
+UPLOAD_KEEP = 4
+MAX_UPLOAD = 60 * 1024 * 1024
 
 
 def region_options():
@@ -85,7 +93,91 @@ class Handler(SimpleHTTPRequestHandler):
             return self.api_options()
         if route.path == "/api/run":
             return self.api_run(parse_qs(route.query))
+        if route.path == "/api/run_upload":
+            return self.api_run_upload(parse_qs(route.query))
         return super().do_GET()
+
+    def do_POST(self):
+        route = urlparse(self.path)
+        if route.path == "/api/upload":
+            return self.api_upload()
+        self.send_error(404)
+
+    # ---- upload -------------------------------------------------------
+    def api_upload(self):
+        try:
+            n = int(self.headers.get("Content-Length") or 0)
+        except ValueError:
+            n = 0
+        if n <= 0:
+            return self._json({"error": "no file received"}, 400)
+        if n > MAX_UPLOAD:
+            return self._json({"error": f"file exceeds "
+                                        f"{MAX_UPLOAD // (1024*1024)} MB"}, 400)
+        raw = self.rfile.read(n)
+        name = (self.headers.get("X-Filename") or "upload.csv")[:120]
+        try:
+            df = read_csv_bytes(raw)
+            prof = build_profile(df)
+        except Exception as exc:
+            return self._json({"error": str(exc)}, 400)
+
+        uid = f"u{int(time.time()*1000) % 10**9}"
+        UPLOADS[uid] = {"raw": raw, "name": name, "at": time.time()}
+        for old in sorted(UPLOADS, key=lambda k: UPLOADS[k]["at"])[:-UPLOAD_KEEP]:
+            UPLOADS.pop(old, None)
+        print(f"  uploaded {name}  {len(raw):,} bytes  -> {uid}")
+        self._json({"id": uid, "filename": name, "profile": prof.to_dict()})
+
+    def api_run_upload(self, q):
+        uid = (q.get("id") or [""])[0]
+        metric = (q.get("metric") or [None])[0]
+        item = UPLOADS.get(uid)
+        if item is None:
+            return self._json({"error": "upload not found; please pick the file again"}, 404)
+
+        self._sse_open()
+        if not RUN_LOCK.acquire(blocking=False):
+            self._sse("error", {"message": "another run is in progress"})
+            return
+        lines: "queue.Queue[str|None]" = queue.Queue()
+        box = {}
+
+        def work():
+            try:
+                box["result"] = investigate_upload(
+                    item["raw"], metric_key=metric, filename=item["name"],
+                    on_log=lines.put)
+            except Exception as exc:
+                box["error"] = str(exc)
+                traceback.print_exc()
+            finally:
+                lines.put(None)
+
+        t0 = time.time()
+        threading.Thread(target=work, daemon=True).start()
+        try:
+            while True:
+                try:
+                    line = lines.get(timeout=20)
+                except queue.Empty:
+                    self._sse("ping", {})
+                    continue
+                if line is None:
+                    break
+                self._sse("log", {"line": line})
+            if "error" in box:
+                self._sse("error", {"message": box["error"]})
+            else:
+                inv = box["result"]
+                self._sse("done", {
+                    "label": f"{item['name']} / {inv['meta']['metric_label']}",
+                    "elapsed": round(time.time() - t0, 1),
+                    "investigation": inv})
+        except (BrokenPipeError, ConnectionResetError):
+            pass
+        finally:
+            RUN_LOCK.release()
 
     def api_options(self):
         try:

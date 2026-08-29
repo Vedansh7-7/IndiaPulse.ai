@@ -276,8 +276,12 @@ svg.plot{display:block;width:100%;height:auto;overflow:visible}
   border-top-style:solid;margin-right:7px;vertical-align:3px}
 
 /* prose */
-.prose{max-width:74ch;text-wrap:pretty}
-.prose p{margin:0 0 14px}
+.prose{max-width:74ch;text-wrap:pretty;color:var(--ink-soft)}
+.prose p{margin:0 0 16px}
+/* Figures carry the finding, so they sit forward of the sentence around them. */
+.fig{font-family:var(--mono);font-variant-numeric:tabular-nums;
+  color:var(--ink);font-weight:500;font-size:0.94em;white-space:nowrap}
+.kw{color:var(--ink);font-weight:600}
 .prose p:last-child{margin:0}
 .prose strong{font-weight:600}
 
@@ -378,6 +382,23 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 .live-log li .sc{color:var(--ink);font-size:11.5px}
 @keyframes logIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
 .live-err{color:var(--signal);font-size:13px;margin-top:14px}
+/* upload */
+.drop{border:1px dashed var(--rule-strong);padding:22px;text-align:center;
+  cursor:pointer;transition:background 160ms var(--ease),border-color 160ms var(--ease)}
+.drop:hover,.drop.over{background:var(--sunken);border-color:var(--ink-soft)}
+.drop b{display:block;font-size:14px;margin-bottom:4px}
+.drop span{font-size:12.5px;color:var(--ink-soft)}
+.drop input{position:absolute;width:1px;height:1px;opacity:0}
+.prof{margin-top:20px;border-top:1px solid var(--rule-firm)}
+.prof table{font-size:12.5px}
+.prof td.role{font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+  letter-spacing:0.06em}
+.prof td.role[data-r=date],.prof td.role[data-r=measure],
+.prof td.role[data-r=segment],.prof td.role[data-r=text]{color:var(--ink)}
+.prof .meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);
+  padding:14px 0 4px}
+.warn{color:var(--caution);font-size:12.5px;margin-top:10px}
+
 @media (prefers-reduced-motion:reduce){.live-log li{animation:none}}
 
 @media (prefers-reduced-motion:reduce){
@@ -473,6 +494,24 @@ footer a{text-decoration:underline;text-underline-offset:2px}
       </div>
       <ol class="live-log" id="runLog" aria-live="polite" aria-label="Engine progress"></ol>
       <p class="live-err" id="runErr" hidden></p>
+      <div class="sec-h" style="margin-top:34px">
+        <h3 style="font-size:14px">Or investigate your own file</h3>
+        <span class="aside" id="upAside">CSV</span>
+      </div>
+      <label class="drop" id="drop">
+        <b id="dropTitle">Choose a CSV file</b>
+        <span id="dropHint">The engine works out the columns itself. Nothing is uploaded off this machine.</span>
+        <input type="file" id="fFile" accept=".csv,text/csv">
+      </label>
+      <div class="prof" id="profBox" hidden></div>
+      <div class="live-go" style="margin-top:16px" id="upGo" hidden>
+        <div class="field" style="min-width:220px">
+          <label for="fUpMetric">Metric</label>
+          <select id="fUpMetric"></select>
+        </div>
+        <button class="btn" type="button" id="upRunBtn" style="align-self:end">Investigate file</button>
+      </div>
+      <p class="live-err" id="upErr" hidden></p>
     </section>
 
     <section class="sec">
@@ -531,9 +570,29 @@ footer a{text-decoration:underline;text-underline-offset:2px}
     return (v>0?'+':'')+Number(v).toFixed(d==null?3:d); }
   function pv(p){ if(p==null) return '-';
     return p < 1e-12 ? 'p < 1e-12' : 'p = '+Number(p).toExponential(1); }
+  /* Highlight the measured quantities. Numbers are what a reader scans for, and
+     in a dense paragraph they are invisible without help. Applied after escaping,
+     so it can never introduce markup that came from the data. */
+  var FIG = new RegExp([
+    'p\\s*[=<]\\s*[0-9][0-9.]*e?[-+]?[0-9]*',
+    '95% CI \\[[^\\]]+\\]',
+    '[-+]?[0-9]+\\.[0-9]+x',
+    '[-+]?[0-9]+\\.[0-9]+ ?(?:days?|weeks?|points?)',
+    '[-+]?[0-9]+(?:\\.[0-9]+)?%',
+    '[0-9]+ of [0-9]+',
+    '[0-9]{4}-[0-9]{2}-[0-9]{2}',
+    '[-+]?[0-9]+\\.[0-9]+',
+    '\\br\\s*=\\s*[-+]?[0-9.]+',
+    '[±+-]?[0-9]+(?:\\.[0-9]+)?σ'
+  ].join('|'), 'g');
+  var KW = /\b(REAL|RATE|MIX|CONFIRMED|INCONCLUSIVE|NOISE|ARTEFACT|FDR control)\b/g;
   function md(t){ return String(t||'').split('\n\n').map(function(p){
-      return '<p>'+esc(p).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-                         .replace(/\*(.+?)\*/g,'<em>$1</em>')+'</p>'; }).join(''); }
+      var body = esc(p)
+        .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g,'<em>$1</em>')
+        .replace(FIG, function(m){ return '<span class="fig">'+m+'</span>'; })
+        .replace(KW, function(m){ return '<span class="kw">'+m+'</span>'; });
+      return '<p>'+body+'</p>'; }).join(''); }
 
   /* ---------- chart ---------- */
   function plot(inv){
@@ -842,18 +901,23 @@ footer a{text-decoration:underline;text-underline-offset:2px}
   }
 
   function runLive(){
-    if(stream){ stream.close(); stream=null; }
-    runLog.innerHTML=''; runErr.hidden=true; runStatus.textContent='';
-    setBusy(true);
-
     var q=[];
     Array.prototype.forEach.call(elRegion.selectedOptions,function(o){
       q.push('state='+encodeURIComponent(o.value)); });
     q.push('metric='+encodeURIComponent(elMetric.value));
     if(elFrom.value) q.push('from='+elFrom.value);
     if(elTo.value)   q.push('to='+elTo.value);
+    runStream('api/run?'+q.join('&'), runBtn, 'Run investigation');
+  }
 
-    stream=new EventSource('api/run?'+q.join('&'));
+  /* One streaming path for both the built-in data and an uploaded file. */
+  function runStream(url, btn, idleLabel){
+    if(stream){ stream.close(); stream=null; }
+    runLog.innerHTML=''; runErr.hidden=true; runStatus.textContent='';
+    if(upErr) upErr.hidden=true;
+    btn.disabled=true; btn.textContent='Running';
+    setBusy(true);
+    stream=new EventSource(url);
     stream.addEventListener('log',function(e){
       var line=JSON.parse(e.data).line;
       var li=document.createElement('li');
@@ -864,6 +928,7 @@ footer a{text-decoration:underline;text-underline-offset:2px}
     stream.addEventListener('done',function(e){
       var d=JSON.parse(e.data);
       stream.close(); stream=null; setBusy(false);
+      btn.disabled=false; btn.textContent=idleLabel;
       runStatus.textContent='completed in '+d.elapsed+'s';
       D.investigations.live=d.investigation;
       D.index=[{key:'live',title:d.label,state:d.investigation.scope4_decision.state}]
@@ -875,7 +940,79 @@ footer a{text-decoration:underline;text-underline-offset:2px}
       var msg='Connection to the engine was lost.';
       try { if(e.data) msg=JSON.parse(e.data).message; } catch(x){}
       stream && stream.close(); stream=null; setBusy(false);
+      btn.disabled=false; btn.textContent=idleLabel;
       runErr.textContent=msg; runErr.hidden=false; runStatus.textContent='';
+    });
+  }
+
+
+  /* ---------- upload ---------- */
+  var elFile=document.getElementById('fFile'), drop=document.getElementById('drop'),
+      profBox=document.getElementById('profBox'), upGo=document.getElementById('upGo'),
+      upMetric=document.getElementById('fUpMetric'), upRun=document.getElementById('upRunBtn'),
+      upErr=document.getElementById('upErr'), dropTitle=document.getElementById('dropTitle'),
+      dropHint=document.getElementById('dropHint');
+  var upload=null;
+
+  function showProfile(p, name){
+    var rows=p.columns.map(function(c){
+      return '<tr><td>'+esc(c.name)+'</td><td class="role" data-r="'+esc(c.role)+'">'+
+        esc(c.role)+'</td><td class="n">'+c.n_unique.toLocaleString()+'</td>'+
+        '<td>'+esc(c.note)+'</td></tr>'; }).join('');
+    profBox.innerHTML =
+      '<div class="meta">'+esc(name)+' &nbsp; '+p.rows.toLocaleString()+' rows &nbsp; '+
+      p.span.weeks+' weeks &nbsp; '+esc(p.span.start)+' to '+esc(p.span.end)+'</div>'+
+      '<div class="scroll"><table><thead><tr><th scope="col">Column</th>'+
+      '<th scope="col">Read as</th><th scope="col">Distinct</th>'+
+      '<th scope="col">Why</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+      (p.warnings.length ? '<p class="warn">'+p.warnings.map(esc).join(' ')+'</p>' : '');
+    profBox.hidden=false;
+    upMetric.innerHTML='';
+    p.metrics.forEach(function(m){
+      var o=document.createElement('option'); o.value=m.key; o.textContent=m.label;
+      upMetric.appendChild(o);
+    });
+    upGo.hidden=false;
+  }
+
+  function sendFile(file){
+    if(!file) return;
+    upErr.hidden=true; profBox.hidden=true; upGo.hidden=true;
+    dropTitle.textContent='Reading '+file.name;
+    dropHint.textContent='working out the columns';
+    fetch('api/upload',{method:'POST',body:file,
+        headers:{'X-Filename':file.name,'Content-Type':'text/csv'}})
+      .then(function(r){ return r.json().then(function(j){
+          if(!r.ok) throw new Error(j.error||'upload failed'); return j; }); })
+      .then(function(j){
+        upload=j;
+        dropTitle.textContent=file.name;
+        dropHint.textContent='choose a different file';
+        showProfile(j.profile, j.filename);
+      })
+      .catch(function(e){
+        upload=null;
+        dropTitle.textContent='Choose a CSV file';
+        dropHint.textContent='The engine works out the columns itself.';
+        upErr.textContent=e.message; upErr.hidden=false;
+      });
+  }
+
+  if(elFile){
+    elFile.addEventListener('change',function(){ sendFile(elFile.files[0]); });
+    ['dragenter','dragover'].forEach(function(ev){
+      drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.add('over'); });
+    });
+    ['dragleave','drop'].forEach(function(ev){
+      drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.remove('over'); });
+    });
+    drop.addEventListener('drop',function(e){
+      if(e.dataTransfer && e.dataTransfer.files.length) sendFile(e.dataTransfer.files[0]);
+    });
+    upRun.addEventListener('click',function(){
+      if(!upload) return;
+      runStream('api/run_upload?id='+encodeURIComponent(upload.id)+
+                '&metric='+encodeURIComponent(upMetric.value), upRun, 'Investigate file');
     });
   }
 

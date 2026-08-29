@@ -43,9 +43,35 @@ Standard library only: there is nothing to install beyond the analysis
 dependencies. Opened from GitHub Pages there is no backend, `/api/options` is
 absent, and the page stays a static demo.
 
-Scopes 0 and 1 are dataset-agnostic: they need a date column, a metric and a
-segment. The agents in scope 2 read domain columns, so a new domain means new
-agents against the same contract in `engine/agents/base.py`.
+## Investigate your own file
+
+The same panel takes a CSV. Nothing is configured: each column is read and
+assigned a role from its own contents, so a plain transaction export becomes
+something the scopes can work on.
+
+    date        parses as timestamps across most rows
+    measure     numeric and varying
+    segment     few distinct values relative to row count
+    identifier  nearly one distinct value per row
+    text        sentence-shaped, several words
+
+Revenue, average value, quantity and record count are derived from those roles,
+and the inferred roles are shown in the page so they can be checked rather than
+trusted.
+
+Scope 2 swaps to a generic agent set, because the built-in agents read delivery
+columns that a stranger's file will not have. The competing explanations for an
+unknown table are different:
+
+| Agent | Asks |
+|---|---|
+| Segment Concentration | is the movement confined to particular segment values |
+| Customer Language | which words rose in the text, discovered without a word list |
+| Mix Shift | did the composition change rather than any segment getting worse |
+| Systemic Shift | did everything move together, pointing outside the data |
+| Data Integrity | did the table change rather than the business |
+
+Uploads are held in memory and never written to disk.
 
 ## Demo
 

@@ -28,7 +28,8 @@ class Decision:
         return asdict(self)
 
 
-def decide(ctx, triage, decomposition, segments, verdicts, adversary) -> Decision:
+def decide(ctx, triage, decomposition, segments, verdicts, adversary,
+           prescribe_fn=None) -> Decision:
     if not triage.is_signal:
         return Decision(
             state="NOISE",
@@ -100,7 +101,7 @@ def decide(ctx, triage, decomposition, segments, verdicts, adversary) -> Decisio
 
     top = max(families[fam_ranked[0]["family"]], key=lambda v: v.evidence_score)
     rejected = [v for v in ranked if not v.supported and v.cause_family != "measurement"]
-    next_test = _prescribe(ctx, triage, top, adversary, segments)
+    next_test = (prescribe_fn or _prescribe)(ctx, triage, top, adversary, segments)
 
     top_seg = [s for s in segments["findings"] if s["significant"]][:3]
     seg_txt = ", ".join(f"{s['label']} ({s['delta']:+.2f})" for s in top_seg)
@@ -173,11 +174,8 @@ def _narrative(triage, decomp, segments, top, rejected, integrity, adversary, se
             "**What was ruled out.** "
             + " ".join(f"*{r.agent}:* {r.reasoning}" for r in rejected)
         )
-    if adversary:
-        parts.append(
-            f"**Challenge.** {adversary['summary']} "
-            + " ".join(f"({c['name']}) {c['finding']}" for c in adversary["challenges"])
-        )
+    # The challenges have their own section in the report. Repeating them here
+    # lengthened the story without adding anything to it.
     return "\n\n".join(p for p in parts if p)
 
 

@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "national",
-    "generated_at": "2026-08-29 23:59:12",
-    "runtime_seconds": 13.47,
+    "generated_at": "2026-08-30 01:02:18",
+    "runtime_seconds": 18.56,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -1066,11 +1066,11 @@
       "scope": "Scope 2 - Investigate",
       "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
       "supported": true,
-      "evidence_score": 0.6244674753000344,
+      "evidence_score": 0.6244674753000343,
       "components": {
         "statistical": 1.0,
         "temporal": 0.65,
-        "specificity": 0.1805887353764451,
+        "specificity": 0.18058873537644476,
         "discrimination": 0.4966014572796156,
         "weights": {
           "statistical": 0.35,
@@ -1359,7 +1359,7 @@
   "scope4_decision": {
     "state": "CONFIRMED",
     "headline": "Review Score fell 0.324 (4.23 to 3.90). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
-    "narrative": "**What changed.** Weekly review score fell from 4.228 to 3.904 (-0.324) across 11 consecutive weeks beginning 2018-01-15. The worst week sits -6.4 robust standard deviations below baseline, outside the \u00b13.0\u03c3 control limit (p=0.0e+00). This is not normal variation.\n\n**Is the metric real?** Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 1.71%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.\n\n**Where.** 99% of the movement is RATE: the same kinds of customers had a worse experience. This is an operational or product problem, not a change in who is buying. 18 of 22 segments moved significantly after Benjamini-Hochberg FDR control, led by Ceara (-1.01), Para (-0.79), Tocantins (-0.78).\n\n**Why.** On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.\n\n**What was ruled out.** *Market & External:* The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 1.54x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 1.00x (p=0.975): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. Retrieved context notes that Brazilian Carnival (9-14 Feb 2018) falls inside the event window and is documented to disrupt logistics via road congestion and staff leave. This is a plausible contributing mechanism, but it is external context rather than measured evidence and is not scored as such.\n\n**Challenge.** The leading hypothesis was challenged on 3 fronts and survived 3. No challenge overturned it. (Simpson's paradox) 21 of 22 segments (95%) fell independently. The direction is consistent within segments, so the national movement is not an aggregation artefact. (Difference-in-differences) Exposed segments (Ceara, Tocantins, Maranhao, Rio de Janeiro...) changed -0.718 while control segments changed -0.162. DiD estimate -0.556 (95% CI [-0.631, -0.480], p=0.00e+00). Parallel-trends test p=0.199 (trends were parallel pre-event, so DiD is credible). The exposed-vs-control gap confirms the delivery mechanism. (Reverse causation / order-level check) Within the event window, orders delivered LATE scored 2.24 against 4.22 for on-time orders (difference -1.98, 95% CI [-2.04, -1.92], p=0.00e+00, n_late=2840). The mechanism holds at order level: the same customers who experienced a late delivery are the ones who scored lower. A reverse-causation story cannot produce this, because the review is written after the delivery outcome is known.",
+    "narrative": "**What changed.** Weekly review score fell from 4.228 to 3.904 (-0.324) across 11 consecutive weeks beginning 2018-01-15. The worst week sits -6.4 robust standard deviations below baseline, outside the \u00b13.0\u03c3 control limit (p=0.0e+00). This is not normal variation.\n\n**Is the metric real?** Four independent integrity checks were run against the event window: review coverage, free-text rate, key-field null rates, and order-status mix. 0 of 4 flagged. The largest movement across all checks is 1.71%, which is within normal drift. The metric movement is therefore REAL and not an artefact of who was measured or how, which strengthens every substantive hypothesis below.\n\n**Where.** 99% of the movement is RATE: the same kinds of customers had a worse experience. This is an operational or product problem, not a change in who is buying. 18 of 22 segments moved significantly after Benjamini-Hochberg FDR control, led by Ceara (-1.01), Para (-0.79), Tocantins (-0.78).\n\n**Why.** On-time delivery fell 9.9% (93.6% -> 83.7%, p=0.00e+00) and average delivery time rose +4.4 days. Decomposing the journey, the seller-to-carrier handoff barely moved (+0.30d) while the carrier leg absorbed 93% of the increase. The bottleneck is in last-mile transit, not seller dispatch. Across 22 segments the magnitude of the delivery drop predicts the magnitude of the satisfaction drop (r=0.94, p=1.4e-10), the gradient a real cause produces.\n\n**What was ruled out.** *Market & External:* The demand-overload explanation is NOT supported. Measured against the global baseline, event volume looks 1.54x elevated, but that baseline spans a growth period and the comparison is invalid. Against the 8 weeks immediately before the event, volume was 1.00x (p=0.975): demand was already at this level and did not rise as satisfaction fell. Fulfilment therefore degraded WITHOUT a demand trigger, which points to a capacity or carrier-side change rather than a volume shock. Retrieved context notes that Brazilian Carnival (9-14 Feb 2018) falls inside the event window and is documented to disrupt logistics via road congestion and staff leave. This is a plausible contributing mechanism, but it is external context rather than measured evidence and is not scored as such.",
     "ranked": [
       {
         "agent": "Ops & Fulfilment",
@@ -1489,11 +1489,11 @@
         "scope": "Scope 2 - Investigate",
         "hypothesis": "Customer free-text independently corroborates a delivery cause, and rules out others.",
         "supported": true,
-        "evidence_score": 0.6244674753000344,
+        "evidence_score": 0.6244674753000343,
         "components": {
           "statistical": 1.0,
           "temporal": 0.65,
-          "specificity": 0.1805887353764451,
+          "specificity": 0.18058873537644476,
           "discrimination": 0.4966014572796156,
           "weights": {
             "statistical": 0.35,
