@@ -442,6 +442,42 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
   color:var(--ink-soft)}
 
+/* hero steps */
+.steps{margin:34px 0 0;padding:0;list-style:none;counter-reset:step;max-width:60ch}
+.steps li{counter-increment:step;display:grid;grid-template-columns:28px 1fr;gap:16px;
+  padding:13px 0;border-bottom:1px solid var(--rule)}
+.steps li:last-child{border-bottom:0}
+.steps li::before{content:counter(step);font-family:var(--mono);font-size:11px;
+  color:var(--ink-soft);padding-top:4px}
+.steps b{display:block;font-weight:500;font-size:14.5px}
+.steps span{display:block;color:var(--ink-soft);font-size:13px;margin-top:3px;
+  text-wrap:pretty}
+
+/* mode tabs */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);
+  margin-top:8px}
+.modes button{appearance:none;background:none;border:0;
+  border-right:1px solid var(--rule);color:var(--ink-soft);font:inherit;
+  padding:15px 18px;cursor:pointer;text-align:left;
+  transition:background 160ms var(--ease),color 160ms var(--ease)}
+.modes button:last-child{border-right:0}
+.modes button:hover{background:var(--sunken);color:var(--ink)}
+.modes button[aria-selected=true]{background:var(--surface);color:var(--ink);
+  box-shadow:inset 0 -2px 0 var(--ink)}
+.modes b{display:block;font-weight:500;font-size:14.5px}
+.modes span{display:block;font-size:11.5px;font-family:var(--mono);
+  color:var(--ink-soft);margin-top:4px}
+@media (max-width:560px){.modes{grid-template-columns:1fr}
+  .modes button{border-right:0;border-bottom:1px solid var(--rule)}
+  .modes button:last-child{border-bottom:0}}
+
+.runbar:empty{display:none}
+.live-status{display:block;font-family:var(--mono);font-size:11.5px;
+  color:var(--ink-soft);padding-top:16px}
+.offline{color:var(--ink-soft);font-size:13px;padding:4px 0 8px;max-width:60ch}
+.offline code{font-family:var(--mono);font-size:12px;background:var(--sunken);
+  padding:2px 6px;border:1px solid var(--rule)}
+
 @media (prefers-reduced-motion:reduce){.live-log li{animation:none}}
 
 @media (prefers-reduced-motion:reduce){
@@ -493,84 +529,117 @@ td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
     <h1>A metric moved.<br>Find out why.</h1>
     <p class="lede">An investigation engine for KPI movements. It reports the cause,
        or reports that it cannot find one.</p>
+    <ol class="steps">
+      <li><b>Choose a KPI, or bring your own file.</b>
+          <span>A prepared dataset to see the depth, or any CSV to see the range.</span></li>
+      <li><b>The engine investigates and shows its working.</b>
+          <span>Five scopes run in the open: detect, localise, investigate,
+                challenge, decide.</span></li>
+      <li><b>It names a cause, or says it cannot.</b>
+          <span>With the evidence, what would disprove it, and the next test worth
+                running.</span></li>
+    </ol>
     <div class="hero-act">
-      <a class="btn" href="#tool">Open investigation</a>
+      <a class="btn" href="#tool">Start an investigation</a>
       <a class="btn ghost" href="https://github.com/Vedansh7-7/IndiaPulse.ai">Source</a>
     </div>
-    <dl class="hero-facts">
-      <div><dt>Dataset</dt><dd>99k orders</dd></div>
-      <div><dt>Unstructured</dt><dd>41k reviews</dd></div>
-      <div><dt>Decision states</dt><dd>4</dd></div>
-      <div><dt>Hard-coded effects</dt><dd>0</dd></div>
-    </dl>
   </section>
 
   <div class="shell" id="tool">
-    <section class="sec live" id="live" hidden>
-      <div class="sec-h">
-        <h2>Run an investigation</h2>
-        <span class="aside" id="liveAside">connected</span>
-      </div>
-      <div class="live-controls">
-        <div class="field">
-          <label for="fRegion">Region</label>
-          <select id="fRegion" multiple size="5"></select>
-          <span class="hint">none selected runs all regions</span>
+    <div class="modes" role="tablist" aria-label="Data source">
+      <button role="tab" type="button" id="mode-dataset" aria-controls="pane-dataset"
+              aria-selected="true" tabindex="0">
+        <b>Reference dataset</b>
+        <span>What the engine can do</span>
+      </button>
+      <button role="tab" type="button" id="mode-upload" aria-controls="pane-upload"
+              aria-selected="false" tabindex="-1">
+        <b>Your data</b>
+        <span>How far it adapts</span>
+      </button>
+    </div>
+
+    <div id="pane-dataset" role="tabpanel" aria-labelledby="mode-dataset">
+      <section class="sec">
+        <div class="sec-h">
+          <h2>Prepared investigations</h2>
+          <span class="aside">real slices, every outcome</span>
         </div>
-        <div class="field">
-          <label for="fMetric">Metric</label>
-          <select id="fMetric"></select>
+        <div role="tablist" aria-label="Investigations" id="tabs"></div>
+      </section>
+      <section class="sec live" id="live" hidden>
+        <div class="sec-h">
+          <h2>Run one now</h2>
+          <span class="aside" id="liveAside">connected</span>
         </div>
-        <div class="field">
-          <label for="fFrom">From</label>
-          <input type="date" id="fFrom">
+        <div class="live-controls">
+          <div class="field">
+            <label for="fRegion">Segment</label>
+            <select id="fRegion" multiple size="5"></select>
+            <span class="hint">none selected runs everything</span>
+          </div>
+          <div class="field">
+            <label for="fMetric">Metric</label>
+            <select id="fMetric"></select>
+          </div>
+          <div class="field">
+            <label for="fFrom">From</label>
+            <input type="date" id="fFrom">
+          </div>
+          <div class="field">
+            <label for="fTo">To</label>
+            <input type="date" id="fTo">
+          </div>
         </div>
-        <div class="field">
-          <label for="fTo">To</label>
-          <input type="date" id="fTo">
+        <div class="live-go" style="margin-top:18px">
+          <button class="btn" type="button" id="runBtn">Run investigation</button>
+          <button class="btn ghost" type="button" id="resetBtn">Reset</button>
         </div>
-      </div>
-      <div class="live-go" style="margin-top:18px">
-        <button class="btn" type="button" id="runBtn">Run investigation</button>
-        <button class="btn ghost" type="button" id="resetBtn">Reset</button>
-        <span class="live-status" id="runStatus"></span>
-      </div>
+      </section>
+    </div>
+
+    <div id="pane-upload" role="tabpanel" aria-labelledby="mode-upload" hidden>
+      <section class="sec">
+        <div class="sec-h">
+          <h2>Investigate your own file</h2>
+          <span class="aside" id="upAside">CSV</span>
+        </div>
+        <label class="drop" id="drop">
+          <b id="dropTitle">Choose a CSV file</b>
+          <span id="dropHint">The engine works out the columns itself.
+                Nothing leaves this machine.</span>
+          <input type="file" id="fFile" accept=".csv,text/csv">
+        </label>
+        <div class="prof" id="profBox" hidden></div>
+        <div class="live-go" style="margin-top:16px" id="upGo" hidden>
+          <div class="field" style="min-width:220px">
+            <label for="fUpMetric">Metric</label>
+            <select id="fUpMetric"></select>
+          </div>
+          <button class="btn" type="button" id="upRunBtn"
+                  style="align-self:end">Investigate file</button>
+        </div>
+        <p class="live-err" id="upErr" hidden></p>
+      </section>
+      <p class="offline" id="upOffline" hidden>
+        Reading a file needs the local engine running.
+        Start it with <code>python serve.py</code> and open
+        <code>http://localhost:8000</code>.
+      </p>
+    </div>
+
+    <div class="runbar">
+      <span class="live-status" id="runStatus"></span>
       <ol class="live-log" id="runLog" aria-live="polite" aria-label="Engine progress"></ol>
       <p class="live-err" id="runErr" hidden></p>
-      <div class="sec-h" style="margin-top:34px">
-        <h3 style="font-size:14px">Or investigate your own file</h3>
-        <span class="aside" id="upAside">CSV</span>
-      </div>
-      <label class="drop" id="drop">
-        <b id="dropTitle">Choose a CSV file</b>
-        <span id="dropHint">The engine works out the columns itself. Nothing is uploaded off this machine.</span>
-        <input type="file" id="fFile" accept=".csv,text/csv">
-      </label>
-      <div class="prof" id="profBox" hidden></div>
-      <div class="live-go" style="margin-top:16px" id="upGo" hidden>
-        <div class="field" style="min-width:220px">
-          <label for="fUpMetric">Metric</label>
-          <select id="fUpMetric"></select>
-        </div>
-        <button class="btn" type="button" id="upRunBtn" style="align-self:end">Investigate file</button>
-      </div>
-      <p class="live-err" id="upErr" hidden></p>
-    </section>
-
-    <section class="sec">
-      <div class="sec-h">
-        <h2>Investigations</h2>
-        <span class="aside">real slices, four outcomes</span>
-      </div>
-      <div role="tablist" aria-label="Investigations" id="tabs"></div>
-    </section>
+    </div>
     <div id="panel"></div>
   </div>
 </main>
 
 <footer>
   <div class="shell">
-    <p>Computed from the public Olist Brazilian E-Commerce dataset. No hard-coded
+    <p>Computed from a public e-commerce dataset. No hard-coded
        effect sizes. Retrieved web context is excluded from evidence scoring.
        <a href="https://github.com/Vedansh7-7/IndiaPulse.ai">Source and method</a>.</p>
   </div>
@@ -1011,20 +1080,17 @@ td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
     });
     var first=document.getElementById('tab-'+D.index[0].key);
     if(first) first.tabIndex=0;          // keep one stop for keyboard entry
-    panel.innerHTML=
-      '<section class="idle"><h3>No investigation loaded</h3>'+
-      '<p>Pick one above to load its result, or give the engine a file and it will '+
-      'run now.</p><ol>'+
-      '<li><span>Choose an investigation, or drop in a CSV.</span></li>'+
-      '<li><span>The engine reads the file, works out the columns, and reports each '+
-      'scope as it runs.</span></li>'+
-      '<li><span>It returns a cause, or says the evidence cannot name one.</span></li>'+
-      '</ol></section>';
+    panel.innerHTML='<section class="idle"><h3>No investigation loaded</h3><p>'+
+      (mode==='upload'
+        ? 'Choose a CSV. The engine reads it, works out which column is the date, '+
+          'which are measures and which are segments, then investigates.'
+        : 'Pick an investigation above to load its result, or run a new one against '+
+          'a segment, metric and window of your choosing.')+
+      '</p></section>';
     document.getElementById('meta').textContent='';
   }
 
   buildTabs();
-  idle();
 
   /* ---------- live mode ----------
      The page ships as a static demo. These controls appear only when a local
@@ -1057,7 +1123,14 @@ td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
   fetch('api/options',{cache:'no-store'})
     .then(function(r){ if(!r.ok) throw 0; return r.json(); })
     .then(optionsLoaded)
-    .catch(function(){ /* static mode: leave the section hidden */ });
+    .catch(function(){
+      // static mode: the dataset tab still works from the published bundle,
+      // but reading a file needs the local engine.
+      var off=document.getElementById('upOffline');
+      if(off) off.hidden=false;
+      var d=document.getElementById('drop');
+      if(d) d.style.display='none';
+    });
 
   function setBusy(on){
     runBtn.disabled=on;
@@ -1109,6 +1182,43 @@ td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
     });
   }
 
+
+
+  /* ---------- data-source tabs ----------
+     Two entry points exist in the engine: a prepared dataset with domain agents,
+     and an uploaded file profiled from scratch. The interface says so rather
+     than stacking both in one column. */
+  var MODES=['dataset','upload'], mode='dataset';
+  function setMode(next){
+    mode=next;
+    MODES.forEach(function(m){
+      var btn=document.getElementById('mode-'+m),
+          pane=document.getElementById('pane-'+m), on=(m===next);
+      btn.setAttribute('aria-selected',on?'true':'false');
+      btn.tabIndex=on?0:-1;
+      pane.hidden=!on;
+    });
+    if(stream){ stream.close(); stream=null; setBusy(false); }
+    runLog.innerHTML=''; runErr.hidden=true; runStatus.textContent='';
+    idle();
+  }
+  MODES.forEach(function(m){
+    var b=document.getElementById('mode-'+m);
+    b.addEventListener('click',function(){ setMode(m); });
+    // fall through to the keyboard handler below
+    b.addEventListener('keydown',function(e){
+      var i=MODES.indexOf(m), n=-1;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown') n=(i+1)%MODES.length;
+      if(e.key==='ArrowLeft'||e.key==='ArrowUp') n=(i-1+MODES.length)%MODES.length;
+      if(e.key==='Home') n=0;
+      if(e.key==='End') n=MODES.length-1;
+      if(n>=0){ e.preventDefault(); setMode(MODES[n]);
+        document.getElementById('mode-'+MODES[n]).focus(); }
+    });
+  });
+  // Pane visibility is owned here rather than by the markup defaults, so the
+  // two never drift apart.
+  setMode('dataset');
 
   /* ---------- upload ---------- */
   var elFile=document.getElementById('fFile'), drop=document.getElementById('drop'),

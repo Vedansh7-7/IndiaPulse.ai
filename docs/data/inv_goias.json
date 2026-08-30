@@ -1,14 +1,14 @@
 {
   "meta": {
-    "product": "IndiaPulse AI",
+    "product": "IndiaPulse.ai",
     "subtitle": "KPI storytelling engine. Accenture Innovation Challenge 2026",
     "problem_statement": "BusinessIntelligence.ai",
-    "dataset": "Olist Brazilian E-Commerce (public, ~99k orders, ~41k free-text reviews)",
+    "dataset": "Reference dataset: 99k orders, 41k free-text reviews, 3 grains",
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "goias",
-    "generated_at": "2026-08-30 01:47:35",
-    "runtime_seconds": 0.05,
+    "generated_at": "2026-08-30 12:02:27",
+    "runtime_seconds": 0.26,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -635,16 +635,16 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 46.4,
+      "total_ms": 261.2,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 42.9,
+          "ms": 234.9,
           "detail": "2,011 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 3.3,
+          "ms": 25.6,
           "detail": "NOISE, z=2.47"
         }
       ],

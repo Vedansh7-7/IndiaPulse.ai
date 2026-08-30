@@ -183,10 +183,10 @@ def _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric
              telemetry=None, personas=None, panel=None):
     payload = {
         "meta": {
-            "product": "IndiaPulse AI",
+            "product": "IndiaPulse.ai",
             "subtitle": "KPI storytelling engine. Accenture Innovation Challenge 2026",
             "problem_statement": "BusinessIntelligence.ai",
-            "dataset": "Olist Brazilian E-Commerce (public, ~99k orders, ~41k free-text reviews)",
+            "dataset": "Reference dataset: 99k orders, 41k free-text reviews, 3 grains",
             "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
             "metric": metric,
             "scenario": scenario,
