@@ -1,8 +1,8 @@
-# local reference material, not part of the product
-reference/
-
 # dataset (fetch with: python download_data.py)
 data/raw/*.csv
+
+# engine output; docs/data holds the copy the site serves
+out/
 
 # secrets
 .env
@@ -13,6 +13,9 @@ secrets.json
 credentials.json
 .kaggle/
 
+# session artefact from a live run, not the published demo
+docs/data/inv_live.json
+
 # python
 __pycache__/
 *.py[cod]
@@ -20,18 +23,7 @@ __pycache__/
 .venv/
 venv/
 
-# scratch
-out/tmp_*.json
-*.log
-
-# regenerable engine output (web/data is the served copy)
-out/
-
-# design tooling context (local only)
-PRODUCT.md
-DESIGN.md
+# tooling context lives in AIC/claude, outside this repo
 .impeccable/
 
-# live-run output (session artifact, not the published demo)
-out/inv_live.json
-docs/data/inv_live.json
+*.log
