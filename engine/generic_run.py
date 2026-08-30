@@ -22,6 +22,7 @@ from .ingest import Profile, build_panel, weekly_panel, profile, read_csv_bytes
 from .stats_core import difference_in_differences, welch_t_test
 from . import governance as G
 from . import personas as P
+from . import integrity as I
 
 
 @dataclass
@@ -245,18 +246,37 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
     label = next(m["label"] for m in prof.metrics if m["key"] == metric)
     say(f"Scope 0  Triage      | investigating: {label}")
 
+    tel.start("Scope 0 Integrity")
+    integ = I.check(panel, metric,
+                    segment_columns=prof.segment_columns,
+                    value_columns=prof.measure_columns +
+                                  ([prof.text_column] if prof.text_column else []))
+    tel.stop("Scope 0 Integrity", f"{integ.n_flagged} flagged")
+    say(f"Scope 0  Integrity   | {integ.n_flagged} of {len(integ.checks)} checks "
+        f"flagged, {integ.n_structural} structural")
+
     tel.start("Scope 0 Triage")
     tri = detect.triage(panel, weekly, metric)
     say(f"Scope 0  Triage      | {tri.verdict}  z={tri.robust_z:.2f}  "
         f"delta={tri.delta:+.3f}  weeks={len(tri.event_weeks)}")
 
     tel.stop("Scope 0 Triage", f"{tri.verdict}, z={tri.robust_z:.2f}")
+    if integ.is_artefact or tri.verdict == "NO_BASELINE":
+        say("Scope 0  Triage      | stopping before any agent is spawned.")
+        dec = arbiter.decide(None, tri, None, None, [], None,
+                             metric_label=label, integrity_report=integ)
+        views = P.build_all(tri, dec, None, [], None, None, metric)
+        return _package(prof, tri, None, None, [], None, dec, log, t0, metric,
+                        label, filename, telemetry=tel, personas=views,
+                        integrity=integ)
+
     if not tri.is_signal:
         say("Scope 0  Triage      | inside control limits, stopping before any agent runs.")
         dec = arbiter.decide(None, tri, None, None, [], None, metric_label=label)
         views = P.build_all(tri, dec, None, [], None, None, metric)
         return _package(prof, tri, None, None, [], None, dec, log, t0, metric,
-                        label, filename, telemetry=tel, personas=views)
+                        label, filename, telemetry=tel, personas=views,
+                        integrity=integ)
 
     event, base = set(tri.event_weeks), set(tri.baseline_weeks)
     seg_col = prof.segment_columns[0] if prof.segment_columns else None
@@ -328,11 +348,12 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
     say(f"Scope 4  Arbiter     | {len([v for v in views if not v['withheld']])} of "
         f"{len(views)} readers served, 0 model calls")
     return _package(prof, tri, decomp, segs, verdicts, adv, dec, log, t0, metric,
-                    label, filename, ctx=ctx, telemetry=tel, personas=views)
+                    label, filename, ctx=ctx, telemetry=tel, personas=views,
+                    integrity=integ)
 
 
 def _package(prof, tri, decomp, segs, verdicts, adv, dec, log, t0, metric, label,
-             filename, ctx=None, telemetry=None, personas=None):
+             filename, ctx=None, telemetry=None, personas=None, integrity=None):
     payload = {
         "meta": {
             "product": "IndiaPulse.ai",
@@ -360,6 +381,7 @@ def _package(prof, tri, decomp, segs, verdicts, adv, dec, log, t0, metric, label
             "methods": G.method_summary(),
             "contract": G.upload_contract(prof, metric),
             "lineage": G.upload_lineage(prof, filename),
+            "integrity": integrity.to_dict() if integrity is not None else None,
         },
     }
     if ctx is not None:

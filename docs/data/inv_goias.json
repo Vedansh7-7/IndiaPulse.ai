@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "goias",
-    "generated_at": "2026-08-30 12:54:25",
-    "runtime_seconds": 0.23,
+    "generated_at": "2026-08-30 13:08:55",
+    "runtime_seconds": 0.28,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -564,6 +564,7 @@
   "orchestration_log": [
     "Scope 0  Triage      | loading panel...",
     "Scope 0  Triage      | scenario='goias'  orders=2,011  states=['GO']",
+    "Scope 0  Integrity   | 1 of 4 checks flagged, 1 structural",
     "Scope 0  Triage      | NOISE  z=2.47  delta=+0.872  weeks=0",
     "Scope 0  Triage      | inside control limits, stopping before any agent is spawned."
   ],
@@ -635,16 +636,21 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 226.9,
+      "total_ms": 276.8,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 204.2,
+          "ms": 219.9,
           "detail": "2,011 rows"
         },
         {
+          "scope": "Scope 0 Integrity",
+          "ms": 34.0,
+          "detail": "1 flagged"
+        },
+        {
           "scope": "Scope 0 Triage",
-          "ms": 22.0,
+          "ms": 22.3,
           "detail": "NOISE, z=2.47"
         }
       ],
@@ -855,6 +861,56 @@
       ],
       "latest_record": "2018-08-24",
       "note": "Refresh is the cadence each feed declares. Latest record is what the extract actually contains, so a stale feed is visible rather than assumed."
+    },
+    "integrity": {
+      "is_artefact": false,
+      "checks": [
+        {
+          "name": "Rows per period",
+          "question": "Did the amount of data arriving change?",
+          "flagged": false,
+          "structural": false,
+          "magnitude": 0.2674451322453573,
+          "detail": "23 to 29 rows per week (+6, +27%, p=0.142). Volume alone is a business event as often as a technical one, so it never triggers this gate by itself."
+        },
+        {
+          "name": "Metric coverage",
+          "question": "Do the same share of rows still carry a value?",
+          "flagged": false,
+          "structural": true,
+          "magnitude": 0.007315700619020871,
+          "detail": "99.3% to 100.0% of rows carry review_score (p=0.189). A collection failure removes values without changing what they were."
+        },
+        {
+          "name": "Missing values",
+          "question": "Did any field start arriving empty?",
+          "flagged": false,
+          "structural": true,
+          "magnitude": 0.007315700619020821,
+          "detail": "largest change is review_score: 0.7% to 0.0% null. A feed that breaks mid-window leaves nulls behind rather than different numbers."
+        },
+        {
+          "name": "Category stability",
+          "question": "Are the same values still being used?",
+          "flagged": true,
+          "structural": true,
+          "magnitude": 0.5,
+          "detail": "50% of values in order_status changed; no longer seen: invoiced, processing, unavailable. A renamed or re-coded category reads as a real shift in the data."
+        }
+      ],
+      "n_flagged": 1,
+      "n_structural": 1,
+      "recent_weeks": [
+        "2018-07-02",
+        "2018-07-09",
+        "2018-07-16",
+        "2018-07-23",
+        "2018-07-30",
+        "2018-08-06",
+        "2018-08-13",
+        "2018-08-20"
+      ],
+      "summary": "1 of 4 integrity checks flagged over the last 8 weeks, 1 structural but uncorroborated. The feed behaves consistently across both windows, so the metric movement is in the business rather than in its measurement."
     }
   }
 }

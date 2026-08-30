@@ -1,0 +1,441 @@
+{
+  "meta": {
+    "product": "IndiaPulse.ai",
+    "subtitle": "KPI storytelling engine. Accenture Innovation Challenge 2026",
+    "problem_statement": "BusinessIntelligence.ai",
+    "dataset": "Reference dataset: 99k orders, 41k free-text reviews, 3 grains",
+    "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
+    "metric": "review_score",
+    "scenario": "launch",
+    "generated_at": "2026-08-30 13:09:12",
+    "runtime_seconds": 0.29,
+    "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
+  },
+  "scope0_triage": {
+    "metric": "review_score",
+    "is_signal": false,
+    "verdict": "NO_BASELINE",
+    "event_weeks": [],
+    "baseline_weeks": [],
+    "event_value": 4.434947768281102,
+    "baseline_value": 4.31948510886797,
+    "delta": 0.0,
+    "robust_z": 0.0,
+    "control_limits": [
+      NaN,
+      NaN
+    ],
+    "changepoint_week": null,
+    "p_value": 1.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "series": [
+      {
+        "week": "2018-06-25",
+        "value": 4.336489439184268,
+        "orders": 1382,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-02",
+        "value": 4.372331340734415,
+        "orders": 1178,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-09",
+        "value": 4.198132780082988,
+        "orders": 972,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-16",
+        "value": 4.333333333333333,
+        "orders": 1649,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-23",
+        "value": 4.3508114856429465,
+        "orders": 1610,
+        "in_event": false
+      },
+      {
+        "week": "2018-07-30",
+        "value": 4.22149673530889,
+        "orders": 2002,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-06",
+        "value": 4.243523316062176,
+        "orders": 1931,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-13",
+        "value": 4.384299781181619,
+        "orders": 1839,
+        "in_event": false
+      },
+      {
+        "week": "2018-08-20",
+        "value": 4.434947768281102,
+        "orders": 1054,
+        "in_event": false
+      }
+    ],
+    "reasoning": "This metric has 9 periods of history, and a baseline needs at least 12. A median and a spread estimated from 9 points describe almost nothing, so any movement measured against them would be a number without a meaning. No finding is reported. Re-run once 12 periods have accumulated, or compare against a comparable established segment instead.",
+    "direction": "none",
+    "rule": "only 9 periods of history"
+  },
+  "scope1_decomposition": null,
+  "scope1_segments": null,
+  "scope2_verdicts": [],
+  "scope3_adversary": null,
+  "scope4_decision": {
+    "state": "NO_BASELINE",
+    "headline": "Customer satisfaction has too little history to investigate.",
+    "narrative": "This metric has 9 periods of history, and a baseline needs at least 12. A median and a spread estimated from 9 points describe almost nothing, so any movement measured against them would be a number without a meaning. No finding is reported. Re-run once 12 periods have accumulated, or compare against a comparable established segment instead.",
+    "ranked": [],
+    "separability": {},
+    "next_test": {
+      "recommendation": "Wait for history, or borrow a baseline",
+      "rationale": "This metric has 9 periods of history, and a baseline needs at least 12. A median and a spread estimated from 9 points describe almost nothing, so any movement measured against them would be a number without a meaning. No finding is reported. Re-run once 12 periods have accumulated, or compare against a comparable established segment instead.",
+      "design": {
+        "note": "A comparable established segment can stand in as a baseline until this metric has enough of its own."
+      }
+    },
+    "caveats": [
+      "No conclusion is drawn from a series this short."
+    ]
+  },
+  "orchestration_log": [
+    "Scope 0  Triage      | loading panel...",
+    "Scope 0  Triage      | scenario='launch'  orders=13,914  window=2018-06-25..end",
+    "Scope 0  Integrity   | 0 of 0 checks flagged, 0 structural",
+    "Scope 0  Triage      | NO_BASELINE  z=0.00  delta=+0.000  weeks=0",
+    "Scope 0  Triage      | NO_BASELINE, stopping before any agent is spawned."
+  ],
+  "personas": [
+    {
+      "persona": {
+        "key": "executive",
+        "title": "Executive",
+        "reads_for": "Is this worth my attention, and what is the decision?",
+        "depth": "headline",
+        "clearance": "confidential",
+        "levers": [
+          "fund a fix",
+          "accept the risk",
+          "ask for a deeper review"
+        ]
+      },
+      "withheld": false,
+      "narrative": "**No judgement available.** Customer satisfaction has only 9 periods of history. There is not enough of it to say whether anything unusual has happened, and a number produced from this little data would look like an answer without being one.",
+      "action": {
+        "headline": "Wait for history before judging this metric",
+        "driver": "not assessable",
+        "lever": "time, or a borrowed baseline",
+        "action": "Let the series accumulate, or compare against a comparable established segment.",
+        "expected_impact": "Avoids acting on a number with no context.",
+        "owner": "Customer Experience",
+        "confidence": "None claimed. There is not enough history to claim any.",
+        "monitoring": "Re-run once the series is long enough.",
+        "steps": []
+      }
+    },
+    {
+      "persona": {
+        "key": "operations",
+        "title": "Operations manager",
+        "reads_for": "What do I change, where, and how will I know it worked?",
+        "depth": "operational",
+        "clearance": "internal",
+        "levers": [
+          "carrier routing",
+          "capacity booking",
+          "delivery estimates",
+          "seller dispatch SLAs"
+        ]
+      },
+      "withheld": false,
+      "narrative": "**Too new to judge.** Customer satisfaction has 9 periods behind it. Normal variation has not been established yet, so there is nothing to compare this week against. Do not change process on the strength of it. If a decision cannot wait, compare against an established segment that behaves similarly.",
+      "action": {
+        "headline": "Wait for history before judging this metric",
+        "driver": "not assessable",
+        "lever": "time, or a borrowed baseline",
+        "action": "Let the series accumulate, or compare against a comparable established segment.",
+        "expected_impact": "Avoids acting on a number with no context.",
+        "owner": "Customer Experience",
+        "confidence": "None claimed. There is not enough history to claim any.",
+        "monitoring": "Re-run once the series is long enough.",
+        "steps": []
+      }
+    },
+    {
+      "persona": {
+        "key": "analyst",
+        "title": "Data analyst",
+        "reads_for": "Does the evidence hold, and what is the next test?",
+        "depth": "full",
+        "clearance": "confidential",
+        "levers": [
+          "run the follow-up test",
+          "extend the baseline",
+          "challenge the method"
+        ]
+      },
+      "withheld": false,
+      "narrative": "**Insufficient history.** This metric has 9 periods of history, and a baseline needs at least 12. A median and a spread estimated from 9 points describe almost nothing, so any movement measured against them would be a number without a meaning. No finding is reported. Re-run once 12 periods have accumulated, or compare against a comparable established segment instead.",
+      "action": {
+        "headline": "Wait for history before judging this metric",
+        "driver": "not assessable",
+        "lever": "time, or a borrowed baseline",
+        "action": "Let the series accumulate, or compare against a comparable established segment.",
+        "expected_impact": "Avoids acting on a number with no context.",
+        "owner": "Customer Experience",
+        "confidence": "None claimed. There is not enough history to claim any.",
+        "monitoring": "Re-run once the series is long enough.",
+        "steps": []
+      }
+    }
+  ],
+  "governance": {
+    "telemetry": {
+      "total_ms": 287.9,
+      "scopes": [
+        {
+          "scope": "Data load",
+          "ms": 274.8,
+          "detail": "13,914 rows"
+        },
+        {
+          "scope": "Scope 0 Integrity",
+          "ms": 6.9,
+          "detail": "0 flagged"
+        },
+        {
+          "scope": "Scope 0 Triage",
+          "ms": 5.8,
+          "detail": "NO_BASELINE, z=0.00"
+        }
+      ],
+      "llm_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "retrieval_calls": 0,
+      "cost_note": "Priced at 3.00 USD per million input tokens and 15.00 per million output tokens. With no model calls the cost of an investigation is compute only, and does not grow with the number of KPIs monitored."
+    },
+    "methods": {
+      "methods": [
+        {
+          "scope": "Scope 0",
+          "step": "Baseline and control limits",
+          "technique": "Median / MAD robust baseline, +/-3 sigma control limits",
+          "klass": "classical statistics",
+          "why": "Median and MAD tolerate contamination, so a large anomaly cannot inflate the baseline it is measured against."
+        },
+        {
+          "scope": "Scope 0",
+          "step": "Change point",
+          "technique": "Tabular CUSUM (k=0.5, h=4)",
+          "klass": "classical statistics",
+          "why": "Detects a sustained level shift rather than a single spike."
+        },
+        {
+          "scope": "Scope 0",
+          "step": "Significance of the movement",
+          "technique": "Welch's t-test on order-level values",
+          "klass": "classical statistics",
+          "why": "Unequal variance and unequal sample sizes between the two windows."
+        },
+        {
+          "scope": "Scope 1",
+          "step": "Mix versus rate",
+          "technique": "Additive decomposition of a weighted mean",
+          "klass": "deterministic arithmetic",
+          "why": "Exact arithmetic. Separates a change in composition from a change in experience, with no model and no assumptions."
+        },
+        {
+          "scope": "Scope 1",
+          "step": "Segment scan",
+          "technique": "Per-segment Welch t-test with Benjamini-Hochberg FDR control",
+          "klass": "classical statistics",
+          "why": "Scanning 27 segments at alpha 0.05 yields about 1.4 false positives by chance. FDR control stops noise being reported as insight."
+        },
+        {
+          "scope": "Scope 2",
+          "step": "Effect sizes and intervals",
+          "technique": "Two-proportion z-test, Welch's t-test, percentile bootstrap",
+          "klass": "classical statistics",
+          "why": "Every reported effect carries an interval, so magnitude and uncertainty travel together."
+        },
+        {
+          "scope": "Scope 2",
+          "step": "Journey decomposition",
+          "technique": "Leg-wise arithmetic on timestamp differences",
+          "klass": "deterministic arithmetic",
+          "why": "Attributes delay to the carrier leg or the seller handoff, which names an owner rather than a symptom."
+        },
+        {
+          "scope": "Scope 2",
+          "step": "Customer language",
+          "technique": "Lexicon match (built-in) or unsupervised term-frequency lift with FDR control (uploads)",
+          "klass": "classical statistics",
+          "why": "For an unknown file no word list is supplied, so a finding cannot be an artefact of vocabulary chosen in advance."
+        },
+        {
+          "scope": "Scope 2",
+          "step": "External context",
+          "technique": "Web search, returned as cited context",
+          "klass": "retrieval",
+          "why": "Holidays, strikes and competitor moves are genuinely absent from the warehouse. Retrieved context is never scored as evidence."
+        },
+        {
+          "scope": "Scope 3",
+          "step": "Dose-response",
+          "technique": "Linear regression of segment effect on segment exposure",
+          "klass": "causal inference",
+          "why": "A real cause produces a gradient across segments; a coincidence does not."
+        },
+        {
+          "scope": "Scope 3",
+          "step": "Counterfactual",
+          "technique": "Difference-in-differences with a parallel-trends test",
+          "klass": "causal inference",
+          "why": "Compares exposed against unexposed segments, and tests the assumption the method depends on rather than assuming it."
+        },
+        {
+          "scope": "Scope 3",
+          "step": "Aggregation check",
+          "technique": "Simpson's paradox test across segments",
+          "klass": "classical statistics",
+          "why": "An aggregate can move while every segment moves the other way."
+        },
+        {
+          "scope": "Scope 4",
+          "step": "Ranking and separability",
+          "technique": "Weighted composite of four measured components, compared across cause families",
+          "klass": "deterministic arithmetic",
+          "why": "Weights order findings the data already produced. They cannot create one."
+        },
+        {
+          "scope": "Scope 4",
+          "step": "Narrative",
+          "technique": "Template composition over computed values",
+          "klass": "deterministic arithmetic",
+          "why": "Deliberate. Sentences are assembled from measured quantities, so no figure in the story can be invented by a generator."
+        },
+        {
+          "scope": "Scope 4",
+          "step": "Experiment design",
+          "technique": "Power analysis for two-proportion and two-sample tests",
+          "klass": "classical statistics",
+          "why": "Turns a recommendation into a test with a sample size and a duration."
+        }
+      ],
+      "by_class": {
+        "classical statistics": [
+          "Scope 0: Baseline and control limits",
+          "Scope 0: Change point",
+          "Scope 0: Significance of the movement",
+          "Scope 1: Segment scan",
+          "Scope 2: Effect sizes and intervals",
+          "Scope 2: Customer language",
+          "Scope 3: Aggregation check",
+          "Scope 4: Experiment design"
+        ],
+        "deterministic arithmetic": [
+          "Scope 1: Mix versus rate",
+          "Scope 2: Journey decomposition",
+          "Scope 4: Ranking and separability",
+          "Scope 4: Narrative"
+        ],
+        "retrieval": [
+          "Scope 2: External context"
+        ],
+        "causal inference": [
+          "Scope 3: Dose-response",
+          "Scope 3: Counterfactual"
+        ]
+      },
+      "llm_steps": [],
+      "llm_in_quantitative_path": false,
+      "statement": "No quantitative value in this report is produced by a language model. Detection, decomposition, ranking, causal testing and experiment sizing are classical statistics, causal inference and exact arithmetic. A language model is used nowhere in the numeric path; the narrative is composed from computed values by template. Retrieved web context is labelled as context and excluded from evidence scoring."
+    },
+    "contract": {
+      "label": "Customer satisfaction",
+      "definition": "Mean review score of delivered orders, by purchase week.",
+      "formula": "mean(review_score) grouped by purchase week",
+      "unit": "1-5 scale",
+      "grain": "order",
+      "sources": [
+        "reviews",
+        "orders"
+      ],
+      "cadence": "weekly",
+      "direction": "higher is better",
+      "material_threshold": "robust z beyond -3, or a change past 0.15 points",
+      "drivers": [
+        "delivery timeliness",
+        "product quality",
+        "order accuracy"
+      ],
+      "owner": "Customer Experience",
+      "access": "internal"
+    },
+    "lineage": {
+      "sources": [
+        {
+          "source": "orders",
+          "table": "olist_orders_dataset",
+          "grain": "one row per order",
+          "refresh": "daily batch",
+          "owner": "Fulfilment Data",
+          "sensitivity": "internal",
+          "latest_record": "2018-08-26"
+        },
+        {
+          "source": "reviews",
+          "table": "olist_order_reviews_dataset",
+          "grain": "one row per review (roughly one per order)",
+          "refresh": "daily batch, arrives 1-3 days after delivery",
+          "owner": "Customer Experience",
+          "sensitivity": "internal, free text may contain personal detail",
+          "latest_record": "2018-08-26"
+        },
+        {
+          "source": "order_items",
+          "table": "olist_order_items_dataset",
+          "grain": "one row per item (many per order)",
+          "refresh": "daily batch",
+          "owner": "Commerce",
+          "sensitivity": "confidential (revenue)",
+          "latest_record": "2018-08-26"
+        },
+        {
+          "source": "customers",
+          "table": "olist_customers_dataset",
+          "grain": "one row per customer",
+          "refresh": "daily batch",
+          "owner": "Commerce",
+          "sensitivity": "internal",
+          "latest_record": "2018-08-26"
+        }
+      ],
+      "latest_record": "2018-08-26",
+      "note": "Refresh is the cadence each feed declares. Latest record is what the extract actually contains, so a stale feed is visible rather than assumed."
+    },
+    "integrity": {
+      "is_artefact": false,
+      "checks": [],
+      "n_flagged": 0,
+      "n_structural": 0,
+      "recent_weeks": [],
+      "summary": "Only 9 periods available, too few to compare a recent window against a prior one. Integrity was not assessed."
+    }
+  }
+}

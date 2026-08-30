@@ -53,6 +53,15 @@
       "state": "CONFIRMED",
       "headline": "Delivery time rose 4.801 (11.95 to 16.75). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
       "orders": 96095
+    },
+    {
+      "key": "launch",
+      "title": "Newly launched - no baseline",
+      "blurb": "Nine weeks of history. Too little to say whether anything is wrong, so nothing is claimed.",
+      "file": "inv_launch.json",
+      "state": "NO_BASELINE",
+      "headline": "Customer satisfaction has too little history to investigate.",
+      "orders": 13617
     }
   ]
 }

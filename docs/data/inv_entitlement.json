@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "aov",
     "scenario": "entitlement",
-    "generated_at": "2026-08-30 12:54:30",
-    "runtime_seconds": 4.94,
+    "generated_at": "2026-08-30 13:09:02",
+    "runtime_seconds": 5.79,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -1380,6 +1380,7 @@
   "orchestration_log": [
     "Scope 0  Triage      | loading panel...",
     "Scope 0  Triage      | scenario='entitlement'  orders=98,962",
+    "Scope 0  Integrity   | 1 of 4 checks flagged, 0 structural",
     "Scope 0  Triage      | SIGNAL  z=-6.20  delta=-67.233  weeks=1",
     "Scope 1  Localize    | mix-vs-rate decomposition...",
     "Scope 1  Localize    | rate=-36.805 mix=-0.334 -> 56% rate-driven",
@@ -1474,31 +1475,36 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 4942.3,
+      "total_ms": 5792.8,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 327.9,
+          "ms": 381.7,
           "detail": "98,962 rows"
         },
         {
+          "scope": "Scope 0 Integrity",
+          "ms": 666.4,
+          "detail": "1 flagged"
+        },
+        {
           "scope": "Scope 0 Triage",
-          "ms": 597.7,
+          "ms": 639.5,
           "detail": "SIGNAL, z=-6.20"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 1740.3,
+          "ms": 1803.4,
           "detail": "0 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 2274.1,
+          "ms": 2299.0,
           "detail": "4 agents"
         },
         {
           "scope": "Scope 4 Arbiter",
-          "ms": 0.8,
+          "ms": 0.7,
           "detail": "INCONCLUSIVE"
         }
       ],
@@ -1709,6 +1715,56 @@
       ],
       "latest_record": "2018-08-26",
       "note": "Refresh is the cadence each feed declares. Latest record is what the extract actually contains, so a stale feed is visible rather than assumed."
+    },
+    "integrity": {
+      "is_artefact": false,
+      "checks": [
+        {
+          "name": "Rows per period",
+          "question": "Did the amount of data arriving change?",
+          "flagged": true,
+          "structural": false,
+          "magnitude": 0.4112569260488842,
+          "detail": "1108 to 1564 rows per week (+456, +41%, p=0.018). Volume alone is a business event as often as a technical one, so it never triggers this gate by itself."
+        },
+        {
+          "name": "Metric coverage",
+          "question": "Do the same share of rows still carry a value?",
+          "flagged": false,
+          "structural": true,
+          "magnitude": 0.0024399614857349983,
+          "detail": "99.2% to 99.5% of rows carry aov (p=0.003). A collection failure removes values without changing what they were."
+        },
+        {
+          "name": "Missing values",
+          "question": "Did any field start arriving empty?",
+          "flagged": false,
+          "structural": true,
+          "magnitude": 0.007812371380106462,
+          "detail": "largest change is order_delivered_customer_date: 3.0% to 2.2% null. A feed that breaks mid-window leaves nulls behind rather than different numbers."
+        },
+        {
+          "name": "Category stability",
+          "question": "Are the same values still being used?",
+          "flagged": false,
+          "structural": true,
+          "magnitude": 0.25,
+          "detail": "25% of values in order_status changed; no longer seen: approved, created. A renamed or re-coded category reads as a real shift in the data."
+        }
+      ],
+      "n_flagged": 1,
+      "n_structural": 0,
+      "recent_weeks": [
+        "2018-07-02",
+        "2018-07-09",
+        "2018-07-16",
+        "2018-07-23",
+        "2018-07-30",
+        "2018-08-06",
+        "2018-08-13",
+        "2018-08-20"
+      ],
+      "summary": "1 of 4 integrity checks flagged over the last 8 weeks, none structural. The feed behaves consistently across both windows, so the metric movement is in the business rather than in its measurement."
     }
   },
   "timeline": [

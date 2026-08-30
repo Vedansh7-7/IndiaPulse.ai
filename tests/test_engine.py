@@ -186,16 +186,54 @@ def test_engine_can_decline_as_well_as_confirm(bundle):
         f"the engine must be able to abstain and to dismiss: {states}")
 
 
-@pytest.mark.xfail(strict=True, reason=(
-    "ARTEFACT is currently unreachable in the demo bundle. The integrity agent "
-    "runs inside Scope 2, which only executes once triage reports a signal, so a "
-    "broken feed on a metric that looks stable is never checked. Integrity should "
-    "run in Scope 0 against a recent-versus-prior window, independent of whether "
-    "the metric moved. Until then this guard is expected to fail rather than be "
-    "quietly deleted."))
-def test_artefact_state_is_reachable(bundle):
-    states = {s["state"] for s in bundle["index"]}
-    assert "ARTEFACT" in states
+def test_artefact_is_reachable_and_gated_before_any_agent():
+    """A broken feed must be caught whether or not the metric appears to move.
+
+    Integrity used to run inside Scope 2, which only executes once triage
+    reports a signal, so a feed that broke on a stable-looking metric was never
+    checked. It now runs in Scope 0 against a recent-versus-prior window.
+    """
+    from pathlib import Path
+    from engine.generic_run import investigate_upload
+    f = Path(__file__).parent / "measurement_artefact.csv"
+    if not f.exists():
+        pytest.skip("fixture not generated; run tests/test_data_gen.py")
+    r = investigate_upload(f.read_bytes(), metric_key="avg_value",
+                           filename="measurement_artefact.csv")
+    assert r["scope4_decision"]["state"] == "ARTEFACT"
+    assert r["scope2_verdicts"] == [], "agents ran on data known to be broken"
+    ig = r["governance"]["integrity"]
+    assert ig["is_artefact"] and ig["n_structural"] >= 1
+
+
+def test_volume_change_alone_never_triggers_artefact():
+    """A business is allowed to grow. Only structural breakage counts."""
+    from engine.integrity import check
+    import pandas as pd, numpy as np
+    rng = np.random.default_rng(4)
+    weeks = pd.date_range("2024-01-01", periods=30, freq="W")
+    rows = []
+    for i, w in enumerate(weeks):
+        n = 40 if i < 20 else 120            # volume triples, nothing else changes
+        for _ in range(n):
+            rows.append({"wk": str(w.date()), "value": float(rng.normal(10, 2)),
+                         "seg": str(rng.choice(["a", "b", "c"]))})
+    p = pd.DataFrame(rows)
+    rep = check(p, "value", segment_columns=["seg"], value_columns=["value"])
+    assert not rep.is_artefact, "a volume change alone was treated as a broken feed"
+
+
+def test_short_series_abstains_instead_of_inventing_a_baseline():
+    from engine.detect import triage
+    import pandas as pd, numpy as np
+    rng = np.random.default_rng(5)
+    weeks = pd.date_range("2024-01-01", periods=6, freq="W")
+    weekly = pd.DataFrame({"week": weeks, "orders": 100,
+                           "m": rng.normal(10, 1, len(weeks))})
+    panel = pd.DataFrame({"week": weeks, "wk": [str(w.date()) for w in weeks],
+                          "delivered": True, "m": rng.normal(10, 1, len(weeks))})
+    t = triage(panel, weekly, "m")
+    assert t.verdict == "NO_BASELINE" and t.is_signal is False
 
 
 def test_noise_path_stops_before_spawning_agents(bundle):

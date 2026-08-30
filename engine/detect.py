@@ -75,6 +75,30 @@ def triage(panel: pd.DataFrame, weekly_national: pd.DataFrame,
            metric: str = "review_score") -> TriageResult:
     w = weekly_national.sort_values("week").reset_index(drop=True)
     series = w[metric].astype(float)
+    usable = int(series.notna().sum())
+
+    # A newly launched KPI has no baseline to be measured against. Reporting a
+    # z-score from a handful of periods would be inventing precision.
+    if usable < C.MIN_HISTORY_WEEKS:
+        return TriageResult(
+            metric=metric, is_signal=False, verdict="NO_BASELINE", direction="none",
+            rule=f"only {usable} periods of history",
+            event_weeks=[], baseline_weeks=[],
+            event_value=float(series.dropna().iloc[-1]) if usable else float("nan"),
+            baseline_value=float(series.mean()) if usable else float("nan"),
+            delta=0.0, robust_z=0.0, control_limits=(float("nan"), float("nan")),
+            changepoint_week=None, p_value=1.0, ci_low=0.0, ci_high=0.0,
+            series=_series_payload(w, metric, series * 0, 0, 0, set()),
+            reasoning=(
+                f"This metric has {usable} periods of history, and a baseline needs "
+                f"at least {C.MIN_HISTORY_WEEKS}. A median and a spread estimated "
+                f"from {usable} points describe almost nothing, so any movement "
+                f"measured against them would be a number without a meaning. No "
+                f"finding is reported. Re-run once {C.MIN_HISTORY_WEEKS} periods "
+                f"have accumulated, or compare against a comparable established "
+                f"segment instead."),
+        )
+
     base = robust_baseline(series)
     z = series.map(base.z)
     zv = np.nan_to_num(z.values, nan=0.0)

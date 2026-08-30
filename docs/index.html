@@ -238,6 +238,7 @@ a{color:inherit}
 .s-INCONCLUSIVE{color:var(--caution)}
 .s-NOISE{color:var(--ink-soft)}
 .s-ARTEFACT{color:var(--signal)}
+.s-NO_BASELINE{color:var(--ink-soft)}
 .verdict h3{font-size:clamp(1.2rem,2.7vw,1.65rem);line-height:1.28;
   max-width:30ch;letter-spacing:-0.02em}
 
@@ -962,7 +963,7 @@ td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
         dcp=inv.scope1_decomposition, ad=inv.scope3_adversary, nt=dc.next_test||{};
     var h='';
 
-    h+='<div class="verdict"><div class="state s-'+dc.state+'">'+dc.state+'</div>'+
+    h+='<div class="verdict"><div class="state s-'+dc.state+'">'+dc.state.replace('_',' ')+'</div>'+
        '<h3>'+esc(dc.headline)+'</h3></div>'+pipeline(inv);
 
     h+=sec('Reading','', readings(t)+plot(inv));

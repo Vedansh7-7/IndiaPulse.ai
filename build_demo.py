@@ -35,6 +35,11 @@ SCENARIOS = [
     {"key": "delivery", "states": None, "metric": "delivery_days",
      "title": "Delivery time - second KPI",
      "blurb": "A different KPI over the same sources, at the same grain."},
+    {"key": "launch", "states": None, "metric": "review_score",
+     "week_from": "2018-06-25",
+     "title": "Newly launched - no baseline",
+     "blurb": "Nine weeks of history. Too little to say whether anything is wrong, "
+              "so nothing is claimed."},
 ]
 
 
@@ -48,6 +53,7 @@ def main() -> None:
     for sc in SCENARIOS:
         print(f"\n{'=' * 70}\n{sc['key']}\n{'=' * 70}")
         r = investigate(states=sc["states"], metric=sc.get("metric", "review_score"),
+                        week_from=sc.get("week_from"), week_to=sc.get("week_to"),
                         scenario=sc["key"],
                         out_name=f"inv_{sc['key']}.json", verbose=True)
         d = r["scope4_decision"]

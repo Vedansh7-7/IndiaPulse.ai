@@ -29,10 +29,39 @@ class Decision:
 
 
 def decide(ctx, triage, decomposition, segments, verdicts, adversary,
-           prescribe_fn=None, metric_label: str | None = None) -> Decision:
+           prescribe_fn=None, metric_label: str | None = None,
+           integrity_report=None) -> Decision:
     # A derived metric key such as rate__was_late__yes title-cases into
     # nonsense, so a caller that knows the human label passes it in.
     label = metric_label or triage.metric.replace('_', ' ').title()
+
+    if getattr(triage, "verdict", "") == "NO_BASELINE":
+        return Decision(
+            state="NO_BASELINE",
+            headline=f"{label} has too little history to investigate.",
+            narrative=triage.reasoning, ranked=[], separability={},
+            next_test={"recommendation": "Wait for history, or borrow a baseline",
+                       "rationale": triage.reasoning,
+                       "design": {"note": "A comparable established segment can "
+                                          "stand in as a baseline until this "
+                                          "metric has enough of its own."}},
+            caveats=["No conclusion is drawn from a series this short."],
+        )
+
+    if integrity_report is not None and integrity_report.is_artefact:
+        return Decision(
+            state="ARTEFACT",
+            headline=f"{label} cannot be trusted: the data changed, not the business.",
+            narrative=integrity_report.summary,
+            ranked=[], separability={},
+            next_test={"recommendation": "Fix the feed before reading this metric",
+                       "rationale": integrity_report.summary,
+                       "design": {"checks": [c.name for c in integrity_report.checks
+                                             if c.flagged]}},
+            caveats=["Every substantive hypothesis is withheld until the data is "
+                     "resolved."],
+        )
+
     if not triage.is_signal:
         return Decision(
             state="NOISE",

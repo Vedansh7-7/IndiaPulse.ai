@@ -26,6 +26,7 @@ from .agents.external import MarketExternalAgent
 from . import governance as G
 from . import personas as P
 from .governance import KPI_CONTRACT
+from . import integrity as I
 
 
 @dataclass
@@ -94,12 +95,34 @@ def investigate(metric: str = "review_score", verbose: bool = True,
     weekly_national = D.weekly(panel)
     tel.stop("Data load", f"{len(panel):,} rows")
 
+    # The integrity gate runs before triage, on every investigation. A broken
+    # feed matters whether or not the metric appears to have moved.
+    tel.start("Scope 0 Integrity")
+    integ = I.check(panel, metric,
+                    segment_columns=["customer_state", "order_status"],
+                    value_columns=["order_value", "review_score",
+                                   "order_delivered_customer_date"])
+    tel.stop("Scope 0 Integrity", f"{integ.n_flagged} flagged")
+    say(f"Scope 0  Integrity   | {integ.n_flagged} of {len(integ.checks)} checks "
+        f"flagged, {integ.n_structural} structural")
+
     tel.start("Scope 0 Triage")
     tri = detect.triage(panel, weekly_national, metric)
     say(f"Scope 0  Triage      | {tri.verdict}  z={tri.robust_z:.2f}  "
         f"delta={tri.delta:+.3f}  weeks={len(tri.event_weeks)}")
 
     tel.stop("Scope 0 Triage", f"{tri.verdict}, z={tri.robust_z:.2f}")
+    if integ.is_artefact or tri.verdict == "NO_BASELINE":
+        say(f"Scope 0  Triage      | {tri.verdict if tri.verdict == 'NO_BASELINE' else 'ARTEFACT'}"
+            f", stopping before any agent is spawned.")
+        dec = arbiter.decide(None, tri, None, None, [], None,
+                             metric_label=KPI_CONTRACT.get(metric, {}).get("label"),
+                             integrity_report=integ)
+        views = P.build_all(tri, dec, None, [], None, None, metric)
+        return _package(tri, None, None, [], None, dec, log, t0, metric,
+                        scenario=scenario, out_name=out_name, write=write,
+                        telemetry=tel, personas=views, panel=panel, integrity=integ)
+
     if not tri.is_signal:
         say("Scope 0  Triage      | inside control limits, stopping before "
             "any agent is spawned.")
@@ -108,7 +131,8 @@ def investigate(metric: str = "review_score", verbose: bool = True,
         views = P.build_all(tri, dec, None, [], None, None, metric)
         return _package(tri, None, None, [], None, dec, log, t0, metric,
                         scenario=scenario, out_name=out_name, write=write,
-                        telemetry=tel, personas=views, panel=panel)
+                        telemetry=tel, personas=views, panel=panel,
+                        integrity=integ)
 
     event_set = set(tri.event_weeks)
     baseline_set = set(tri.baseline_weeks)
@@ -178,12 +202,12 @@ def investigate(metric: str = "review_score", verbose: bool = True,
         f"{len(views)} personas served, 0 model calls")
     return _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric,
                     ctx=ctx, scenario=scenario, out_name=out_name, write=write,
-                    telemetry=tel, personas=views, panel=panel)
+                    telemetry=tel, personas=views, panel=panel, integrity=integ)
 
 
 def _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric, ctx=None,
              scenario="national", out_name="investigation.json", write=True,
-             telemetry=None, personas=None, panel=None):
+             telemetry=None, personas=None, panel=None, integrity=None):
     payload = {
         "meta": {
             "product": "IndiaPulse.ai",
@@ -215,6 +239,7 @@ def _package(tri, decomp, segs, verdicts, adversary_result, dec, log, t0, metric
             "methods": G.method_summary(),
             "contract": G.KPI_CONTRACT.get(metric),
             "lineage": G.data_freshness(panel) if panel is not None else None,
+            "integrity": integrity.to_dict() if integrity is not None else None,
         },
     }
     if ctx is not None:

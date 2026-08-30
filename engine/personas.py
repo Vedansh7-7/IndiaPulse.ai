@@ -94,6 +94,20 @@ def build(persona: Persona, triage, decision, segments, verdicts, adversary,
                        "steps": []},
         }
 
+    if state == "NO_BASELINE":
+        return {"persona": persona.to_dict(), "withheld": False,
+                "narrative": _no_baseline_text(persona, label, triage),
+                "action": {"headline": "Wait for history before judging this metric",
+                           "driver": "not assessable",
+                           "lever": "time, or a borrowed baseline",
+                           "action": ("Let the series accumulate, or compare against a "
+                                      "comparable established segment."),
+                           "expected_impact": "Avoids acting on a number with no context.",
+                           "owner": contract.get("owner", "Metric owner"),
+                           "confidence": "None claimed. There is not enough history to "
+                                         "claim any.",
+                           "monitoring": "Re-run once the series is long enough.",
+                           "steps": []}}
     if state == "NOISE":
         return {"persona": persona.to_dict(), "withheld": False,
                 "narrative": _noise_text(persona, label, triage),
@@ -123,6 +137,22 @@ def build(persona: Persona, triage, decision, segments, verdicts, adversary,
 
 
 # ---------------------------------------------------------------- narratives
+
+def _no_baseline_text(p, label, triage):
+    n = triage.rule.replace("only ", "").replace(" periods of history", "")
+    if p.depth == "headline":
+        return (f"**No judgement available.** {label} has only {n} periods of history. "
+                f"There is not enough of it to say whether anything unusual has "
+                f"happened, and a number produced from this little data would look "
+                f"like an answer without being one.")
+    if p.depth == "operational":
+        return (f"**Too new to judge.** {label} has {n} periods behind it. Normal "
+                f"variation has not been established yet, so there is nothing to "
+                f"compare this week against. Do not change process on the strength "
+                f"of it. If a decision cannot wait, compare against an established "
+                f"segment that behaves similarly.")
+    return f"**Insufficient history.** {triage.reasoning}"
+
 
 def _noise_text(p, label, triage):
     if p.depth == "headline":

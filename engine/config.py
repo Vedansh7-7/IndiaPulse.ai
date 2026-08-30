@@ -22,6 +22,10 @@ ROBUST_Z_TRIGGER = 3.0    # display band on the chart
 SUSTAINED_SIGMA = 2.0     # excursion threshold for a run
 SUSTAINED_RUN = 3         # consecutive periods required
 EXTREME_SIGMA = 5.0       # a single period this far out qualifies alone
+# A baseline needs history. Median and MAD over four points describe nothing,
+# and a z-score computed from them is noise wearing a number. Below this the
+# engine abstains rather than reporting a movement it cannot size.
+MIN_HISTORY_WEEKS = 12
 MIN_SEGMENT_N = 40        # below this a segment is too thin to conclude from
 SEPARABILITY_MARGIN = 0.15  # top-2 evidence scores closer than this => Inconclusive
 POWER = 0.80
