@@ -325,3 +325,68 @@ def data_freshness(panel) -> dict:
             "note": ("Refresh is the cadence each feed declares. Latest record is what "
                      "the extract actually contains, so a stale feed is visible rather "
                      "than assumed.")}
+
+
+# --------------------------------------------------------------------------
+# Uploaded files: the same four questions, answered from what was inferred
+# --------------------------------------------------------------------------
+
+def upload_contract(profile, metric_key: str) -> dict:
+    """A KPI contract for a metric the engine derived rather than was told.
+
+    The built-in contract is written by hand because the sources are known. For
+    an upload nothing is known, so every field here is filled from the profile.
+    Where a value cannot be inferred it says so rather than guessing: an
+    invented owner or refresh cadence would be worse than an admitted gap.
+    """
+    m = next((x for x in profile.metrics if x["key"] == metric_key), None)
+    if m is None:
+        return {}
+    kind = m.get("kind", "mean")
+    src = m.get("source")
+    formula = {
+        "count": "count of rows per period",
+        "sum": f"sum({src}) per period" if src else "sum per period",
+        "mean": f"mean({src}) per period" if src else "mean per period",
+    }.get(kind, kind)
+    drivers = [c for c in profile.segment_columns] or ["no grouping column found"]
+    return {
+        "label": m["label"],
+        "definition": f"{m['label']}, grouped by week, read from the uploaded file.",
+        "formula": formula,
+        "unit": "as supplied",
+        "grain": "one row of the uploaded file",
+        "sources": [f"uploaded file, column '{src}'"] if src else ["uploaded file"],
+        "cadence": "weekly, derived from the date column",
+        "direction": "not declared for an uploaded metric",
+        "material_threshold": ("a sustained run beyond two sigma, or one period "
+                               "beyond five"),
+        "drivers": drivers,
+        "owner": "not declared in the file",
+        "access": "internal",
+        "inferred": True,
+    }
+
+
+def upload_lineage(profile, filename: str) -> dict:
+    """Lineage for an upload: what each column was read as, and why."""
+    rows = []
+    for c in profile.columns:
+        if c.role == "unused":
+            continue
+        rows.append({
+            "source": c.name,
+            "table": filename,
+            "grain": f"read as {c.role}",
+            "refresh": "single upload, not a live feed",
+            "owner": "uploader",
+            "sensitivity": "as supplied",
+            "latest_record": profile.span.get("end"),
+            "why": c.note,
+        })
+    return {
+        "sources": rows,
+        "latest_record": profile.span.get("end"),
+        "note": ("Roles were inferred from the contents of each column, not from "
+                 "its name. The reasoning is shown so it can be disagreed with."),
+    }

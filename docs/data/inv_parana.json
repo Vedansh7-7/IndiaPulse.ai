@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "parana",
-    "generated_at": "2026-08-30 12:02:27",
-    "runtime_seconds": 0.63,
+    "generated_at": "2026-08-30 12:45:15",
+    "runtime_seconds": 1.36,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -1478,31 +1478,31 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 632.7,
+      "total_ms": 1367.7,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 217.8,
+          "ms": 243.4,
           "detail": "5,021 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 77.5,
+          "ms": 185.2,
           "detail": "SIGNAL, z=-6.17"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 109.4,
+          "ms": 268.4,
           "detail": "0 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 225.0,
+          "ms": 663.3,
           "detail": "4 agents"
         },
         {
           "scope": "Scope 4 Arbiter",
-          "ms": 0.8,
+          "ms": 1.1,
           "detail": "INCONCLUSIVE"
         }
       ],

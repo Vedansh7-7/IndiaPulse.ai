@@ -74,6 +74,9 @@
 }
 
 *{box-sizing:border-box}
+/* Any class that sets `display` outranks the user-agent rule for [hidden].
+   Without this guard, hiding an element by attribute silently fails. */
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{
   margin:0;background:var(--ground);color:var(--ink);
@@ -205,7 +208,7 @@ a{color:inherit}
 .sec-h .aside{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)}
 
 /* scenario tablist */
-[role=tablist]{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+[role=tablist]{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
   border:1px solid var(--rule)}
 [role=tab]{
   appearance:none;background:none;border:0;border-right:1px solid var(--rule);
@@ -359,13 +362,12 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 /* ============================================================
    Live run (only shown when a local backend is present)
    ============================================================ */
-.live[hidden]{display:none!important}
 .live-controls{display:grid;gap:14px 20px;align-items:end;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   padding-bottom:20px;border-bottom:1px solid var(--rule)}
 .field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .field label{font-size:12.5px;color:var(--ink-soft)}
-.field select,.field input{
+.field select,.field input{max-width:100%;
   font:inherit;font-size:13.5px;color:var(--ink);background:var(--surface);
   border:1px solid var(--rule-strong);padding:9px 10px;min-width:0;
   border-radius:0;appearance:none}
@@ -383,7 +385,7 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 @keyframes logIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
 .live-err{color:var(--signal);font-size:13px;margin-top:14px}
 /* upload */
-.drop{border:1px dashed var(--rule-strong);padding:22px;text-align:center;
+.drop{display:block;position:relative;border:1px dashed var(--rule-strong);padding:26px 22px;text-align:center;
   cursor:pointer;transition:background 160ms var(--ease),border-color 160ms var(--ease)}
 .drop:hover,.drop.over{background:var(--sunken);border-color:var(--ink-soft)}
 .drop b{display:block;font-size:14px;margin-bottom:4px}
@@ -563,7 +565,7 @@ td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
       <section class="sec">
         <div class="sec-h">
           <h2>Prepared investigations</h2>
-          <span class="aside">real slices, every outcome</span>
+          <span class="aside">six prepared runs</span>
         </div>
         <div role="tablist" aria-label="Investigations" id="tabs"></div>
       </section>

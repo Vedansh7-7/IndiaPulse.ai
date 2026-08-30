@@ -20,6 +20,8 @@ from .adversary import Challenge
 from .agents.generic import GENERIC_AGENTS, _segment_deltas
 from .ingest import Profile, build_panel, weekly_panel, profile, read_csv_bytes
 from .stats_core import difference_in_differences, welch_t_test
+from . import governance as G
+from . import personas as P
 
 
 @dataclass
@@ -214,6 +216,7 @@ def prescribe(ctx, triage, top, adversary, segments) -> dict:
 def investigate_upload(raw: bytes, metric_key: str | None = None,
                        filename: str = "upload.csv", on_log=None) -> dict:
     t0 = time.time()
+    tel = G.Telemetry()
     log = []
 
     def say(msg):
@@ -221,6 +224,7 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
         if on_log:
             on_log(msg)
 
+    tel.start("Profile")
     say("Scope 0  Profile     | reading the file...")
     df = read_csv_bytes(raw)
     prof = profile(df)
@@ -234,21 +238,25 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
 
     panel = build_panel(df, prof)
     weekly = weekly_panel(panel, prof)
+    tel.stop("Profile", f"{prof.rows:,} rows, {len(prof.columns)} columns")
 
     keys = [m["key"] for m in prof.metrics]
     metric = metric_key if metric_key in keys else keys[0]
     label = next(m["label"] for m in prof.metrics if m["key"] == metric)
     say(f"Scope 0  Triage      | investigating: {label}")
 
+    tel.start("Scope 0 Triage")
     tri = detect.triage(panel, weekly, metric)
     say(f"Scope 0  Triage      | {tri.verdict}  z={tri.robust_z:.2f}  "
         f"delta={tri.delta:+.3f}  weeks={len(tri.event_weeks)}")
 
+    tel.stop("Scope 0 Triage", f"{tri.verdict}, z={tri.robust_z:.2f}")
     if not tri.is_signal:
         say("Scope 0  Triage      | inside control limits, stopping before any agent runs.")
         dec = arbiter.decide(None, tri, None, None, [], None)
+        views = P.build_all(tri, dec, None, [], None, None, metric)
         return _package(prof, tri, None, None, [], None, dec, log, t0, metric,
-                        label, filename)
+                        label, filename, telemetry=tel, personas=views)
 
     event, base = set(tri.event_weeks), set(tri.baseline_weeks)
     seg_col = prof.segment_columns[0] if prof.segment_columns else None
@@ -256,6 +264,7 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
     decomp, segs = None, {"findings": [], "n_tested": 0, "n_significant_naive": 0,
                           "n_significant_fdr": 0, "fdr_alpha": C.FDR_ALPHA,
                           "note": "No grouping column, so no segment scan was run."}
+    tel.start("Scope 1 Localize")
     if seg_col:
         say(f"Scope 1  Localize    | grouping by '{seg_col}'...")
         try:
@@ -274,12 +283,14 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
         except Exception as exc:
             say(f"Scope 1  Localize    | segment scan unavailable: {exc}")
 
+    tel.stop("Scope 1 Localize", f"{segs['n_tested']} groups")
     ctx = UploadContext(panel=panel, weekly_national=weekly, event_set=event,
                         baseline_set=base,
                         top_segments=[s["segment"] for s in segs["findings"]
                                       if s["significant"]][:8],
                         profile=prof, metric=metric, segment_column=seg_col)
 
+    tel.start("Scope 2 Investigate")
     say("Scope 2  Investigate | spawning agents...")
     verdicts = []
     for cls in GENERIC_AGENTS:
@@ -292,27 +303,35 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
             f"spec={v.components['specificity']:.2f} "
             f"disc={v.components['discrimination']:.2f}]")
 
+    tel.stop("Scope 2 Investigate", f"{len(GENERIC_AGENTS)} agents")
     ranked = sorted(verdicts, key=lambda v: v.evidence_score, reverse=True)
     lead = next((v for v in ranked if v.supported and v.cause_family != "measurement"), None)
     adv = None
     if lead is not None:
+        tel.start("Scope 3 Adversary")
         say(f"Scope 3  Adversary   | challenging: {lead.agent}")
         adv = run_adversary(ctx, lead.hypothesis)
         for c in adv["challenges"]:
             say(f"Scope 3  Adversary   | {'PASS' if c['passed'] else 'FAIL'}  {c['name']}")
+        tel.stop("Scope 3 Adversary", f"{adv['n_passed']}/{adv['n_total']} survived")
 
+    tel.start("Scope 4 Arbiter")
     say("Scope 4  Arbiter     | ranking and deciding...")
     dec = arbiter.decide(ctx, tri, decomp, segs, verdicts, adv, prescribe_fn=prescribe)
     say(f"Scope 4  Arbiter     | STATE = {dec.state}")
     if dec.separability.get("note"):
         say(f"Scope 4  Arbiter     | {dec.separability['note']}")
 
+    views = P.build_all(tri, dec, segs, verdicts, adv, decomp, metric)
+    tel.stop("Scope 4 Arbiter", dec.state)
+    say(f"Scope 4  Arbiter     | {len([v for v in views if not v['withheld']])} of "
+        f"{len(views)} readers served, 0 model calls")
     return _package(prof, tri, decomp, segs, verdicts, adv, dec, log, t0, metric,
-                    label, filename, ctx=ctx)
+                    label, filename, ctx=ctx, telemetry=tel, personas=views)
 
 
 def _package(prof, tri, decomp, segs, verdicts, adv, dec, log, t0, metric, label,
-             filename, ctx=None):
+             filename, ctx=None, telemetry=None, personas=None):
     payload = {
         "meta": {
             "product": "IndiaPulse.ai",
@@ -334,6 +353,13 @@ def _package(prof, tri, decomp, segs, verdicts, adv, dec, log, t0, metric, label
         "scope3_adversary": adv,
         "scope4_decision": dec.to_dict(),
         "orchestration_log": log,
+        "personas": personas or [],
+        "governance": {
+            "telemetry": telemetry.to_dict() if telemetry else None,
+            "methods": G.method_summary(),
+            "contract": G.upload_contract(prof, metric),
+            "lineage": G.upload_lineage(prof, filename),
+        },
     }
     if ctx is not None:
         w = ctx.weekly_national.sort_values("week").copy()

@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "goias",
-    "generated_at": "2026-08-30 12:02:27",
-    "runtime_seconds": 0.26,
+    "generated_at": "2026-08-30 12:45:15",
+    "runtime_seconds": 0.22,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -635,16 +635,16 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 261.2,
+      "total_ms": 216.8,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 234.9,
+          "ms": 193.9,
           "detail": "2,011 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 25.6,
+          "ms": 22.3,
           "detail": "NOISE, z=2.47"
         }
       ],

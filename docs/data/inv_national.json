@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "national",
-    "generated_at": "2026-08-30 12:02:26",
-    "runtime_seconds": 83.73,
+    "generated_at": "2026-08-30 12:45:14",
+    "runtime_seconds": 64.58,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -1879,36 +1879,36 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 83732.5,
+      "total_ms": 64576.8,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 74882.5,
+          "ms": 55978.6,
           "detail": "98,962 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 633.3,
+          "ms": 660.4,
           "detail": "SIGNAL, z=-6.36"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 2535.0,
+          "ms": 2481.8,
           "detail": "22 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 2975.7,
+          "ms": 2771.5,
           "detail": "4 agents"
         },
         {
           "scope": "Scope 3 Adversary",
-          "ms": 2444.2,
+          "ms": 2463.7,
           "detail": "3/3 survived"
         },
         {
           "scope": "Scope 4 Arbiter",
-          "ms": 260.3,
+          "ms": 219.0,
           "detail": "CONFIRMED"
         }
       ],
