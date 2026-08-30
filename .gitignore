@@ -29,3 +29,7 @@ venv/
 .DS_Store
 
 *.log
+
+# master screen recording, far over GitHub's 100 MB per-file limit.
+# The compressed demo is committed instead.
+IndiaPulse_ai_*.mp4
