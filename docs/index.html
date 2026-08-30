@@ -447,14 +447,17 @@ td.klass{font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
 
 /* hero steps */
 .steps{margin:34px 0 0;padding:0;list-style:none;counter-reset:step;max-width:60ch}
-.steps li{counter-increment:step;display:grid;grid-template-columns:28px 1fr;gap:16px;
-  padding:13px 0;border-bottom:1px solid var(--rule)}
+/* The counter, the heading and the description are three items in a two-column
+   grid. The heading and description both sit in column two, stacked, so the
+   description clears the counter instead of wrapping inside its 28px width. */
+.steps li{counter-increment:step;display:grid;grid-template-columns:28px 1fr;
+  column-gap:16px;row-gap:0;padding:13px 0;border-bottom:1px solid var(--rule)}
 .steps li:last-child{border-bottom:0}
-.steps li::before{content:counter(step);font-family:var(--mono);font-size:11px;
-  color:var(--ink-soft);padding-top:4px}
-.steps b{display:block;font-weight:500;font-size:14.5px}
-.steps span{display:block;color:var(--ink-soft);font-size:13px;margin-top:3px;
-  text-wrap:pretty}
+.steps li::before{content:counter(step);grid-column:1;grid-row:1;
+  font-family:var(--mono);font-size:11px;color:var(--ink-soft);padding-top:4px}
+.steps b{grid-column:2;grid-row:1;font-weight:500;font-size:14.5px}
+.steps span{grid-column:2;grid-row:2;color:var(--ink-soft);font-size:13px;
+  margin-top:3px;text-wrap:pretty}
 
 /* mode tabs */
 .modes{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);
