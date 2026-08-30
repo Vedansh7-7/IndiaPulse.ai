@@ -33,7 +33,12 @@ from engine.run import investigate, NpEncoder
 from engine.generic_run import investigate_upload
 from engine.ingest import read_csv_bytes, profile as build_profile
 
-METRICS = ["review_score", "on_time", "delivery_days", "days_late", "days_to_carrier"]
+# The metrics a user may investigate. on_time and days_to_carrier are not on
+# this list by choice: they remain the Ops agent's evidence for splitting a
+# delay between the carrier leg and the seller handoff, which is where they
+# earn their place, rather than being targets in their own right.
+METRICS = ["review_score", "days_late", "delivery_days", "aov",
+           "cancellation_rate", "items_per_order"]
 WEB = C.ROOT / "docs"
 
 # One investigation at a time. The engine shares a cached panel and a demo has a

@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "review_score",
     "scenario": "para",
-    "generated_at": "2026-08-30 12:45:15",
-    "runtime_seconds": 0.2,
+    "generated_at": "2026-08-30 12:54:25",
+    "runtime_seconds": 0.24,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -545,7 +545,7 @@
   "scope3_adversary": null,
   "scope4_decision": {
     "state": "NOISE",
-    "headline": "No investigation warranted: review_score is within normal variation.",
+    "headline": "No investigation warranted: Customer satisfaction is within normal variation.",
     "narrative": "The largest single deviation is -3.48 robust standard deviations from a baseline of 4.000, but it does not persist. The longest run beyond 2 sigma is under 3 weeks, and no week reaches the 5 sigma an isolated excursion would need to qualify. Searching 84 periods for the most extreme one produces deviations of this size routinely. This is normal variation and no investigation is warranted.",
     "ranked": [],
     "separability": {},
@@ -629,16 +629,16 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 203.7,
+      "total_ms": 238.4,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 181.0,
+          "ms": 207.0,
           "detail": "971 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 21.9,
+          "ms": 30.6,
           "detail": "NOISE, z=-3.48"
         }
       ],

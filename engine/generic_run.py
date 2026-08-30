@@ -253,7 +253,7 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
     tel.stop("Scope 0 Triage", f"{tri.verdict}, z={tri.robust_z:.2f}")
     if not tri.is_signal:
         say("Scope 0  Triage      | inside control limits, stopping before any agent runs.")
-        dec = arbiter.decide(None, tri, None, None, [], None)
+        dec = arbiter.decide(None, tri, None, None, [], None, metric_label=label)
         views = P.build_all(tri, dec, None, [], None, None, metric)
         return _package(prof, tri, None, None, [], None, dec, log, t0, metric,
                         label, filename, telemetry=tel, personas=views)
@@ -317,7 +317,8 @@ def investigate_upload(raw: bytes, metric_key: str | None = None,
 
     tel.start("Scope 4 Arbiter")
     say("Scope 4  Arbiter     | ranking and deciding...")
-    dec = arbiter.decide(ctx, tri, decomp, segs, verdicts, adv, prescribe_fn=prescribe)
+    dec = arbiter.decide(ctx, tri, decomp, segs, verdicts, adv,
+                         prescribe_fn=prescribe, metric_label=label)
     say(f"Scope 4  Arbiter     | STATE = {dec.state}")
     if dec.separability.get("note"):
         say(f"Scope 4  Arbiter     | {dec.separability['note']}")

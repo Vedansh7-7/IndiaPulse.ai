@@ -6,7 +6,7 @@
       "blurb": "The full dataset. A sustained 11-week drop in customer satisfaction.",
       "file": "inv_national.json",
       "state": "CONFIRMED",
-      "headline": "Review Score fell 0.324 (4.23 to 3.90). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
+      "headline": "Customer satisfaction fell 0.324 (4.23 to 3.90). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
       "orders": 96095
     },
     {
@@ -15,7 +15,7 @@
       "blurb": "A real movement the evidence cannot attribute to a single cause.",
       "file": "inv_parana.json",
       "state": "INCONCLUSIVE",
-      "headline": "Review Score moved significantly (-0.952), but the evidence cannot identify a single cause.",
+      "headline": "Customer satisfaction moved significantly (-0.952), but the evidence cannot identify a single cause.",
       "orders": 4899
     },
     {
@@ -24,7 +24,7 @@
       "blurb": "A dip that looks alarming on a dashboard and is statistically ordinary.",
       "file": "inv_goias.json",
       "state": "NOISE",
-      "headline": "No investigation warranted: review_score is within normal variation.",
+      "headline": "No investigation warranted: Customer satisfaction is within normal variation.",
       "orders": 1950
     },
     {
@@ -33,7 +33,7 @@
       "blurb": "A dip that does not persist. Detection needs a sustained run, not one extreme week.",
       "file": "inv_para.json",
       "state": "NOISE",
-      "headline": "No investigation warranted: review_score is within normal variation.",
+      "headline": "No investigation warranted: Customer satisfaction is within normal variation.",
       "orders": 942
     },
     {
@@ -42,16 +42,16 @@
       "blurb": "A confidential KPI. The operations reader is told what is withheld, not shown a redacted number.",
       "file": "inv_entitlement.json",
       "state": "INCONCLUSIVE",
-      "headline": "Aov moved significantly (-67.233), but the evidence cannot identify a single cause.",
+      "headline": "Average order value moved significantly (-67.233), but the evidence cannot identify a single cause.",
       "orders": 96095
     },
     {
-      "key": "ontime",
-      "title": "On-time delivery - second KPI",
+      "key": "delivery",
+      "title": "Delivery time - second KPI",
       "blurb": "A different KPI over the same sources, at the same grain.",
-      "file": "inv_ontime.json",
+      "file": "inv_delivery.json",
       "state": "CONFIRMED",
-      "headline": "On Time fell 0.138 (0.95 to 0.81). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
+      "headline": "Delivery time rose 4.801 (11.95 to 16.75). Leading cause: Delivery performance degraded, and that degradation drove the satisfaction drop.",
       "orders": 96095
     }
   ]

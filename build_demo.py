@@ -32,8 +32,8 @@ SCENARIOS = [
      "title": "Average order value - restricted",
      "blurb": "A confidential KPI. The operations reader is told what is withheld, "
               "not shown a redacted number."},
-    {"key": "ontime", "states": None, "metric": "on_time",
-     "title": "On-time delivery - second KPI",
+    {"key": "delivery", "states": None, "metric": "delivery_days",
+     "title": "Delivery time - second KPI",
      "blurb": "A different KPI over the same sources, at the same grain."},
 ]
 

@@ -66,6 +66,13 @@ def load_panel(force: bool = False) -> pd.DataFrame:
     df["week"] = df["order_purchase_timestamp"].dt.to_period("W").dt.start_time
     df["delivered"] = df["order_status"].eq("delivered")
 
+    # Cancellation is the one metric that must see orders which never shipped,
+    # so it is measured over every order rather than the delivered subset. It
+    # carries a value on every row; the delivery metrics stay null off that
+    # subset and are dropped by the tests, which is why both can share a panel.
+    df["cancellation_rate"] = df["order_status"].eq("canceled").astype(float)
+    df["items_per_order"] = df["n_items"]
+
     # --- outcome metrics (all derived from dates, none assumed) ---
     df["on_time"] = np.where(
         df["order_delivered_customer_date"].notna()
@@ -100,6 +107,12 @@ def weekly(df: pd.DataFrame, by: str | None = None) -> pd.DataFrame:
     """Aggregate the order panel to weekly KPIs, optionally per segment."""
     keys = ["week"] + ([by] if by else [])
     d = df[df["delivered"]]
+    # Cancellation is a property of the full order book, not of the delivered
+    # subset, so its denominator is every order placed that week.
+    cancels = df.groupby(keys).agg(
+        cancellation_rate=("cancellation_rate", "mean"),
+        orders_placed=("order_id", "size"),
+    ).reset_index()
     agg = d.groupby(keys).agg(
         orders=("order_id", "size"),
         revenue=("order_value", "sum"),
@@ -109,8 +122,10 @@ def weekly(df: pd.DataFrame, by: str | None = None) -> pd.DataFrame:
         days_late=("days_late", "mean"),
         days_to_carrier=("days_to_carrier", "mean"),
         review_score=("review_score", "mean"),
+        items_per_order=("items_per_order", "mean"),
         n_reviews=("review_score", "count"),
     ).reset_index()
+    agg = agg.merge(cancels, on=keys, how="outer")
 
     txt = d[d["has_text"]].groupby(keys).agg(
         n_text=("order_id", "size"),

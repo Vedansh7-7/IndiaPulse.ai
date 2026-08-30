@@ -29,11 +29,14 @@ class Decision:
 
 
 def decide(ctx, triage, decomposition, segments, verdicts, adversary,
-           prescribe_fn=None) -> Decision:
+           prescribe_fn=None, metric_label: str | None = None) -> Decision:
+    # A derived metric key such as rate__was_late__yes title-cases into
+    # nonsense, so a caller that knows the human label passes it in.
+    label = metric_label or triage.metric.replace('_', ' ').title()
     if not triage.is_signal:
         return Decision(
             state="NOISE",
-            headline=f"No investigation warranted: {triage.metric} is within normal variation.",
+            headline=f"No investigation warranted: {label} is within normal variation.",
             narrative=triage.reasoning, ranked=[], separability={},
             next_test={"recommendation": "No action. Continue monitoring.",
                        "rationale": triage.reasoning},
@@ -97,7 +100,7 @@ def decide(ctx, triage, decomposition, segments, verdicts, adversary,
     }
 
     if not substantive or not separable:
-        return _inconclusive(ctx, triage, ranked, sep, segments)
+        return _inconclusive(ctx, triage, ranked, sep, segments, label)
 
     top = max(families[fam_ranked[0]["family"]], key=lambda v: v.evidence_score)
     rejected = [v for v in ranked if not v.supported and v.cause_family != "measurement"]
@@ -112,7 +115,7 @@ def decide(ctx, triage, decomposition, segments, verdicts, adversary,
     return Decision(
         state="CONFIRMED",
         headline=(
-            f"{triage.metric.replace('_', ' ').title()} fell {abs(triage.delta):.3f} "
+            f"{label} {'fell' if triage.delta < 0 else 'rose'} {abs(triage.delta):.3f} "
             f"({triage.baseline_value:.2f} to {triage.event_value:.2f}). "
             f"Leading cause: {top.hypothesis}"
         ),
@@ -151,12 +154,14 @@ def _separability_note(fam_ranked, gap, separable, corr) -> str:
 def _narrative(triage, decomp, segments, top, rejected, integrity, adversary, seg_txt) -> str:
     parts = []
     parts.append(
-        f"**What changed.** Weekly {triage.metric.replace('_', ' ')} fell from "
+        f"**What changed.** Weekly {triage.metric.replace('_', ' ')} "
+        f"{'fell' if triage.delta < 0 else 'rose'} from "
         f"{triage.baseline_value:.3f} to {triage.event_value:.3f} "
         f"({triage.delta:+.3f}) across {len(triage.event_weeks)} consecutive weeks "
-        f"beginning {triage.event_weeks[0]}. The worst week sits {triage.robust_z:.1f} "
-        f"robust standard deviations below baseline, outside the "
-        f"±{C.ROBUST_Z_TRIGGER}σ control limit (p={triage.p_value:.1e}). "
+        f"beginning {triage.event_weeks[0]}. The worst week sits {abs(triage.robust_z):.1f} "
+        f"robust standard deviations "
+        f"{'below' if triage.delta < 0 else 'above'} baseline. "
+        f"Detected by a {triage.rule} (p={triage.p_value:.1e}). "
         f"This is not normal variation."
     )
     parts.append(
@@ -258,7 +263,8 @@ def _prescribe(ctx, triage, top, adversary, segments) -> dict:
     }
 
 
-def _inconclusive(ctx, triage, ranked, sep, segments) -> Decision:
+def _inconclusive(ctx, triage, ranked, sep, segments, label=None) -> Decision:
+    label = label or triage.metric.replace('_', ' ').title()
     top2 = [v for v in ranked if v.supported][:2]
     names = " vs ".join(v.agent for v in top2) if top2 else "no hypothesis"
     disc = []
@@ -267,8 +273,8 @@ def _inconclusive(ctx, triage, ranked, sep, segments) -> Decision:
     return Decision(
         state="INCONCLUSIVE",
         headline=(
-            f"{triage.metric.replace('_', ' ').title()} moved significantly "
-            f"({triage.delta:+.3f}), but the evidence cannot identify a single cause."
+            f"{label} moved significantly ({triage.delta:+.3f}), but the evidence "
+            f"cannot identify a single cause."
         ),
         narrative=(
             f"**What changed.** {triage.reasoning}\n\n"

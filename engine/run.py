@@ -25,6 +25,7 @@ from .agents.integrity import DataIntegrityAgent
 from .agents.external import MarketExternalAgent
 from . import governance as G
 from . import personas as P
+from .governance import KPI_CONTRACT
 
 
 @dataclass
@@ -102,7 +103,8 @@ def investigate(metric: str = "review_score", verbose: bool = True,
     if not tri.is_signal:
         say("Scope 0  Triage      | inside control limits, stopping before "
             "any agent is spawned.")
-        dec = arbiter.decide(None, tri, None, None, [], None)
+        dec = arbiter.decide(None, tri, None, None, [], None,
+                             metric_label=KPI_CONTRACT.get(metric, {}).get('label'))
         views = P.build_all(tri, dec, None, [], None, None, metric)
         return _package(tri, None, None, [], None, dec, log, t0, metric,
                         scenario=scenario, out_name=out_name, write=write,
@@ -165,7 +167,8 @@ def investigate(metric: str = "review_score", verbose: bool = True,
 
     tel.start("Scope 4 Arbiter")
     say("Scope 4  Arbiter     | ranking and deciding...")
-    dec = arbiter.decide(ctx, tri, decomp, segs, verdicts, adversary_result)
+    dec = arbiter.decide(ctx, tri, decomp, segs, verdicts, adversary_result,
+                         metric_label=KPI_CONTRACT.get(metric, {}).get('label'))
     say(f"Scope 4  Arbiter     | STATE = {dec.state}")
     say(f"Scope 4  Arbiter     | {dec.separability.get('note', '')}")
 

@@ -69,6 +69,7 @@ class Profile:
     metrics: list
     span: dict
     warnings: list
+    flags: list = field(default_factory=list)
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -231,27 +232,51 @@ def profile(df: pd.DataFrame) -> Profile:
             money = max(spread, key=spread.get)
     qty = next((c.name for c in measures if QTY_HINTS.search(c.name)), None)
 
+    # A two-valued column is a flag, and the share of rows taking one value is a
+    # rate. That gives an uploaded file a volume-normalised metric even when it
+    # contains nothing but categories and a date.
+    flags = []
+    for c in cols:
+        if c.role not in ("segment", "measure") or c.n_unique != 2:
+            continue
+        vals = sorted(df[c.name].dropna().unique().tolist(), key=str)
+        pos = next((v for v in vals
+                    if str(v).strip().lower() in
+                    ("1", "true", "yes", "y", "cancelled", "canceled", "late",
+                     "failed", "churned", "returned")), vals[-1])
+        flags.append({"column": c.name, "positive": str(pos),
+                      "values": [str(v) for v in vals]})
+
     if not segs:
         warn.append("no grouping column found; segment analysis will be skipped.")
     if not texts:
         warn.append("no free-text column found; customer-language analysis will be skipped.")
 
-    metrics = [{"key": "records", "label": "Record count", "kind": "count"}]
+    # Ratios first. A sum or a count mostly measures how many rows arrived, so
+    # it moves with volume rather than with the health of the business. Averages
+    # and rates are volume-normalised, which is what makes them worth alerting
+    # on. Totals stay available, but never as the default.
+    metrics = []
     if money:
-        metrics += [
-            {"key": "total_value", "label": f"Total {money}", "kind": "sum",
-             "source": money},
-            {"key": "avg_value", "label": f"Average {money}", "kind": "mean",
-             "source": money},
-        ]
+        metrics.append({"key": "avg_value", "label": f"Average {money}",
+                        "kind": "mean", "source": money})
     if qty and qty != money:
-        metrics.append({"key": "total_quantity", "label": f"Total {qty}",
-                        "kind": "sum", "source": qty})
+        metrics.append({"key": "avg_quantity", "label": f"Average {qty}",
+                        "kind": "mean", "source": qty})
     for c in measures:
         if c.name in (money, qty):
             continue
         metrics.append({"key": f"mean__{c.name}", "label": f"Average {c.name}",
                         "kind": "mean", "source": c.name})
+    for c in flags:
+        metrics.append({"key": f"rate__{c['column']}__{c['positive']}",
+                        "label": f"Rate of {c['column']} = {c['positive']}",
+                        "kind": "rate", "source": c["column"],
+                        "positive": c["positive"]})
+    metrics.append({"key": "records", "label": "Record count", "kind": "count"})
+    if money:
+        metrics.append({"key": "total_value", "label": f"Total {money}",
+                        "kind": "sum", "source": money})
 
     d = pd.to_datetime(df[date_col], errors="coerce")
     span = {"start": str(d.min())[:10], "end": str(d.max())[:10],
@@ -261,7 +286,7 @@ def profile(df: pd.DataFrame) -> Profile:
                     f"history to be reliable.")
 
     return Profile(
-        rows=len(df), columns=cols, date_column=date_col,
+        rows=len(df), columns=cols, date_column=date_col, flags=flags,
         segment_columns=[c.name for c in segs][:6],
         measure_columns=[c.name for c in measures],
         text_column=texts[0].name if texts else None,
@@ -295,6 +320,11 @@ def build_panel(df: pd.DataFrame, prof: Profile) -> pd.DataFrame:
         p["avg_value"] = pd.to_numeric(p[prof.money_column], errors="coerce")
     if prof.quantity_column:
         p["total_quantity"] = pd.to_numeric(p[prof.quantity_column], errors="coerce")
+        p["avg_quantity"] = p["total_quantity"]
+    for f in prof.flags:
+        key = f"rate__{f['column']}__{f['positive']}"
+        p[key] = (p[f["column"]].astype(str).str.strip().str.lower()
+                  == f["positive"].strip().lower()).astype(float)
     for c in prof.measure_columns:
         if c not in (prof.money_column, prof.quantity_column):
             p[f"mean__{c}"] = pd.to_numeric(p[c], errors="coerce")
@@ -317,6 +347,11 @@ def weekly_panel(p: pd.DataFrame, prof: Profile) -> pd.DataFrame:
         out["avg_value"] = g["avg_value"].mean()
     if prof.quantity_column:
         out["total_quantity"] = g["total_quantity"].sum()
+        out["avg_quantity"] = g["avg_quantity"].mean()
+    for f in prof.flags:
+        key = f"rate__{f['column']}__{f['positive']}"
+        if key in p.columns:
+            out[key] = g[key].mean()
     for c in prof.measure_columns:
         if c not in (prof.money_column, prof.quantity_column):
             out[f"mean__{c}"] = g[f"mean__{c}"].mean()

@@ -7,8 +7,8 @@
     "dataset_source": "https://huggingface.co/datasets/bulutttt/olist-raw-data",
     "metric": "aov",
     "scenario": "entitlement",
-    "generated_at": "2026-08-30 12:45:21",
-    "runtime_seconds": 5.41,
+    "generated_at": "2026-08-30 12:54:30",
+    "runtime_seconds": 4.94,
     "honesty_note": "Every figure in this report is computed from the public dataset named above. There are no hand-tuned effect constants anywhere in the engine. Retrieved web context is labelled as context and is excluded from evidence scoring by design."
   },
   "scope0_triage": {
@@ -1006,7 +1006,7 @@
   "scope3_adversary": null,
   "scope4_decision": {
     "state": "INCONCLUSIVE",
-    "headline": "Aov moved significantly (-67.233), but the evidence cannot identify a single cause.",
+    "headline": "Average order value moved significantly (-67.233), but the evidence cannot identify a single cause.",
     "narrative": "**What changed.** Weekly aov fell to 70.795 against a robust baseline of 138.027 (change -67.233). Detected by a isolated excursion of -6.20 sigma in a single week, with the worst week at -6.20 robust standard deviations. A sustained excursion is what separates a real movement from the isolated spikes that searching 86 periods produces by chance. Welch's t-test on the underlying records gives p=8.89e-03 with a 95% CI of [-115.100, -17.519].\n\n**Why this is inconclusive.** No substantive cause family is supported by the evidence. The metric moved, but no investigated hypothesis clears its own evidence bar. The competing explanations are no hypothesis. Reporting the marginally higher-scoring one as 'the' cause would present a coin-flip as a finding.\n\n**What would separate them.** ",
     "ranked": [
       {
@@ -1474,31 +1474,31 @@
   ],
   "governance": {
     "telemetry": {
-      "total_ms": 5412.1,
+      "total_ms": 4942.3,
       "scopes": [
         {
           "scope": "Data load",
-          "ms": 288.6,
+          "ms": 327.9,
           "detail": "98,962 rows"
         },
         {
           "scope": "Scope 0 Triage",
-          "ms": 593.6,
+          "ms": 597.7,
           "detail": "SIGNAL, z=-6.20"
         },
         {
           "scope": "Scope 1 Localize",
-          "ms": 1694.6,
+          "ms": 1740.3,
           "detail": "0 segments"
         },
         {
           "scope": "Scope 2 Investigate",
-          "ms": 2833.2,
+          "ms": 2274.1,
           "detail": "4 agents"
         },
         {
           "scope": "Scope 4 Arbiter",
-          "ms": 0.7,
+          "ms": 0.8,
           "detail": "INCONCLUSIVE"
         }
       ],
