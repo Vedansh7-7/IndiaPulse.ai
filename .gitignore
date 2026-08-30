@@ -23,7 +23,9 @@ __pycache__/
 .venv/
 venv/
 
-# tooling context lives in AIC/claude, outside this repo
-.impeccable/
+# editor and local tooling
+.vscode/
+.idea/
+.DS_Store
 
 *.log
